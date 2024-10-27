@@ -1,4 +1,3 @@
 class Availability < ApplicationRecord
-  belongs_to :user
-  belongs_to :trip
+  belongs_to :participation
 end

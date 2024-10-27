@@ -3,10 +3,12 @@
 
 // Satoshi font
 @import url('satoshi.css');
+// Gambetta font
+@import url('gambetta.css');
 
 // Define fonts for body and headers
 $body-font: "Satoshi", "Work Sans", "Helvetica", "sans-serif";
-$headers-font: "Nunito", "Helvetica", "sans-serif";
+$headers-font: "Gambetta", "Nunito", "Helvetica", "sans-serif";
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {

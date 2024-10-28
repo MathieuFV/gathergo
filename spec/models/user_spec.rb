@@ -21,19 +21,6 @@ RSpec.describe User, type: :model do
 
   # Je veux vérifier que :
 
-  # Un user peut avoir un ou plusieurs participations
-  it "has one participation to a trip" do
-    user = User.create!(first_name: "Michel", address: "Rue lamalgue, Toulon",
-                        email: "michel@example.com", password: "password")
-
-    trip = Trip.create!(name: "Voyage")
-    trip2 = Trip.create!(name: "Voyage2")
-
-    p1 = Participation.create!(user: user, trip: trip, role: "member")
-
-    expect(user.participations).to include(p1)
-  end
-
   # Un user peut avoir plusieurs participations à différents voyages
   it "has many participations" do
     user = User.create!(first_name: "Michel", address: "Rue lamalgue, Toulon",
@@ -76,19 +63,26 @@ RSpec.describe User, type: :model do
   end
 
   # Si je supprime un user, je supprime ses participations
-  it "has many trips" do
+  it "destroys linked participations if deleted" do
     user = User.create!(first_name: "Michel", address: "Rue lamalgue, Toulon",
                         email: "michel@example.com", password: "password")
 
     trip = Trip.create!(name: "Voyage")
-    trip2 = Trip.create!(name: "Voyage2")
+    participation = Participation.create!(user: user, trip: trip, role: "member")
 
-    Participation.create!(user: user, trip: trip, role: "member")
-    Participation.create!(user: user, trip: trip2, role: "admin")
-
-    expect(user.trips).to include(trip, trip2)
+    user.destroy
+    expect(Participation.all).not_to include(participation)
   end
 
   # Si je supprime un user, je ne supprime pas les voyages
+  it "does not destroy trips if deleted" do
+    user = User.create!(first_name: "Michel", address: "Rue lamalgue, Toulon",
+                        email: "michel@example.com", password: "password")
 
+    trip = Trip.create!(name: "Voyage")
+    Participation.create!(user: user, trip: trip, role: "member")
+
+    user.destroy
+    expect(Trip.all).to include(trip)
+  end
 end

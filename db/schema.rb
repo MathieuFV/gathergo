@@ -43,15 +43,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_27_170302) do
     t.index ["user_id"], name: "index_participations_on_user_id"
   end
 
-  create_table "trip_destinations", force: :cascade do |t|
-    t.bigint "trip_id", null: false
-    t.bigint "destination_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["destination_id"], name: "index_trip_destinations_on_destination_id"
-    t.index ["trip_id"], name: "index_trip_destinations_on_trip_id"
-  end
-
   create_table "trips", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -81,6 +72,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_27_170302) do
   add_foreign_key "destinations", "trips"
   add_foreign_key "participations", "trips"
   add_foreign_key "participations", "users"
-  add_foreign_key "trip_destinations", "destinations"
-  add_foreign_key "trip_destinations", "trips"
 end

@@ -1,8 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Gathergo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <%# PWA & Mobile Config %>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <%# Icons & Manifest %>
+    <%# <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="theme-color" content="#ffffff"> %>
+
+    <%# SEO %>
+    <meta name="description" content="Collaborative trip planning made easy">
+    <meta name="robots" content="index, follow">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,8 +27,8 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body><%= render "shared/navbar" %>
-<%= render "shared/flashes" %>
+  <body>
+    <%= render "shared/flashes" %>
 
     <%= yield %>
   </body>

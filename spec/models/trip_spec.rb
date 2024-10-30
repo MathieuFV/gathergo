@@ -73,7 +73,7 @@ RSpec.describe Trip, type: :model do
       user2 = User.create!(first_name: "François", address: "Paris", email: "francois@example.com", password: "password", phone: "3636")
 
       participation1 = Participation.create!(user: user, trip: trip, role: "admin")
-      participation2 = Participation.create!(user: user2, trip: trip, role: "traveler")
+      participation2 = Participation.create!(user: user2, trip: trip, role: "participant")
 
       expect(trip.participations).to include(participation1, participation2)
     end
@@ -82,7 +82,7 @@ RSpec.describe Trip, type: :model do
       user2 = User.create!(first_name: "François", address: "Paris", email: "francois@example.com", password: "password", phone: "3636")
 
       participation1 = Participation.create!(user: user, trip: trip, role: "admin")
-      participation2 = Participation.create!(user: user2, trip: trip, role: "traveler")
+      participation2 = Participation.create!(user: user2, trip: trip, role: "participant")
 
       expect(trip.users).to include(user, user2)
     end

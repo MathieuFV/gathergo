@@ -26,8 +26,8 @@ RSpec.describe Participation, type: :model do
   it { should validate_inclusion_of(:role).in_array(["admin", "participant"]) }
 
   it "checks that a trip can only be associated with a user once" do
-    Participation.create!(:user, :trip, role: "admin")
-    participation2 = Participation.new(:user, :trip, role: "participant")
+    Participation.create!(user: user, trip: trip, role: "admin")
+    participation2 = Participation.new(user: user, trip: trip, role: "participant")
 
     expect(participation2).to be_invalid
   end

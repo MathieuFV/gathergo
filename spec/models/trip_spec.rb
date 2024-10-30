@@ -86,5 +86,21 @@ RSpec.describe Trip, type: :model do
 
       expect(trip.users).to include(user, user2)
     end
+
+    it "should destroy associated participations if deleted" do
+      p1 = Participation.create!(user: user, trip: trip, role: "admin")
+
+      trip.destroy
+
+      expect(Participation.all).to_not include(p1)
+    end
+
+    it "should destroy associated destinations if deleted" do
+      d1 = Destination.create!(trip: trip, name: "Destination")
+
+      trip.destroy
+
+      expect(Destination.all).to_not include(d1)
+    end
   end
 end

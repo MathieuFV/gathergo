@@ -1,0 +1,25 @@
+.tabbar {
+  display: flex;
+  justify-content: space-around;
+  background-color: #ECF4FE;
+  width: 100%;
+  position: fixed;
+  margin: 0;
+  padding: 10px;
+  left: 0;
+  bottom: 0;
+}
+
+.tabbar-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #042040; // Title blue
+  font-size: medium;
+  margin: 5px 0;
+
+  i {
+    font-size: 24px;
+  }
+}

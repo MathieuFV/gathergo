@@ -1,0 +1,34 @@
+<section class="proposal-section">
+  <%# Proposal Card %>
+  <div class="proposal-card" style="background-image: url('<%= proposal[:image_url] %>')">
+    <div class="card-overlay"></div>
+    <div class="card-body">
+      <h3 class="card-title"><%= proposal[:title] %></h3>
+      <i class="fa-solid fa-chevron-right card-arrow"></i>
+      <div class="card-stats">
+        <span class="stats-item">
+          <i class="fa-regular fa-comment"></i>
+          <%= proposal[:comments_count] %>
+        </span>
+        <span class="stats-item">
+          <i class="fa-regular fa-heart"></i>
+          <%= proposal[:likes_count] %>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <%# Proposal Controls %>
+  <div class="proposal-controls">
+    <div class="user-info">
+      <%= image_tag proposal[:user][:avatar_url], class: "user-avatar" %>
+      <span class="addition-info">
+        Added <%= time_ago_in_words(proposal[:created_at]) %> ago by
+        <strong><%= proposal[:user][:name] %></strong>
+      </span>
+    </div>
+    <%= link_to "#", class: "btn btn-primary upvote-btn" do %>
+      Upvote
+    <% end %>
+  </div>
+</section>

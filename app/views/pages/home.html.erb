@@ -33,7 +33,27 @@
         likes_count: 3,
         image_url: asset_path('courchevel.jpg')
       },
+      {
+        name: 'Tignes',
+        comments_count: 5,
+        likes_count: 3,
+        image_url: asset_path('tignes.jpg')
+      }
     ]
+%>
+
+<%= render 'shared/proposal_section',
+  proposal: {
+    title: "La Clusaz",
+    image_url: asset_path('laclusaz.jpg'),
+    comments_count: 6,
+    likes_count: 4,
+    created_at: 3.days.ago,
+    user: {
+      name: "Mathieu",
+      avatar_url: asset_path('PhotoMFV.png')
+    }
+  }
 %>
 
 <h1>Main title</h1>

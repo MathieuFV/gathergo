@@ -43,7 +43,7 @@ puts "Ajout des destinations à Ski 2025"
 # Destinations for trip Ski 2025
 Destination.create(trip: trip, name: "La Clusaz")
 Destination.create(trip: trip, name: "Courchevel")
-Destination.create(trip: trip, name: "Meribel")
+Destination.create(trip: trip, name: "Méribel")
 Destination.create(trip: trip, name: "Puy-Saint-Vincent")
 # Participations for trip ski 2025
 puts "Ajout des participants à Ski 2025"

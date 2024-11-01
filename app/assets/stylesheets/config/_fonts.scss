@@ -3,12 +3,14 @@
 
 // Satoshi font
 @import 'satoshi';
-// Gambetta font
-@import 'gambetta';
+// RedHat font
+@import 'red-hat-display';
+// Sequel Sans font
+@import 'sequel-sans';
 
 // Define fonts for body and headers
 $body-font: "Satoshi", "Work Sans", "Helvetica", "sans-serif";
-$headers-font: "Gambetta", "Nunito", "Helvetica", "sans-serif";
+$headers-font:  "Sequel", "Nunito", "Helvetica", "sans-serif";
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {

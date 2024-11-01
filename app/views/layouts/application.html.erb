@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Gathergo</title>
 
@@ -25,6 +24,7 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= yield :head %>
   </head>
 
   <body>
@@ -32,4 +32,5 @@
 
     <%= yield %>
   </body>
+
 </html>

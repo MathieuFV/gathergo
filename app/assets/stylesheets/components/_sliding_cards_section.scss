@@ -1,0 +1,141 @@
+.sliding-cards-section {
+
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  .section-header {
+    padding-left: 1rem;
+    padding-right: 1.5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-footer {
+    padding-left: 1rem;
+    padding-right: 1.5rem;
+    margin-top: 0.8rem;
+  }
+
+  .d-flex a.see-more-link {
+    font-size: 1.25rem;
+    color: $primary-text-color;
+    text-decoration: none;
+    i {
+      color: $primary-text-color;
+    }
+  }
+
+  // Container setup
+  .cards-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  // Horizontal scroll setup
+  .cards-scroll {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    // scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 0.5rem;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .spacer {
+    flex: 0 0 1rem;
+    min-width: 1rem;
+    height: 1px;
+  }
+
+  // Card styling
+  .sliding-card {
+    flex: 0 0 55%; // Makes cards not grow or shrink, and sets base width
+    width: 55%; // Fallback
+    min-width: 55%; // Ensures consistent width
+    height: 9rem;
+    border-radius: 26px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: start; // Changed to start for better UX
+
+    &:first-child {
+      margin-left: 1rem; // À supprimer
+    }
+
+    &:last-child {
+      margin-right: 1rem; // À ajuster si besoin
+    }
+
+    // Gradient overlay
+    .card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.6) 100%
+      );
+      z-index: 1;
+    }
+
+    .card-body {
+      position: relative;
+      height: 100%;
+      z-index: 2;
+    }
+
+    .card-title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      text-align: center;
+      margin: 0;
+      padding: 0 1rem;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-stats {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.75rem;
+
+      .stats-item {
+        color: white;
+        font-size: 0.9rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+        i {
+          margin-right: 0.2rem;
+        }
+      }
+    }
+  }
+
+  .remaining-time {
+    color: $gray-600;
+    font-size: 0.9rem;
+    font-style: italic;
+
+    strong {
+      color: $primary-text-color;
+    }
+  }
+}

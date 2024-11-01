@@ -1,0 +1,21 @@
+<div class="header-card">
+  <div class="header-card-body">
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="btn-group gap-2" role="group">
+        <% if local_assigns[:left_buttons] %>
+          <%= left_buttons %>
+        <% end %>
+      </div>
+
+      <h1 class="mb-0 mx-3 text-center flex-grow-1">
+        <%= local_assigns[:title] %>
+      </h1>
+
+      <div class="btn-group gap-2" role="group">
+        <% if local_assigns[:right_buttons] %>
+          <%= right_buttons %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

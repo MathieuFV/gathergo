@@ -1,0 +1,187 @@
+/**
+* @license
+*
+* Font Family: Red Hat Display
+* Designed by: MCKL, Jeremy Mickel
+* URL: https://www.fontshare.com/fonts/red-hat-display
+* © 2024 Indian Type Foundry
+*
+* Red Hat Display Light
+* Red Hat Display LightItalic
+* Red Hat Display Regular
+* Red Hat Display Italic
+* Red Hat Display Medium
+* Red Hat Display MediumItalic
+* Red Hat Display SemiBold
+* Red Hat Display SemiBoldItalic
+* Red Hat Display Bold
+* Red Hat Display BoldItalic
+* Red Hat Display ExtraBold
+* Red Hat Display ExtraBoldItalic
+* Red Hat Display Black
+* Red Hat Display BlackItalic
+* Red Hat Display Variable (Variable font)
+* Red Hat Display VariableItalic (Variable font)
+
+*
+*/
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: font-url('redhat/RedHatDisplay-Light.woff2') format('woff2'),
+       font-url('redhat/RedHatDisplay-Light.woff') format('woff'),
+       font-url('redhat/RedHatDisplay-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: font-url('redhat/RedHatDisplay-LightItalic.woff2') format('woff2'),
+       font-url('redhat/RedHatDisplay-LightItalic.woff') format('woff'),
+       font-url('redhat/RedHatDisplay-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: font-url('redhat/RedHatDisplay-Regular.woff2') format('woff2'),
+       font-url('redhat/RedHatDisplay-Regular.woff') format('woff'),
+       font-url('redhat/RedHatDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: font-url('redhat/RedHatDisplay-Italic.woff2') format('woff2'),
+       font-url('redhat/RedHatDisplay-Italic.woff') format('woff'),
+       font-url('redhat/RedHatDisplay-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: font-url('redhat/RedHatDisplay-Medium.woff2') format('woff2'),
+       font-url('redhat/RedHatDisplay-Medium.woff') format('woff'),
+       font-url('redhat/RedHatDisplay-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: font-url('redhat/RedHatDisplay-MediumItalic.woff2') format('woff2'),
+       font-url('redhat/RedHatDisplay-MediumItalic.woff') format('woff'),
+       font-url('redhat/RedHatDisplay-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: font-url('redhat/RedHatDisplay-SemiBold.woff2') format('woff2'),
+       font-url('redhat/RedHatDisplay-SemiBold.woff') format('woff'),
+       font-url('redhat/RedHatDisplay-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: font-url('redhat/RedHatDisplay-SemiBoldItalic.woff2') format('woff2'),
+       font-url('redhat/RedHatDisplay-SemiBoldItalic.woff') format('woff'),
+       font-url('redhat/RedHatDisplay-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: font-url('redhat/RedHatDisplay-Bold.woff2') format('woff2'),
+       font-url('redhat/RedHatDisplay-Bold.woff') format('woff'),
+       font-url('redhat/RedHatDisplay-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: font-url('redhat/RedHatDisplay-BoldItalic.woff2') format('woff2'),
+       font-url('redhat/RedHatDisplay-BoldItalic.woff') format('woff'),
+       font-url('redhat/RedHatDisplay-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: font-url('redhat/RedHatDisplay-ExtraBold.woff2') format('woff2'),
+       font-url('redhat/RedHatDisplay-ExtraBold.woff') format('woff'),
+       font-url('redhat/RedHatDisplay-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: font-url('redhat/RedHatDisplay-ExtraBoldItalic.woff2') format('woff2'),
+       font-url('redhat/RedHatDisplay-ExtraBoldItalic.woff') format('woff'),
+       font-url('redhat/RedHatDisplay-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: 800;
+  font-display: swap;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: font-url('redhat/RedHatDisplay-Black.woff2') format('woff2'),
+       font-url('redhat/RedHatDisplay-Black.woff') format('woff'),
+       font-url('redhat/RedHatDisplay-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: font-url('redhat/RedHatDisplay-BlackItalic.woff2') format('woff2'),
+       font-url('redhat/RedHatDisplay-BlackItalic.woff') format('woff'),
+       font-url('redhat/RedHatDisplay-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-display: swap;
+  font-style: italic;
+}
+/**
+* This is a variable font
+* You can control variable axes as shown below:
+* font-variation-settings: wght 400.0;
+*
+* available axes:
+'wght' (range from 300.0 to 900.0
+*/
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: font-url('redhat/RedHatDisplay-Variable.woff2') format('woff2'),
+       font-url('redhat/RedHatDisplay-Variable.woff') format('woff'),
+       font-url('redhat/RedHatDisplay-Variable.ttf') format('truetype');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: normal;
+}
+/**
+* This is a variable font
+* You can control variable axes as shown below:
+* font-variation-settings: wght 400.0;
+*
+* available axes:
+'wght' (range from 300.0 to 900.0
+*/
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: font-url('redhat/RedHatDisplay-VariableItalic.woff2') format('woff2'),
+       font-url('redhat/RedHatDisplay-VariableItalic.woff') format('woff'),
+       font-url('redhat/RedHatDisplay-VariableItalic.ttf') format('truetype');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: italic;
+}

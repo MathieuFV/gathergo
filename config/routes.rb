@@ -4,5 +4,6 @@ Rails.application.routes.draw do
 
   resources :trips do
     resources :destinations
+    resources :availabilities, except: [:show]
   end
 end

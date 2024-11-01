@@ -1,0 +1,13 @@
+.header-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid $primary-text-color;
+  background-color: white;
+  color: $primary-text-color;
+  border: 1px solid $primary-text-color;
+  border-radius: 12px;
+}

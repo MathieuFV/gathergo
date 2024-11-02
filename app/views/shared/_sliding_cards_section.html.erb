@@ -10,8 +10,8 @@
   <%# Second row: Scrollable cards container %>
   <div class="cards-container">
     <div class="cards-scroll">
-      <% cards.each do |card| %>
-        <div class="sliding-card" style="background-image: url('<%= card[:image_url] %>')">
+      <% @destinations.each do |card| %>
+        <div class="sliding-card" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('<%= cl_image_path card.photo.key, height: 300, crop: :fill %>')">
           <div class="card-overlay"></div>
           <div class="card-body">
             <h3 class="card-title"><%= card[:name] %></h3>

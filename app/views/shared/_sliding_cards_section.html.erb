@@ -2,7 +2,7 @@
   <%# First row: Title and arrow %>
   <div class="section-header d-flex justify-content-between align-items-center">
     <h1 class="section-title mb-0"><%= title %></h1>
-    <%= link_to link_path, class: "see-more-link" do %>
+    <%= link_to category_path, class: "see-more-link" do %>
       <i class="fa-solid fa-xl fa-chevron-right"></i>
     <% end %>
   </div>
@@ -11,7 +11,7 @@
   <div class="cards-container">
     <div class="cards-scroll">
       <% @destinations.each do |card| %>
-        <div class="sliding-card" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('<%= cl_image_path card.photo.key, height: 300, crop: :fill %>')">
+        <%= link_to card_path.call(card), class: "sliding-card", style: "background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('#{cl_image_path(card.photo.key, height: 300, crop: :fill)}')" do %>
           <div class="card-overlay"></div>
           <div class="card-body">
             <h3 class="card-title"><%= card[:name] %></h3>
@@ -26,7 +26,7 @@
               </span>
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>

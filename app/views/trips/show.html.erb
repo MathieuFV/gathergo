@@ -14,10 +14,4 @@
   card_path: ->(card) { trip_destination_path(@trip, card) }
 %>
 
-<ul>
-  <% @destinations.each do |destination| %>
-    <li><%= link_to destination[:name], trip_destination_path(id: destination.id, trip_id: @trip.id) %></li>
-  <% end %>
-</ul>
-
 <%= render "shared/tabbar" %>

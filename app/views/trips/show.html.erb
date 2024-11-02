@@ -1,3 +1,17 @@
-<h1>Trip's show</h1>
+<%= render "shared/header_card",
+  title: @trip.name
+%>
+
+<!-- Affichage des destinations du voyage -->
+<%= render "shared/sliding_cards_section",
+  title: "Destinations",
+  remaining_days: 2,
+  add_path: "#",
+  cards: @destinations,
+  category_path: trip_destinations_path(@trip),
+  # Permet de créer des liens dynamiques qui s'adaptent au type d'objet
+  # (ici, destination. Plus tard, accomodation, activities, etc. )
+  card_path: ->(card) { trip_destination_path(@trip, card) }
+%>
 
 <%= render "shared/tabbar" %>

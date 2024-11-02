@@ -1,3 +1,11 @@
-<h1>Show's index</h1>
+<%= render "shared/header_card",
+  title: "Destinations"
+%>
+
+<ul>
+  <% @destinations.each do |destination| %>
+    <li><%= destination.name %></li>
+  <% end %>
+</ul>
 
 <%= render "shared/tabbar" %>

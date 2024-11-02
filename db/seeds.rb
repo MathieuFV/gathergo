@@ -127,7 +127,7 @@ end
 
 # Ajout de la description à chaque destination
 Destination.all.each do |destination|
-  result = fetch_wikipedia_summary("belle ile en mer")
+  result = fetch_wikipedia_summary(destination[:name])
   if result.present?
     destination.description = result[:summary]
     if result[:image].present?

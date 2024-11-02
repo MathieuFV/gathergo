@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_30_175534) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_01_194554) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,11 +53,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_30_175534) do
 
   create_table "destinations", force: :cascade do |t|
     t.string "name"
-    t.decimal "lon"
-    t.decimal "lat"
+    t.decimal "longitude"
+    t.decimal "latitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "trip_id", null: false
+    t.text "description"
     t.index ["trip_id"], name: "index_destinations_on_trip_id"
   end
 
@@ -69,6 +70,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_30_175534) do
     t.datetime "updated_at", null: false
     t.index ["trip_id"], name: "index_participations_on_trip_id"
     t.index ["user_id"], name: "index_participations_on_user_id"
+  end
+
+  create_table "trip_destinations", force: :cascade do |t|
+    t.bigint "trip_id", null: false
+    t.bigint "destination_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["destination_id"], name: "index_trip_destinations_on_destination_id"
+    t.index ["trip_id"], name: "index_trip_destinations_on_trip_id"
   end
 
   create_table "trips", force: :cascade do |t|
@@ -89,8 +99,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_30_175534) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "address"
-    t.decimal "lat"
-    t.decimal "lon"
+    t.decimal "latitude"
+    t.decimal "longitude"
     t.string "phone"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -102,4 +112,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_30_175534) do
   add_foreign_key "destinations", "trips"
   add_foreign_key "participations", "trips"
   add_foreign_key "participations", "users"
+  add_foreign_key "trip_destinations", "destinations"
+  add_foreign_key "trip_destinations", "trips"
 end

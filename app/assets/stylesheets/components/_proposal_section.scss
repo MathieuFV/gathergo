@@ -11,7 +11,7 @@
     background-repeat: no-repeat;
     position: relative;
     overflow: hidden;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 
     .card-overlay {
       position: absolute;
@@ -57,7 +57,7 @@
 
     .card-stats {
       position: absolute;
-      bottom: 1rem;
+      bottom: 0.5rem;
       right: 1rem;
       display: flex;
       gap: 0.75rem;

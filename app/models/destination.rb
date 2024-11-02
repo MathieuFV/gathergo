@@ -4,6 +4,8 @@ class Destination < ApplicationRecord
   validates :trip_id, presence: true
   validates :name, presence: true
 
+  has_one_attached :photo
+
   # Geocoding
   geocoded_by :name
 

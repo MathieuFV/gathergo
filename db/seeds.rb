@@ -70,20 +70,22 @@ Participation.create(user: User.where(first_name: "Pierre").first, trip: trip, r
 
 def fetch_wikipedia_summary(title)
   if title.present?
+    correct_title = title
 
     # Construction de l'URL pour l'Action API de Wikipédia
     api_url = URI("https://fr.wikipedia.org/w/api.php")
 
     # Définition des paramètres pour obtenir un extrait complet et les coordonnées
     params = {
-      format: 'json',
       action: 'query',
-      prop: 'extracts|coordinates',
+      format: 'json',
+      prop: 'extracts|pageimages',
       exintro: 1,
       explaintext: 1,
-      redirects: 1,           # Redirige vers une orthographe plausible (ne fonctionne pas toujours)
-      titles: title,
-      exsectionformat: 'plain' # Format des sections en texte brut
+      redirects: 1,           # Redirige vers une orthographe plausible
+      titles: correct_title,
+      exsectionformat: 'plain', # Format des sections en texte brut
+      pithumbsize: 500
     }
 
     # Construction de la requête avec les paramètres
@@ -95,14 +97,20 @@ def fetch_wikipedia_summary(title)
     unless summary_response.empty?
       data = JSON.parse(summary_response)
 
-      # p data
+      result = data["query"]["pages"].values.first
+      title = result["title"]
+      image = result["thumbnail"]["source"]
 
       # Navigue dans la structure JSON pour obtenir l'extrait
       pages = data["query"]["pages"]
       page = pages.values.first
 
-      if page && page["extract"]
-        return page["extract"]
+      if page && result && image
+        p "summary and image"
+        fetched_data = { summary: result["extract"], image: image }
+      elsif page && result
+        p "only summary"
+        fetched_data = { summary: result["extract"] }
       else
         puts "Aucun extrait trouvé pour le titre : #{correct_title}"
         return nil
@@ -119,10 +127,15 @@ end
 
 # Ajout de la description à chaque destination
 Destination.all.each do |destination|
-  description = fetch_wikipedia_summary(destination[:name])
-  p description
-  if description.present?
-    destination.description = description
+  result = fetch_wikipedia_summary("belle ile en mer")
+  if result.present?
+    destination.description = result[:summary]
+    if result[:image].present?
+      # Attach image to cloudinary
+      image_url = result[:image]
+      destination.photo.attach(io: URI.open(image_url), filename: "#{destination.name}.jpg", content_type: "image/jpeg")
+    end
+
     destination.save
   end
 end

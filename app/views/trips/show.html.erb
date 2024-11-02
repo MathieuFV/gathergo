@@ -1,24 +1,15 @@
-<h1><%= @trip.name %></h1>
+<%= render "shared/header_card",
+  title: @trip.name
+%>
 
 <!-- Affichage des destinations du voyage -->
-
 <%= render "shared/sliding_cards_section",
   title: "Destinations",
   link_path: "#",
   remaining_days: 2,
   add_path: "#",
-  cards: @destinations
+  cards: @destinations,
+  link_path: trip_destinations_path(@trip)
 %>
-
-<!--
-<ul>
-  <% @destinations.each do |destination| %>
-    <li><%= destination.name %></li>
-  <% end %>
-</ul>
--->
-
-
-
 
 <%= render "shared/tabbar" %>

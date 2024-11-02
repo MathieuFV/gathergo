@@ -3,8 +3,6 @@ class TripsController < ApplicationController
     # get all destinations of the show
     @trip = Trip.find(params[:id])
     @destinations = @trip.destinations
-
-    @cards = @destinations
   end
 
   def index

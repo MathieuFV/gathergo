@@ -1,9 +1,19 @@
-<%= render "shared/header_card", title: "Destinations" %>
+<%= render partial: 'shared/header_card', locals: {
+    title: "Destinations",
+    left_buttons: capture do %>
+      <%= render 'shared/header_button',
+          url: :back,
+          icon_class: "fa-arrow-left",
+          title: "Go back"
+      %>
+    <% end
+}%>
 
-<ul>
+<ul class="mt-5">
   <% @destinations.each do |destination| %>
-    <li><%= destination.name %></li>
+    <li><%= link_to destination.name, trip_destination_path(@trip, destination) %></li>
   <% end %>
 </ul>
 
-<%= render "shared/tabbar", active_button: "updates" %>
+
+<%= render "shared/tabbar", active_button: "none" %>

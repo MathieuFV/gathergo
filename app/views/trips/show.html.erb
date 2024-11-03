@@ -6,12 +6,8 @@
           url: :root,
           icon_class: "fa-arrow-left",
           title: "Go back" %>
-    <% end, right_buttons: capture do %>
-      <%= render 'shared/header_button',
-          url: '#',
-          icon_class: "fa-gear",
-          title: "Settings" %>
-      <% end }%>
+    <% end
+}%>
 
 <!-- Affichage des destinations du voyage -->
 <%= render "shared/sliding_cards_section",

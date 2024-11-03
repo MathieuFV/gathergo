@@ -1,3 +1,19 @@
-<h1>Destination's show</h1>
+<%= render partial: 'shared/header_card', locals: {
+    title: @destination.name,
+    left_buttons: capture do %>
+      <%= render 'shared/header_button',
+          url: :back,
+          icon_class: "fa-arrow-left",
+          title: "Go back"
+      %>
+    <% end
+}%>
 
-<%= render "shared/tabbar", active_button: "dates" %>
+<!-- Affichage des infos de la destination (en vrac)-->
+
+<div style="width: 100%;">
+  <%= cl_image_tag(@destination.photo.key, class: "img") %>
+  <%= @destination.description %>
+</div>
+
+<%= render "shared/tabbar", active_button: "none" %>

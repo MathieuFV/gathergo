@@ -1,6 +1,4 @@
-<%= render "shared/header_card",
-  title: "Destinations"
-%>
+<%= render "shared/header_card", title: "Destinations" %>
 
 <ul>
   <% @destinations.each do |destination| %>
@@ -8,4 +6,4 @@
   <% end %>
 </ul>
 
-<%= render "shared/tabbar" %>
+<%= render "shared/tabbar", active_button: "updates" %>

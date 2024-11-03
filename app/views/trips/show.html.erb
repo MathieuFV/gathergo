@@ -1,6 +1,17 @@
-<%= render "shared/header_card",
-  title: @trip.name
-%>
+<%= render partial: 'shared/header_card',
+  locals: {
+    title: @trip.name,
+    left_buttons: capture do %>
+      <%= render 'shared/header_button',
+          url: :root,
+          icon_class: "fa-arrow-left",
+          title: "Go back" %>
+    <% end, right_buttons: capture do %>
+      <%= render 'shared/header_button',
+          url: '#',
+          icon_class: "fa-gear",
+          title: "Settings" %>
+      <% end }%>
 
 <!-- Affichage des destinations du voyage -->
 <%= render "shared/sliding_cards_section",
@@ -14,4 +25,4 @@
   card_path: ->(card) { trip_destination_path(@trip, card) }
 %>
 
-<%= render "shared/tabbar" %>
+<%= render "shared/tabbar", active_button: "hub" %>

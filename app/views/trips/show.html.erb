@@ -18,7 +18,8 @@
   category_path: trip_destinations_path(@trip),
   # Permet de créer des liens dynamiques qui s'adaptent au type d'objet
   # (ici, destination. Plus tard, accomodation, activities, etc. )
-  card_path: ->(card) { trip_destination_path(@trip, card) }
+  card_path: ->(card) { trip_destination_path(@trip, card) },
+  add_path: new_trip_destination_path(@trip)
 %>
 
 <%= render "shared/tabbar", active_button: "hub" %>

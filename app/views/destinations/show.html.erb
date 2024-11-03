@@ -9,4 +9,11 @@
     <% end
 }%>
 
+<!-- Affichage des infos de la destination (en vrac)-->
+
+<div style="width: 100%;">
+  <%= cl_image_tag(@destination.photo.key, class: "img") %>
+  <%= @destination.description %>
+</div>
+
 <%= render "shared/tabbar", active_button: "none" %>

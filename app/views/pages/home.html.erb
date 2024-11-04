@@ -60,22 +60,6 @@
   }
 %>
 
-<h1>Main title</h1>
-<h2>Secondary title</h2>
-<h3>Third title</h3>
-
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-
-<a href="#">Link</a>
-
-<div class="input-group">
-  <input type="text" class="form-control" placeholder="Text input">
-</div>
-
-<button type="button" class="btn">Base class</button>
-<button type="button" class="btn btn-primary">Button primary</button>
-<button type="button" class="btn btn-outline-primary">Button outline primary</button>
-
 <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete } %>
 <%= link_to "Sign up", new_user_registration_path %>
 

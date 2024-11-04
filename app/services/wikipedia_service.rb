@@ -29,14 +29,29 @@ class WikipediaService
 
       unless summary_response.empty?
         data = JSON.parse(summary_response)
+        image_data = data
 
-        result = data["query"]["pages"].values.first
-        title = result["title"]
-        image = result["thumbnail"]["source"]
+        # Vérification de la présence de query & page
+        if data.dig("query", "pages")
+          result = data["query"]["pages"].values.first
+          # Navigue dans la structure JSON pour obtenir l'extrait
+          pages = data["query"]["pages"]
+          page = pages.values.first
+        end
 
-        # Navigue dans la structure JSON pour obtenir l'extrait
-        pages = data["query"]["pages"]
-        page = pages.values.first
+        # Vérification de la présence d'une image
+        if result && result.dig("thumbnail", "source")
+          p result
+          image = result["thumbnail"]["source"]
+        end
+
+        # result = data["query"]["pages"].values.first
+        # # title = result["title"]
+        # image = result["thumbnail"]["source"]
+
+        # # Navigue dans la structure JSON pour obtenir l'extrait
+        # pages = data["query"]["pages"]
+        # page = pages.values.first
 
         if page && result && image
           p "summary and image"

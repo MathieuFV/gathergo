@@ -70,8 +70,6 @@ Participation.create(user: User.where(first_name: "Pierre").first, trip: trip, r
 
 def fetch_wikipedia_summary(title)
   if title.present?
-    correct_title = title
-
     # Construction de l'URL pour l'Action API de Wikipédia
     api_url = URI("https://fr.wikipedia.org/w/api.php")
 
@@ -83,7 +81,7 @@ def fetch_wikipedia_summary(title)
       exintro: 1,
       explaintext: 1,
       redirects: 1,           # Redirige vers une orthographe plausible
-      titles: correct_title,
+      titles: title,
       exsectionformat: 'plain', # Format des sections en texte brut
       pithumbsize: 500
     }
@@ -112,11 +110,11 @@ def fetch_wikipedia_summary(title)
         p "only summary"
         fetched_data = { summary: result["extract"] }
       else
-        puts "Aucun extrait trouvé pour le titre : #{correct_title}"
+        puts "Aucun extrait trouvé pour le titre : #{title}"
         return nil
       end
     else
-      puts "Réponse vide de l'API pour le titre : #{correct_title}"
+      puts "Réponse vide de l'API pour le titre : #{title}"
       return nil
     end
   else

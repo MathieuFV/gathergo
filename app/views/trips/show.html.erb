@@ -6,7 +6,14 @@
           url: :root,
           icon_class: "fa-arrow-left",
           title: "Go back" %>
-    <% end
+    <% end,
+    right_buttons: capture do %>
+    <%= render 'shared/header_button',
+        url: trip_path(@trip),
+        icon_class: "fa-user-plus",
+        title: "Go back"
+    %>
+<% end
 }%>
 
 <!-- Affichage des destinations du voyage -->

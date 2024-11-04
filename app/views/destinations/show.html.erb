@@ -12,7 +12,7 @@
 <!-- Affichage des infos de la destination (en vrac)-->
 
 <div style="width: 100%;">
-  <%= cl_image_tag(@destination.photo.key, class: "img") %>
+  <%= cl_image_tag(@destination.photo.key, class: "img") if @destination.photo.present? %>
   <%= @destination.description %>
 </div>
 

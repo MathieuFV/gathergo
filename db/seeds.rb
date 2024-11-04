@@ -68,64 +68,10 @@ Participation.create(user: User.where(first_name: "Mathieu").first, trip: trip, 
 Participation.create(user: User.where(first_name: "Marin").first, trip: trip, role: "participant" )
 Participation.create(user: User.where(first_name: "Pierre").first, trip: trip, role: "participant" )
 
-def fetch_wikipedia_summary(title)
-  if title.present?
-    # Construction de l'URL pour l'Action API de Wikipédia
-    api_url = URI("https://fr.wikipedia.org/w/api.php")
-
-    # Définition des paramètres pour obtenir un extrait complet et les coordonnées
-    params = {
-      action: 'query',
-      format: 'json',
-      prop: 'extracts|pageimages',
-      exintro: 1,
-      explaintext: 1,
-      redirects: 1,           # Redirige vers une orthographe plausible
-      titles: title,
-      exsectionformat: 'plain', # Format des sections en texte brut
-      pithumbsize: 500
-    }
-
-    # Construction de la requête avec les paramètres
-    api_url.query = URI.encode_www_form(params)
-
-    # Appel à l'API avec le bon titre
-    summary_response = Net::HTTP.get(api_url)
-
-    unless summary_response.empty?
-      data = JSON.parse(summary_response)
-
-      result = data["query"]["pages"].values.first
-      title = result["title"]
-      image = result["thumbnail"]["source"]
-
-      # Navigue dans la structure JSON pour obtenir l'extrait
-      pages = data["query"]["pages"]
-      page = pages.values.first
-
-      if page && result && image
-        p "summary and image"
-        fetched_data = { summary: result["extract"], image: image }
-      elsif page && result
-        p "only summary"
-        fetched_data = { summary: result["extract"] }
-      else
-        puts "Aucun extrait trouvé pour le titre : #{title}"
-        return nil
-      end
-    else
-      puts "Réponse vide de l'API pour le titre : #{title}"
-      return nil
-    end
-  else
-    puts "Titre invalide ou vide : #{title}"
-    return nil
-  end
-end
-
 # Ajout de la description à chaque destination
 Destination.all.each do |destination|
-  result = fetch_wikipedia_summary(destination[:name])
+  # Appel du service WikipediaService (créé dans "app/services" pour pouvoir être réutilisé ailleurs)
+  result = WikipediaService.new("Meribel").fetch_wikipedia_summary
   if result.present?
     destination.description = result[:summary]
     if result[:image].present?

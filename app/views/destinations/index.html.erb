@@ -2,7 +2,7 @@
     title: "Destinations",
     left_buttons: capture do %>
       <%= render 'shared/header_button',
-          url: :back,
+          url: trip_path(@trip),
           icon_class: "fa-arrow-left",
           title: "Go back"
       %>

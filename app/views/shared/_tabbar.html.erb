@@ -1,9 +1,9 @@
 <%# app/views/shared/_tabbar.html.erb %>
 <div>
   <div class="tabbar">
-    <%= link_to root_path,
-        class: "tabbar-button #{current_page?(root_path) ? 'active' : ''}" do %>
-      <i class="fa-<%= current_page?(root_path) ? 'solid' : 'regular' %> fa-font-awesome"></i>
+    <%= link_to trip_path(@trip),
+        class: "tabbar-button #{current_page?(trip_path(@trip)) ? 'active' : ''}" do %>
+      <i class="fa-<%= current_page?(trip_path(@trip)) ? 'solid' : 'regular' %> fa-font-awesome"></i>
       <span>Trip hub</span>
     <% end %>
 

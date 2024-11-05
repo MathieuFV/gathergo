@@ -45,14 +45,6 @@ class WikipediaService
           image = result["thumbnail"]["source"]
         end
 
-        # result = data["query"]["pages"].values.first
-        # # title = result["title"]
-        # image = result["thumbnail"]["source"]
-
-        # # Navigue dans la structure JSON pour obtenir l'extrait
-        # pages = data["query"]["pages"]
-        # page = pages.values.first
-
         if page && result && image
           p "summary and image"
           fetched_data = { summary: result["extract"], image: image }

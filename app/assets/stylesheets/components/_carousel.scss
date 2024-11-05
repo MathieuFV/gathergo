@@ -1,0 +1,19 @@
+.sticky-section {
+  // height: 100vh;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // flex-direction: column;
+  // border-top-left-radius: 28px;
+  // border-top-right-radius: 28px;
+}
+
+.main-title {
+  text-align: center;
+  padding-top: 10px;
+  // margin-top: -28px;
+  border-bottom: 1px solid $icone-color
+}

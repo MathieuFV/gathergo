@@ -39,8 +39,8 @@
 </div>
 
 <main>
-  <div class="sticky-section">
-    <div class="sticky-section main-title">
+  <div data-controller="scroll" class="sticky-section">
+    <div data-scroll-target="element" class="sticky-section main-title">
       <h2 class="mb-0"><%= @destination.name %></h2>
       <p class="mb-0"><%= @trip.name %></p>
     </div>

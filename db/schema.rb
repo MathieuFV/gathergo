@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_01_194554) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_05_153945) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,6 +51,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_01_194554) do
     t.index ["participation_id"], name: "index_availabilities_on_participation_id"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.string "commentable_type", null: false
+    t.bigint "commentable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "destinations", force: :cascade do |t|
     t.string "name"
     t.decimal "longitude"
@@ -59,6 +70,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_01_194554) do
     t.datetime "updated_at", null: false
     t.bigint "trip_id", null: false
     t.text "description"
+    t.integer "comments_count", default: 0
+    t.integer "votes_count", default: 0
     t.index ["trip_id"], name: "index_destinations_on_trip_id"
   end
 
@@ -97,10 +110,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_01_194554) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "votable_type", null: false
+    t.bigint "votable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "votable_type", "votable_id"], name: "index_votes_on_user_id_and_votable_type_and_votable_id", unique: true
+    t.index ["user_id"], name: "index_votes_on_user_id"
+    t.index ["votable_type", "votable_id"], name: "index_votes_on_votable"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "availabilities", "participations"
+  add_foreign_key "comments", "users"
   add_foreign_key "destinations", "trips"
   add_foreign_key "participations", "trips"
   add_foreign_key "participations", "users"
+  add_foreign_key "votes", "users"
 end

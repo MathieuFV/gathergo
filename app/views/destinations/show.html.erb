@@ -1,19 +1,62 @@
-<%= render partial: 'shared/header_card', locals: {
-    title: @destination.name,
-    left_buttons: capture do %>
-      <%= render 'shared/header_button',
-          url: :back,
-          icon_class: "fa-arrow-left",
-          title: "Go back"
-      %>
-    <% end
-}%>
+<div class="sticky-section no-tabbar">
+  <div id="carouselExample" class="carousel slide" data-bs-touch="true">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <%= cl_image_tag(@destination.photo.key, class: "img d-block") if @destination.photo.present? %>
+      </div>
+      <div class="carousel-item">
+        <%= cl_image_tag(@destination.photo.key, class: "img d-block") if @destination.photo.present? %>
+      </div>
+      <div class="carousel-item">
+        <%= cl_image_tag(@destination.photo.key, class: "img d-block") if @destination.photo.present? %>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
 
-<!-- Affichage des infos de la destination (en vrac)-->
-
-<div style="width: 100%;">
-  <%= cl_image_tag(@destination.photo.key, class: "img") if @destination.photo.present? %>
-  <%= @destination.description %>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
 </div>
+
+<div>
+  <div class="essai left">
+    <%= render 'shared/header_button', url: trip_path(@trip), icon_class: "fa-solid fa-arrow-left fa-lg", title: "Go back" %>
+  </div>
+
+  <div class="essai right">
+    <%= render 'shared/header_button', url: "#", icon_class: "fa-regular fa-heart fa-lg", title: "Go back" %>
+  </div>
+</div>
+
+<main>
+  <div data-controller="scroll" class="sticky-section">
+    <div data-scroll-target="element" class="sticky-section main-title">
+      <h2 class="mb-0"><%= @destination.name %></h2>
+      <p class="mb-0"><%= @trip.name %></p>
+    </div>
+
+    <div class="content">
+      <div class="main-maps">
+        <%= @destination.name %>
+      </div>
+
+      <div class="main-wiki container">
+        <%= @destination.description %>
+      </div>
+    </div>
+
+
+  </div>
+</main>
 
 <%= render "shared/tabbar", active_button: "none" %>

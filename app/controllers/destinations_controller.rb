@@ -10,6 +10,8 @@ class DestinationsController < ApplicationController
   def show
     @trip = Trip.find(params[:trip_id])
     @destination = Destination.find(params[:id])
+
+    @display_top_menu = false
   end
 
   def new

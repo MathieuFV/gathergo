@@ -1,24 +1,30 @@
+<%# app/views/shared/_tabbar.html.erb %>
 <div>
   <div class="tabbar">
-    <%= link_to trip_path(@trip), class: "tabbar-button #{'tabbar-active' if active_button == 'hub'}" do %>
-      <i class="fa-regular fa-font-awesome"></i>
+    <%= link_to trip_path(@trip),
+        class: "tabbar-button #{current_page?(trip_path(@trip)) ? 'active' : ''}" do %>
+      <i class="fa-<%= current_page?(trip_path(@trip)) ? 'solid' : 'regular' %> fa-font-awesome"></i>
       <span>Trip hub</span>
     <% end %>
 
-
-    <%= link_to root_path, class: "tabbar-button #{'tabbar-active' if active_button == 'dates'}" do %>
+    <%= link_to '#', class: "tabbar-button" do %>
       <i class="fa-regular fa-calendar"></i>
       <span>Dates</span>
     <% end %>
 
-    <%= link_to root_path, class: "tabbar-button #{'tabbar-active' if active_button == 'messages'}" do %>
+    <%= link_to '#', class: "tabbar-button" do %>
       <i class="fa-regular fa-comments"></i>
       <span>Messages</span>
     <% end %>
 
-    <%= link_to root_path, class: "tabbar-button #{'tabbar-active' if active_button == 'settings'}" do %>
-      <i class="fa-solid fa-gear"></i>
-      <span>Settings</span>
+    <%= link_to '#', class: "tabbar-button" do %>
+      <i class="fa-regular fa-bookmark"></i>
+      <span>Saved</span>
+    <% end %>
+
+    <%= link_to '#', class: "tabbar-button" do %>
+      <i class="fa-regular fa-bell"></i>
+      <span>Updates</span>
     <% end %>
   </div>
 </div>

@@ -1,0 +1,24 @@
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+
+  .separator-line {
+    flex-grow: 1;
+    content: "";
+    height: 1px;
+    background-color: $primary-text-color;
+  }
+
+  .separator-text {
+    position: relative;
+    background-color: transparent;
+    padding: 0 1rem;
+    color: $primary-text-color;
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+}

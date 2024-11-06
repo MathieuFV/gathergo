@@ -9,10 +9,12 @@
     <% end
 }%>
 
-<ul class="mt-5">
+<div class="destinations-container mt-4">
   <% @destinations.each do |destination| %>
-    <li><%= link_to destination.name, trip_destination_path(@trip, destination) %></li>
+    <%= render 'shared/proposal_section',
+          destination: destination,
+          proposal: destination_proposal_data(destination) %>
   <% end %>
-</ul>
+</div>
 
 <%= render "shared/tabbar", active_button: "none" %>

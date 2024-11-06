@@ -1,0 +1,41 @@
+/* Structure de base pour la page de connexion */
+.login-page {
+  display: flex;                /* Active le mode flexbox pour centrer */
+  justify-content: center;      /* Centre horizontalement */
+  align-items: center;          /* Centre verticalement */
+  height: 100vh;                /* Occupe toute la hauteur de l'écran */
+  background-color: #ECF4FE;    /* Couleur de fond de la page */
+  background-image: url( asset_path('arcs.jpg') );
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Bloc du formulaire */
+.login-box {
+  background-color: rgba(0, 0, 0, 0.7); /* Fond sombre et semi-transparent */
+  padding: 30px;                        /* Espacement interne */
+  border-radius: 10px;                  /* Coins arrondis */
+  color: white;                         /* Texte blanc pour contraste */
+  max-width: 350px;                     /* Largeur maximale */
+  width: 100%;                          /* Occupe toute la largeur disponible */
+  text-align: left;                   /* Centre le texte */
+}
+
+/* Style du bouton de connexion */
+.form-actions .btn {
+  background-color: #0e6edd; /* Couleur de fond (modifiable selon la charte graphique de GatherGo) */
+  color: white;              /* Couleur du texte */
+  padding: 12px 20px;        /* Espacement interne pour un bouton bien proportionné */
+  border: none;              /* Supprime la bordure par défaut */
+  border-radius: 5px;        /* Coins arrondis pour un style moderne */
+  font-size: 16px;           /* Taille de police */
+  cursor: pointer;           /* Curseur en main pour indiquer qu'il est cliquable */
+  width: 100%;               /* Prend toute la largeur disponible */
+  transition: background-color 0.3s ease; /* Animation douce pour le hover */
+}
+
+/* Effet de survol (hover) pour le bouton */
+.form-actions .btn:hover {
+  background-color: #0c5bb3; /* Couleur plus foncée pour le hover */
+}

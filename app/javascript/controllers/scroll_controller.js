@@ -15,13 +15,11 @@ export default class extends Controller {
 
   handleScroll() {
     // Vérifie si l'élément est au niveau du haut de la page
-    const rect = this.elementTarget.getBoundingClientRect()
+    const elementPosition = this.elementTarget.getBoundingClientRect()
 
-    if (rect.top <= 0) {
-      console.log("En haut")
+    if (elementPosition.top <= 0) {
       this.elementTarget.classList.add("--on-top") // Ajoute la classe
     } else {
-      console.log("Pas en haut")
       this.elementTarget.classList.remove("--on-top") // Retire la classe
     }
   }

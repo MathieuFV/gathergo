@@ -3,20 +3,11 @@
     left_buttons: capture do %>
       <%= render 'shared/header_button',
           url: trip_path(@trip),
-          icon_class: "fa-arrow-left",
+          icon_class: "fa-solid fa-arrow-left fa-lg",
           title: "Go back"
       %>
     <% end
 }%>
-
-<div>
-  <button class="btn header-btn essai left">
-    <i class="fa-solid fa-arrow-left"></i>
-  </button>
-  <button class="btn header-btn essai right">
-    <i class="fa-regular fa-heart"></i>
-  </button>
-</div>
 
 <ul class="mt-5">
   <% @destinations.each do |destination| %>

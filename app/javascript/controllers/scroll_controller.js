@@ -5,7 +5,10 @@ export default class extends Controller {
   static targets = ["element"] // L'élément que tu veux observer
 
   connect() {
-    console.log("Scroll controller connecté")
+    console.log("Scroll controller connecté");
+    // console.log(this.elementTarget.getBoundingClientRect());
+    this.handleScroll();
+
     window.addEventListener("scroll", this.handleScroll.bind(this))
   }
 
@@ -18,9 +21,9 @@ export default class extends Controller {
     const elementPosition = this.elementTarget.getBoundingClientRect()
 
     if (elementPosition.top <= 0) {
-      this.elementTarget.classList.add("--on-top") // Ajoute la classe
-    } else {
-      this.elementTarget.classList.remove("--on-top") // Retire la classe
+      this.elementTarget.classList.add("--on-top"); // Ajoute la classe
+    } else if(elementPosition.top > 0) {
+      this.elementTarget.classList.remove("--on-top"); // Retire la classe
     }
   }
 

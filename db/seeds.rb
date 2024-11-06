@@ -73,6 +73,16 @@ places_service = GooglePlacesService.new(GOOGLE_PLACES_API_KEY)
 # Ajout de la description à chaque destination
 puts "Ajout des descriptions et photos aux destinations"
 Destination.all.each do |destination|
+
+    # # Appel du service WikipediaService (créé dans "app/services" pour pouvoir être réutilisé ailleurs)
+    # result = WikipediaService.new(destination.name).fetch_wikipedia_summary
+    # if result.present?
+    #   destination.description = result[:summary]
+    #   if result[:image].present?
+    #     # Attach image to cloudinary
+    #     image_url = result[:image]
+    #     destination.photos.attach(io: URI.open(image_url), filename: "#{destination.name}.jpg", content_type: "image/jpeg")
+
   puts "Récupération des informations pour #{destination.name}"
 
   result = places_service.fetch_place_details(destination.name)

@@ -1,0 +1,112 @@
+.proposal-section {
+
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  .proposal-card {
+    height: 7rem;
+    border-radius: 26px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+
+    .card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.6) 100%
+      );
+      z-index: 1;
+    }
+
+    .card-body {
+      position: relative;
+      height: 100%;
+      z-index: 2;
+      padding: 1rem;
+    }
+
+    .card-title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      margin: 0;
+      text-align: center;
+      width: calc(100% - 4rem); // Laisse de l'espace pour la flèche
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-arrow {
+      position: absolute;
+      top: 50%;
+      right: 1.5rem;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .card-stats {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.75rem;
+
+      .stats-item {
+        color: white;
+        font-size: 0.9rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+        i {
+          margin-right: 0.2rem;
+        }
+      }
+    }
+  }
+
+  .proposal-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.5rem;
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .user-avatar {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      border: 1px solid $primary-text-color;
+      object-fit: cover;
+    }
+
+    .addition-info {
+      color: $gray-600;
+      font-size: 0.9rem;
+      font-style: italic;
+
+      strong {
+        color: $primary-text-color;
+      }
+    }
+
+    .upvote-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+    }
+  }
+}

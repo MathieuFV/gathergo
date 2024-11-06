@@ -3,8 +3,9 @@ class DestinationsController < ApplicationController
 
   def index
     @trip = Trip.find(params[:trip_id])
-
     @destinations = @trip.destinations
+                        .includes(:comments, :votes)
+                        .includes(trip: { participations: { user: :photo_attachment } })
   end
 
   def show

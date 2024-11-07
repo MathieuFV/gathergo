@@ -6,10 +6,12 @@
   height: 58px;
   position: fixed;
   margin: 0;
-  padding: 10px;
+  padding-top: 3px;
   left: 0;
   bottom: 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); // Ajout d'une ombre subtile
   z-index: 10;
+  align-items: center;
 }
 
 .tabbar-button {
@@ -17,7 +19,8 @@
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: $gray-500; // Couleur par défaut grise
+  color: $tertiary-text-color;
+  // color: $gray-500; // Couleur par défaut grise
   font-size: medium;
   margin: 5px 0;
   transition: all 0.2s ease; // Animation douce pour les changements d'état
@@ -58,17 +61,5 @@
 
 // Dans _utilities.scss ou dans le même fichier
 body {
-  // margin-top: 80px;
   background-color: white;
-}
-
-.essai {
-  position: fixed;
-  z-index: 2;
-  top: 0;
-  margin: 14px 15px;
-}
-
-.right {
-  right: 0;
 }

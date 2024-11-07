@@ -9,5 +9,16 @@
   background-color: white;
   color: $primary-text-color;
   border: 1px solid $primary-text-color;
-  border-radius: 20px;
+  border-radius: 12px;
+}
+
+.header-btn-on-show {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  margin: 14px 15px;
+}
+
+.right {
+  right: 0;
 }

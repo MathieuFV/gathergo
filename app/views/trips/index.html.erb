@@ -5,3 +5,5 @@
     <li><%= link_to trip.name, trip_path(trip) %></li>
   <% end %>
 </ul>
+
+<%= link_to 'Déconnexion', destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: 'Êtes-vous sûr de vouloir vous déconnecter ?' }, class: 'btn btn-danger' %>

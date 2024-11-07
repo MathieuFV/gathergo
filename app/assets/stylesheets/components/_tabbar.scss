@@ -19,7 +19,8 @@
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: $gray-500; // Couleur par défaut grise
+  color: $tertiary-text-color;
+  // color: $gray-500; // Couleur par défaut grise
   font-size: medium;
   margin: 5px 0;
   transition: all 0.2s ease; // Animation douce pour les changements d'état

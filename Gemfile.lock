@@ -150,6 +150,7 @@ GEM
       net-http
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86_64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     font-awesome-sass (6.5.2)
       sassc (~> 2.0)
     geocoder (1.8.3)
@@ -210,6 +211,8 @@ GEM
     nokogiri (1.16.7-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.7-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     ostruct (0.6.0)
@@ -339,6 +342,7 @@ GEM
 PLATFORMS
   arm64-darwin
   x86_64-darwin
+  x86_64-linux
 
 DEPENDENCIES
   autoprefixer-rails
@@ -373,4 +377,4 @@ RUBY VERSION
    ruby 3.1.2p20
 
 BUNDLED WITH
-   2.5.18
+   2.5.9

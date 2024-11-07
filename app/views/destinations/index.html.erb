@@ -3,17 +3,27 @@
     left_buttons: capture do %>
       <%= render 'shared/header_button',
           url: trip_path(@trip),
-          icon_class: "fa-solid fa-arrow-left fa-lg",
+          icon_class: "fa-arrow-left",
           title: "Go back"
       %>
     <% end
 }%>
 
-<div class="destinations-container mt-4">
-  <% @destinations.each do |destination| %>
-    <%= render 'shared/proposal_section',
-          destination: destination,
-          proposal: destination_proposal_data(destination) %>
+<div class="destinations-container">
+  <% if @destinations.any? %>
+    <% @destinations.each do |destination| %>
+      <%= render 'shared/proposal_section',
+            destination: destination,
+            proposal: destination_proposal_data(destination) %>
+    <% end %>
+  <% else %>
+    <div class="empty-state">
+      <i class="fa-solid fa-map-location-dot"></i>
+      <p>No destinations yet</p>
+      <%= link_to new_trip_destination_path(@trip), class: "btn btn-primary" do %>
+        Add first destination
+      <% end %>
+    </div>
   <% end %>
 </div>
 

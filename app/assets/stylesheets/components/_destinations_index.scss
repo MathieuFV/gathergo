@@ -1,0 +1,44 @@
+// app/assets/stylesheets/components/_destination_index.scss
+.destinations-container {
+  // Padding horizontal
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  // Définir une hauteur maximale pour permettre le scroll
+  height: calc(100vh - 130px); // Ajuste cette valeur selon la hauteur de ton header et ta tabbar
+  overflow-y: auto; // Permet le scroll vertical
+
+  // Pour masquer la scrollbar sur certains navigateurs (optionnel)
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;  // IE and Edge
+  scrollbar-width: none;  // Firefox
+
+  // Espace entre les cartes
+  .proposal-section {
+    margin-bottom: 1rem;
+
+    // Retire la marge du dernier élément
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // État vide
+  .empty-state {
+    text-align: center;
+    padding: 2rem 1rem;
+
+    i {
+      font-size: 3rem;
+      color: $gray-400;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: $gray-600;
+      margin-bottom: 1.5rem;
+    }
+  }
+}

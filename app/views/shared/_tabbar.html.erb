@@ -7,8 +7,9 @@
       <span>Trip hub</span>
     <% end %>
 
-    <%= link_to '#', class: "tabbar-button" do %>
-      <i class="fa-regular fa-calendar"></i>
+    <%= link_to trip_availabilities_path(@trip),
+        class: "tabbar-button #{current_page?(trip_availabilities_path(@trip)) ? 'active' : ''}" do %>
+      <i class="fa-<%= current_page?(trip_availabilities_path(@trip)) ? 'solid' : 'regular' %> fa-calendar"></i>
       <span>Dates</span>
     <% end %>
 

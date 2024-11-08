@@ -18,15 +18,12 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
 
     # Si le user appartient déjà au voyage
-    unless current_user.trips.include?(@trip)
+    if current_user.trips.include?(@trip)
       redirect_to trip_path(@trip)
-    else
-
     end
   end
 
   def add_participant
-    raise
     @trip = Trip.find(params[:trip_id])
 
     # Create new participation

@@ -1,5 +1,6 @@
 <h1>Join <%= @trip.name %> !</h1>
 
-<p>Voulez vous rejoindre le trip ?</p>
-<%= link_to "Join `#{@trip.name}`", trip_add_participant_path , class: "btn btn-success" %>
+<p>Do you want to join <%= @trip.name %> ?</p>
+
+<%= button_to "Join `#{@trip.name}`", trip_add_participant_path(@trip) , class: "btn btn-success" %>
 <%= link_to "Cancel", trips_path, class: "btn btn-danger" %>

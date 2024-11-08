@@ -7,7 +7,7 @@ export default class extends Controller {
   }
 
   copy_trip_url = () => {
-    navigator.clipboard.writeText(window.location.href);
-    console.log("Lien copié")
+    navigator.clipboard.writeText(window.location.href + '/join');
+    console.log(window.location.href + "/join");
   }
 }

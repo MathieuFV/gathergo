@@ -3,11 +3,6 @@ class TripsController < ApplicationController
     # get all destinations of the trip
     @trip = Trip.find(params[:id])
     @destinations = @trip.destinations.includes(:comments, :votes)
-
-    # On vérifie si le trip fait partie des trips du current user
-    # Si oui, on affiche le trip
-
-    # Si non, on redirige vers la page d'ajout du trip
   end
 
   def index

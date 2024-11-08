@@ -6,6 +6,8 @@ class TripsController < ApplicationController
   end
 
   def index
-    @trips = Trip.all
+    # Filtre des voyages en fonction du user
+    @trips = current_user.trips
+
   end
 end

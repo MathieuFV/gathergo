@@ -10,7 +10,7 @@
     right_buttons: capture do %>
     <%= render 'shared/header_button',
         url: trip_path(@trip),
-        icon_class: "fa-user-plus",
+        icon_class: "fa-solid fa-gear opacity-25",
         title: "Go back"
     %>
 <% end
@@ -26,4 +26,4 @@
   add_path: new_trip_destination_path(@trip)
 %>
 
-<%= render "shared/tabbar", active_button: "hub" %>
+<%= render "shared/tabbar_essai", active_button: "hub" %>

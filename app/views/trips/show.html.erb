@@ -9,9 +9,10 @@
     <% end,
     right_buttons: capture do %>
     <%= render 'shared/header_button',
-        url: trip_path(@trip),
+        url: "#",
         icon_class: "fa-solid fa-share-nodes",
-        title: "Share trip"
+        title: "Share trip",
+        share_trip: true
     %>
 <% end
 }%>

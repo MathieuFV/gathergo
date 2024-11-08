@@ -1,3 +1,12 @@
-<h1>Trip availabilities</h1>
+<%= render partial: 'shared/header_card', locals: {
+    title: "Availabilities",
+    left_buttons: capture do %>
+      <%= render 'shared/header_button',
+          url: :back,
+          icon_class: "fa-solid fa-arrow-left fa-lg",
+          title: "Go back"
+      %>
+    <% end
+}%>
 
 <%= render "shared/tabbar" %>

@@ -27,11 +27,11 @@ users.each do |user|
   new_user = User.new(first_name: "#{user[:name]}", address: user[:address], email: "#{user[:name].downcase}@example.com", password: "password")
 
   if new_user.save
-    photo_path = Rails.root.join("app/assets/images/users/#{user[:name].downcase}.png") # chemin vers votre photo
+    photo_path = Rails.root.join("app/assets/images/users/#{user[:name].downcase}.png")
     new_user.photo.attach(
       io: File.open(photo_path),
       filename: "#{user[:name].downcase}.png",
-      content_type: "image/png" # Assurez-vous que le type de contenu est correct
+      content_type: "image/png"
     )
   end
 end
@@ -51,7 +51,6 @@ Participation.create(user: User.where(first_name: "Marin").first, trip: trip, ro
 Participation.create(user: User.where(first_name: "Mathieu").first, trip: trip, role: "participant" )
 Participation.create(user: User.where(first_name: "Pierre").first, trip: trip, role: "participant" )
 
-
 puts "Creation de Summer 25"
 trip = Trip.create(name: "Summer 25", start_date: '2025-06-26', end_date: '2025-08-31')
 # Destinations for trip Summer 25
@@ -68,18 +67,103 @@ Participation.create(user: User.where(first_name: "Mathieu").first, trip: trip, 
 Participation.create(user: User.where(first_name: "Marin").first, trip: trip, role: "participant" )
 Participation.create(user: User.where(first_name: "Pierre").first, trip: trip, role: "participant" )
 
+# Initialisation du service Google Places
+places_service = GooglePlacesService.new(GOOGLE_PLACES_API_KEY)
+
 # Ajout de la description à chaque destination
+puts "Ajout des descriptions et photos aux destinations"
 Destination.all.each do |destination|
-  # Appel du service WikipediaService (créé dans "app/services" pour pouvoir être réutilisé ailleurs)
-  result = WikipediaService.new("Meribel").fetch_wikipedia_summary
+
+    # # Appel du service WikipediaService (créé dans "app/services" pour pouvoir être réutilisé ailleurs)
+    # result = WikipediaService.new(destination.name).fetch_wikipedia_summary
+    # if result.present?
+    #   destination.description = result[:summary]
+    #   if result[:image].present?
+    #     # Attach image to cloudinary
+    #     image_url = result[:image]
+    #     destination.photos.attach(io: URI.open(image_url), filename: "#{destination.name}.jpg", content_type: "image/jpeg")
+
+  puts "Récupération des informations pour #{destination.name}"
+
+  result = places_service.fetch_place_details(destination.name)
+
   if result.present?
-    destination.description = result[:summary]
-    if result[:image].present?
-      # Attach image to cloudinary
-      image_url = result[:image]
-      destination.photo.attach(io: URI.open(image_url), filename: "#{destination.name}.jpg", content_type: "image/jpeg")
+    puts "Informations trouvées pour #{destination.name}"
+    destination.description = result[:description]
+
+    if result[:photo_url].present?
+      begin
+        puts "Ajout de la photo pour #{destination.name}"
+        destination.photo.attach(
+          io: URI.open(result[:photo_url]),
+          filename: "#{destination.name}.jpg",
+          content_type: "image/jpeg"
+        )
+        puts "Photo ajoutée avec succès pour #{destination.name}"
+      rescue => e
+        puts "Erreur lors de l'ajout de la photo pour #{destination.name}: #{e.message}"
+      end
+    else
+      puts "Pas de photo disponible pour #{destination.name}"
     end
 
-    destination.save
+    # Ajoute les coordonnées si ton modèle les supporte
+    if destination.respond_to?(:latitude=) && destination.respond_to?(:longitude=)
+      destination.latitude = result[:latitude]
+      destination.longitude = result[:longitude]
+      puts "Coordonnées ajoutées pour #{destination.name}"
+    end
+
+    if destination.save
+      puts "#{destination.name} mis à jour avec succès"
+    else
+      puts "Erreur lors de la sauvegarde de #{destination.name}: #{destination.errors.full_messages.join(', ')}"
+    end
+  else
+    puts "Aucune information trouvée pour #{destination.name}"
+  end
+
+  # Pause pour respecter les limites de l'API
+  sleep 1.5
+end
+
+# Après ta boucle Destination.all.each mais avant le "puts 'Seed terminé avec succès!'"
+
+puts "Ajout des commentaires et des votes aux destinations"
+Destination.all.each do |destination|
+  puts "Ajout des interactions pour #{destination.name}"
+
+  # Création de quelques commentaires aléatoires
+  User.all.sample(2).each do |user|
+    comment = Comment.create!(
+      user: user,
+      commentable: destination,
+      content: [
+        "#{destination.name} est un super endroit !",
+        "J'ai adoré #{destination.name}, je recommande !",
+        "Je suis déjà allé à #{destination.name}, c'est magnifique.",
+        "#{destination.name} est parfait pour ce voyage !",
+        "Excellente idée d'aller à #{destination.name} !"
+      ].sample,
+      created_at: rand(1..10).days.ago
+    )
+    puts "Commentaire ajouté par #{user.first_name} pour #{destination.name}"
+  end
+
+  # Création de votes aléatoires (certains utilisateurs votent, d'autres non)
+  User.all.each do |user|
+    if rand > 0.3 # 70% de chance de voter
+      Vote.create!(
+        user: user,
+        votable: destination
+      )
+      puts "Vote ajouté par #{user.first_name} pour #{destination.name}"
+    end
   end
 end
+
+puts "\nRécapitulatif des interactions :"
+puts "#{Comment.count} commentaires créés"
+puts "#{Vote.count} votes ajoutés"
+
+puts "Seed terminé avec succès!"

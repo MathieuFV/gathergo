@@ -4,7 +4,7 @@
     left_buttons: capture do %>
       <%= render 'shared/header_button',
           url: :root,
-          icon_class: "fa-arrow-left",
+          icon_class: "fa-solid fa-arrow-left fa-lg",
           title: "Go back" %>
     <% end,
     right_buttons: capture do %>
@@ -20,11 +20,8 @@
 <%= render "shared/sliding_cards_section",
   title: "Destinations",
   remaining_days: 2,
-  add_path: "#",
   cards: @destinations,
   category_path: trip_destinations_path(@trip),
-  # Permet de créer des liens dynamiques qui s'adaptent au type d'objet
-  # (ici, destination. Plus tard, accomodation, activities, etc. )
   card_path: ->(card) { trip_destination_path(@trip, card) },
   add_path: new_trip_destination_path(@trip)
 %>

@@ -1,6 +1,15 @@
 html {
-  min-height: calc(100% + env(safe-area-inset-top));
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  min-height: 100%;
+  padding: 0; /* Désactive les insets pour voir si cela résout le problème */
+  /*min-height: calc(100% + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);*/
+}
+
+html, body {
+  margin: 0 !important;
+  padding: 0;
+  // height: 100%;
+  // overflow: hidden; /* Évite les défilements inutiles si le contenu s'ajuste bien */
 }
 
 body {

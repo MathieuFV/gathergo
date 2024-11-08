@@ -15,27 +15,52 @@
   <% end
 } %>
 
-<h1>Main title</h1>
-<h2>Secondary title</h2>
-<h3>Third title</h3>
+<%= render 'shared/separator', text: "Carousel section" %>
 
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil doloribus mollitia incidunt unde dolore id dolorem animi quibusdam repellat, quam est nemo perspiciatis, officia reiciendis suscipit magnam dicta consectetur commodi.
-Necessitatibus dolores perferendis optio sapiente sint aliquam sequi, quia excepturi vitae! Dolorum debitis rem, doloremque at et quaerat ad, incidunt aspernatur blanditiis quo, vitae qui nulla facilis. Ullam, veritatis ipsam!
-Excepturi, delectus! Temporibus accusantium officia nesciunt quam officiis. Quibusdam aspernatur itaque vero eveniet ullam reprehenderit nam voluptatem velit facilis nemo libero aliquid, ipsa distinctio tenetur sed! Praesentium aliquam ratione porro!
-Ut voluptas, debitis placeat eveniet temporibus est, amet fuga eius nihil quod maxime tempore totam nemo eos magni consequatur, iste facilis recusandae autem. Ad fuga velit sit iure nihil mollitia!
-Sapiente aspernatur laudantium vel quod quam magni nemo error, praesentium ullam ipsam cumque consequuntur dolores velit eius? Assumenda non veniam distinctio architecto laudantium odit ducimus voluptatem, quam accusantium. Quia, voluptatem!
-Eius dolor at quod natus, laudantium sunt doloribus culpa assumenda possimus! Maiores, minus incidunt! Ea, doloremque sunt tempora quisquam necessitatibus eaque velit alias, quas accusantium, aliquid ipsum ullam saepe distinctio.Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste vero ducimus quae totam veritatis atque sunt fugit obcaecati tenetur ab expedita rerum excepturi rem voluptate et, amet hic deserunt possimus.Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum, eligendi nostrum repudiandae distinctio itaque nobis, ab quos nam iste voluptatum necessitatibus, repellat consectetur officia facilis amet. Illo architecto quos facilis?
-Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur provident quibusdam quidem voluptates voluptatibus dicta doloribus nesciunt eaque iure fugiat a modi mollitia dolorem deleniti assumenda, dolores eos ipsum magnam!Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam a magna vel semper. Cras quis sem sit amet odio varius porta. Sed at dui neque. Phasellus nulla magna, volutpat vel elementum vel, eleifend vitae neque. Proin pretium elit id lacinia porttitor. Curabitur rhoncus dapibus viverra. Maecenas eget dolor non nisl sollicitudin faucibus eu sit amet tortor. Vestibulum rutrum eleifend odio ut aliquam.</p>
+<%= render 'shared/sliding_cards_section',
+    title: 'Destinations',
+    link_path: '#',
+    remaining_days: 2,
+    add_path: '#',
+    cards: [
+      {
+        name: 'La Clusaz',
+        comments_count: 6,
+        likes_count: 4,
+        image_url: asset_path('laclusaz.jpg')
+      },
+      {
+        name: 'Courchevel',
+        comments_count: 8,
+        likes_count: 3,
+        image_url: asset_path('courchevel.jpg')
+      },
+      {
+        name: 'Tignes',
+        comments_count: 5,
+        likes_count: 3,
+        image_url: asset_path('tignes.jpg')
+      }
+    ]
+%>
 
-<a href="#">Link</a>
+<%= render 'shared/separator', text: "Proposal card" %>
 
-<div class="input-group">
-  <input type="text" class="form-control" placeholder="Text input">
-</div>
-
-<button type="button" class="btn">Base class</button>
-<button type="button" class="btn btn-primary">Button primary</button>
-<button type="button" class="btn btn-outline-primary">Button outline primary</button>
+<%= render 'shared/proposal_section',
+  proposal: {
+    title: "La Clusaz",
+    image_url: asset_path('laclusaz.jpg'),
+    comments_count: 6,
+    likes_count: 4,
+    created_at: 3.days.ago,
+    user: {
+      name: "Mathieu",
+      avatar_url: asset_path('PhotoMFV.png')
+    }
+  }
+%>
 
 <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete } %>
 <%= link_to "Sign up", new_user_registration_path %>
+
+<%= render 'shared/tabbar' %>

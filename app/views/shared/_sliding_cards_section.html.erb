@@ -10,22 +10,22 @@
   <%# Second row: Scrollable cards container %>
   <div class="cards-container">
     <div class="cards-scroll">
-      <% @destinations.each do |card| %>
+      <% cards.each do |card| %>
         <%= link_to card_path.call(card),
           class: "sliding-card",
           style: card.photo.present? ?
             "background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('#{cl_image_path(card.photo.key, height: 300, crop: :fill)}')" : "background-color: #042040;" do %>
           <div class="card-overlay"></div>
           <div class="card-body">
-            <h3 class="card-title"><%= card[:name] %></h3>
+            <h3 class="card-title"><%= card.name %></h3>
             <div class="card-stats">
               <span class="stats-item">
                 <i class="fa-regular fa-comment"></i>
-                <%= card[:comments_count] %>
+                <%= card.comments_count || 0 %>
               </span>
               <span class="stats-item">
                 <i class="fa-regular fa-heart"></i>
-                <%= card[:likes_count] %>
+                <%= card.votes_count || 0 %>
               </span>
             </div>
           </div>

@@ -1,3 +1,8 @@
-<%= link_to url, class: "btn header-btn", title: title do %>
+<!-- app/views/shared/_header_button.html.erb -->
+<%= link_to url,
+    class: "btn header-btn",
+    'data-controller': ('share-trip' if local_assigns[:share_trip]),
+    'data-action': ('click->share-trip#copy_trip_url' if local_assigns[:share_trip]),
+    title: title do %>
   <i class="<%= icon_class %>"></i>
 <% end %>

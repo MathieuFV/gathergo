@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :votes, only: [:create, :destroy]
 
   resources :trips do
+    get :join
+    post :add_participant
     resources :destinations
     resources :availabilities, except: [:show]
   end

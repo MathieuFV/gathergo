@@ -1,5 +1,7 @@
 <h1>Trips' index</h1>
 
+<h2><%= current_user.first_name %></h2>
+
 <ul>
   <% @trips.each do |trip| %>
     <li><%= link_to trip.name, trip_path(trip) %></li>

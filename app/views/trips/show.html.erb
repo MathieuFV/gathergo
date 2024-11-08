@@ -6,7 +6,15 @@
           url: :root,
           icon_class: "fa-solid fa-arrow-left fa-lg",
           title: "Go back" %>
-    <% end
+    <% end,
+    right_buttons: capture do %>
+    <%= render 'shared/header_button',
+        url: trip_path(@trip),
+        icon_class: "fa-solid fa-share-nodes",
+        title: "Share trip",
+        share_trip: true
+    %>
+<% end
 }%>
 
 <!-- Affichage des destinations du voyage -->

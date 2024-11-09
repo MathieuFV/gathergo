@@ -10,6 +10,6 @@ export default class extends Controller {
   }
 
   copy = () => {
-    console.log(this.sourceTarget.value)
+    this.buttonTarget.innerHTML = '<i class="fa-solid fa-check"></i>';
   }
 }

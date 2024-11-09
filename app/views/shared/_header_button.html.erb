@@ -1,10 +1,10 @@
 <%# Classic options %>
-<% link_options = { class: "btn header-btn", title: title } %>
+<% link_options = { class: "btn header-btn no-hover", title: title } %>
 
 <%# Options for share button %>
 <% if local_assigns[:share_trip] %>
-  <%  link_options['data-controller'] = 'share-trip' %>
-  <% link_options['data-action'] = 'click->share-trip#copy_trip_url' %>
+  <%# <%  link_options['data-controller'] = 'share-trip' %>
+  <%# <% link_options['data-action'] = 'click->share-trip#copy_trip_url' %>
   <% link_options['data-bs-toggle'] = 'offcanvas' %>
   <% link_options['data-bs-target'] = '#offcanvasBottom' %>
   <% link_options['aria-controls'] = 'offcanvasBottom' %>

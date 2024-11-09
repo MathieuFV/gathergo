@@ -43,8 +43,8 @@ puts "Ajout des destinations à Ski 2025"
 # Destinations for trip Ski 2025
 Destination.create(trip: trip, name: "La Clusaz")
 Destination.create(trip: trip, name: "Courchevel")
-Destination.create(trip: trip, name: "meribel")
-Destination.create(trip: trip, name: "Puy-Saint-Vincent")
+# Destination.create(trip: trip, name: "meribel")
+# Destination.create(trip: trip, name: "Puy-Saint-Vincent")
 # Participations for trip ski 2025
 puts "Ajout des participants à Ski 2025"
 Participation.create(user: User.where(first_name: "Marin").first, trip: trip, role: "admin" )
@@ -57,10 +57,10 @@ trip = Trip.create(name: "Summer 25", start_date: '2025-06-26', end_date: '2025-
 puts "Ajout des destinations à Summer 25"
 Destination.create(trip: trip, name: "Mykonos")
 Destination.create(trip: trip, name: "Belle-Île-en-Mer")
-Destination.create(trip: trip, name: "Marrakech")
-Destination.create(trip: trip, name: "Madrid")
-Destination.create(trip: trip, name: "Barcelone")
-Destination.create(trip: trip, name: "Lisbonne")
+# Destination.create(trip: trip, name: "Marrakech")
+# Destination.create(trip: trip, name: "Madrid")
+# Destination.create(trip: trip, name: "Barcelone")
+# Destination.create(trip: trip, name: "Lisbonne")
 # Participations
 puts "Ajout des participants à Summer 25"
 Participation.create(user: User.where(first_name: "Mathieu").first, trip: trip, role: "admin" )
@@ -91,15 +91,17 @@ Destination.all.each do |destination|
     puts "Informations trouvées pour #{destination.name}"
     destination.description = result[:description]
 
-    if result[:photo_url].present?
+    if result[:photos_url].present?
       begin
-        puts "Ajout de la photo pour #{destination.name}"
-        destination.photo.attach(
-          io: URI.open(result[:photo_url]),
-          filename: "#{destination.name}.jpg",
-          content_type: "image/jpeg"
-        )
-        puts "Photo ajoutée avec succès pour #{destination.name}"
+        result[:photos_url].each_with_index do |photo_url, index|
+          puts "Ajout de la photo #{index} pour #{destination.name}"
+          destination.pictures.attach(
+            io: URI.open(photo_url),
+            filename: "#{destination.name}#{index}.jpg",
+            content_type: "image/jpeg"
+          )
+          puts "Photo #{index} ajoutée avec succès pour #{destination.name}"
+        end
       rescue => e
         puts "Erreur lors de l'ajout de la photo pour #{destination.name}: #{e.message}"
       end

@@ -9,6 +9,7 @@ class GooglePlacesService
     begin
       # Recherche le lieu
       places = @client.spots_by_query(place_name)
+
       return nil if places.empty?
 
       # Prend le premier résultat
@@ -17,14 +18,22 @@ class GooglePlacesService
       # Récupère les détails complets
       details = @client.spot(place.place_id)
 
+      # Utilisation des 10 premières photos pour les ajouter aux destinations
+      photos = details.photos
+      photos = photos.map do |photo|
+        if photo.photo_reference
+          build_photo_url(photo.photo_reference)
+        end
+      end
+
       # Construit l'URL de la photo
-      photo_reference = details.photos&.first&.photo_reference
-      photo_url = photo_reference ? build_photo_url(photo_reference) : nil
+      # photo_reference = details.photos&.first&.photo_reference
+      # photo_url = photo_reference ? build_photo_url(photo_reference) : nil
 
       {
         name: details.name,
         description: details.formatted_address + "\n" + (details.reviews&.first&.text || ""),
-        photo_url: photo_url,
+        photos_url: photos,
         latitude: details.lat,
         longitude: details.lng
       }

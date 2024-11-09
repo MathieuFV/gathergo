@@ -27,4 +27,15 @@
   add_path: new_trip_destination_path(@trip)
 %>
 
+
+<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasBottomLabel">Share the trip with your friends !</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body small">
+    Clipboard
+  </div>
+</div>
+
 <%= render "shared/tabbar", active_button: "hub" %>

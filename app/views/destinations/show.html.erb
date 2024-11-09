@@ -1,20 +1,22 @@
 <div class="sticky-section no-tabbar">
   <div id="carouselExample" class="carousel slide" data-bs-touch="true">
     <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <% @destination.pictures.each_with_index do |picture, index| %>
+        <button type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="<%= index %>"
+                class="<%= 'active' if index.zero? %>"
+                aria-current ="<%= "true" if index.zero?%>"
+                aria-label="Slide <%= index + 1 %>"></button>
+      <% end %>
     </div>
+
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <%= cl_image_tag(@destination.photo.key, class: "img d-block") if @destination.photo.present? %>
-      </div>
-      <div class="carousel-item">
-        <%= cl_image_tag(@destination.photo.key, class: "img d-block") if @destination.photo.present? %>
-      </div>
-      <div class="carousel-item">
-        <%= cl_image_tag(@destination.photo.key, class: "img d-block") if @destination.photo.present? %>
-      </div>
+      <% @destination.pictures.each_with_index do |picture, index| %>
+        <div class="carousel-item <%= "active" if index.zero? %>">
+          <%= cl_image_tag(picture.key, class: "img d-block") %>
+        </div>
+      <% end %>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>

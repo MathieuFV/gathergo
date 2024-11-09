@@ -1,0 +1,27 @@
+.offcanvas-header {
+  padding-top: 80px;
+}
+
+.offcanvas {
+  z-index: 9;
+}
+
+.offcanvas-backdrop {
+  z-index: 8;
+}
+
+.offcanvas-body {
+  border-radius: 0 0 28px 28px;
+}
+
+.offcanvas.offcanvas-top {
+  border-radius: 0 0 28px 28px;
+}
+
+
+.no-hover:hover {
+  background-color: white;
+  color: inherit;
+  border-color: inherit;
+  /* Autres propriétés que tu veux garder identiques au `hover` */
+}

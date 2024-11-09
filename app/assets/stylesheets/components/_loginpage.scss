@@ -2,13 +2,13 @@
 .login-page {
   display: flex;                /* Active le mode flexbox pour centrer */
   justify-content: center;      /* Centre horizontalement */
-  align-items: center;          /* Centre verticalement */
-  height: 100vh;                /* Occupe toute la hauteur de l'écran */
+  align-items: center;          /* Centre verticalement */              /* Occupe toute la hauteur de l'écran */
   background-color: #ECF4FE;    /* Couleur de fond de la page */
   background-image: url( asset_path('arcs.jpg') );
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  height: calc(100vh - 80px);
 }
 
 /* Bloc du formulaire */

@@ -14,7 +14,7 @@
     <div class="carousel-inner">
       <% @destination.photos.each_with_index do |photo, index| %>
         <div class="carousel-item <%= "active" if index.zero? %>">
-          <%= cl_image_tag(photo.key, class: "img d-block") %>
+          <%= cl_image_tag(photo.key, width: 700, height: 400, crop: "fill") %>
         </div>
       <% end %>
     </div>
@@ -28,6 +28,20 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+
+
+  <!--
+  <div class="splide" id="splide">
+    <div class="splide__track">
+      <ul class="splide__list">
+        <% @destination.photos.each_with_index do |photo, index| %>
+          <li class="splide__slide"><%= cl_image_tag(photo.key, width: 300, aspect_ratio: "3:4", crop: "fill") %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  -->
+
 </div>
 
 <div>
@@ -60,5 +74,6 @@
 
   </div>
 </main>
+
 
 <%= render "shared/tabbar", active_button: "none" %>

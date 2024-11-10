@@ -87,14 +87,18 @@ Destination.all.each do |destination|
 
   result = places_service.fetch_place_details(destination.name)
 
+  # Si l'API a bien renvoyé un résultat sur la destination
   if result.present?
     puts "Informations trouvées pour #{destination.name}"
     destination.description = result[:description]
 
+    # Si au moins une photo est rattachée à la destination
     if result[:photos_url].present?
       begin
-        result[:photos_url].each_with_index do |photo_url, index|
+                          # Limite à 5 photos
+        result[:photos_url].take(5).each_with_index do |photo_url, index|
           puts "Ajout de la photo #{index} pour #{destination.name}"
+          # Ajout de la photo à la destination
           destination.pictures.attach(
             io: URI.open(photo_url),
             filename: "#{destination.name}#{index}.jpg",

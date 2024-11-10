@@ -58,17 +58,39 @@
   <div data-controller="scroll" class="sticky-section">
     <div data-scroll-target="element" class="sticky-section main-title">
       <h2 class="mb-0"><%= @destination.name %></h2>
-      <p class="mb-0"><%= @trip.name %></p>
+      <p class="mb-1"><%= @trip.name %></p>
     </div>
 
     <div class="content">
-      <div class="main-maps">
-        <%= @destination.name %>
+      <div class="main-maps d-flex pt-4 pb-3 px-5 justify-content-between">
+        <div>
+          <div>
+            <h3 class="mb-0">673 km</h3>
+          </div>
+          <p class="mt-0">from your location</p>
+        </div>
+
+        <div>
+          <div>
+            <h3 class="mb-0">5h 34min</h3>
+          </div>
+          <p class="mt-0">travel time</p>
+        </div>
       </div>
 
-      <div class="main-wiki container">
-        <%= @destination.description %>
+      <div class="border-top border-primary mx-4 text-center">
+        <p class="bg-white px-2 d-inline position-relative" style="top: -15px;">Description</p>
       </div>
+
+      <div class="main-wiki px-5 pt-1 pb-3">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, natus temporibus excepturi vitae corporis distinctio. Sequi voluptatum adipisci voluptas libero. Voluptates nulla sequi quibusdam maiores ipsa odit saepe voluptatem id!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, natus temporibus excepturi vitae corporis distinctio. Sequi voluptatum adipisci voluptas libero. Voluptates nulla sequi quibusdam maiores ipsa odit saepe voluptatem id!</p>
+      </div>
+
+      <div class="border-top border-primary mx-4 text-center">
+        <p class="bg-white px-2 d-inline position-relative" style="top: -15px;">Comments</p>
+      </div>
+
     </div>
 
 

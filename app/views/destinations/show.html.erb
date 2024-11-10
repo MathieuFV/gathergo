@@ -1,7 +1,7 @@
 <div class="sticky-section no-tabbar">
   <div id="carouselExample" class="carousel slide" data-bs-touch="true">
     <div class="carousel-indicators">
-      <% @destination.pictures.each_with_index do |picture, index| %>
+      <% @destination.photos.each_with_index do |photo, index| %>
         <button type="button"
                 data-bs-target="#carouselExampleIndicators"
                 data-bs-slide-to="<%= index %>"
@@ -12,9 +12,9 @@
     </div>
 
     <div class="carousel-inner">
-      <% @destination.pictures.each_with_index do |picture, index| %>
+      <% @destination.photos.each_with_index do |photo, index| %>
         <div class="carousel-item <%= "active" if index.zero? %>">
-          <%= cl_image_tag(picture.key, class: "img d-block") %>
+          <%= cl_image_tag(photo.key, class: "img d-block") %>
         </div>
       <% end %>
     </div>

@@ -99,7 +99,7 @@ Destination.all.each do |destination|
         result[:photos_url].take(5).each_with_index do |photo_url, index|
           puts "Ajout de la photo #{index} pour #{destination.name}"
           # Ajout de la photo à la destination
-          destination.pictures.attach(
+          destination.photos.attach(
             io: URI.open(photo_url),
             filename: "#{destination.name}#{index}.jpg",
             content_type: "image/jpeg"

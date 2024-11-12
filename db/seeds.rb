@@ -74,23 +74,20 @@ places_service = GooglePlacesService.new(GOOGLE_PLACES_API_KEY)
 puts "Ajout des descriptions et photos aux destinations"
 Destination.all.each do |destination|
 
-    # # Appel du service WikipediaService (créé dans "app/services" pour pouvoir être réutilisé ailleurs)
-    # result = WikipediaService.new(destination.name).fetch_wikipedia_summary
-    # if result.present?
-    #   destination.description = result[:summary]
-    #   if result[:image].present?
-    #     # Attach image to cloudinary
-    #     image_url = result[:image]
-    #     destination.photos.attach(io: URI.open(image_url), filename: "#{destination.name}.jpg", content_type: "image/jpeg")
+  # Appel du service WikipediaService (créé dans "app/services" pour pouvoir être réutilisé ailleurs)
+  puts "Recherche d'informations wikipedia sur #{destination.name}"
+  result = WikipediaService.new(destination.name).fetch_wikipedia_summary
+  if result.present?
+    destination.description = result[:summary]
+  end
 
-  puts "Récupération des informations pour #{destination.name}"
-
+  # Appel du service Google Place
+  puts "Récupération des informations Google Place pour #{destination.name}"
   result = places_service.fetch_place_details(destination.name)
 
   # Si l'API a bien renvoyé un résultat sur la destination
   if result.present?
-    puts "Informations trouvées pour #{destination.name}"
-    destination.description = result[:description]
+    puts "Informations Google Place trouvées pour #{destination.name}"
 
     # Si au moins une photo est rattachée à la destination
     if result[:photos_url].present?

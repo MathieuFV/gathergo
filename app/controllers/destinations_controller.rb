@@ -21,6 +21,8 @@ class DestinationsController < ApplicationController
     destination = { lat: current_user.latitude, lng: current_user.longitude }
 
     @distance_info = service.fetch_distance(origin, destination)
+
+    # Nouvelle table pour stocker les données
   end
 
   def new

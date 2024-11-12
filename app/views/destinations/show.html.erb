@@ -4,7 +4,8 @@
       <ul class="splide__list">
         <% @destination.photos.each_with_index do |photo, index| %>
           <li class="splide__slide">
-              <%= cl_image_tag(photo.key, class: "w-100") %>
+              <%# <%= cl_image_tag(photo.key, class:"w-100", width: 400, height: 400, crop: "fill") %>
+              <%= cl_image_tag(photo.key, class:"w-100" ) %>
           </li>
         <% end %>
       </ul>

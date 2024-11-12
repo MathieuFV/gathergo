@@ -18,3 +18,12 @@
   width: fit-content; /* Assure-toi que le conteneur ait une largeur ajustée au contenu */
   padding: 0 5px;
 }
+
+.splide__slide {
+  height: 200px;
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}

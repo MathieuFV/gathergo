@@ -20,8 +20,8 @@ module DestinationHelper
   private
 
   def destination_image_url(destination)
-    if destination.photo.attached?
-      cl_image_path(destination.photo.key)
+    if destination.photos.attached?
+      cl_image_path(destination.photos.first.key)
     else
       'fallback_destination_image_path'
     end

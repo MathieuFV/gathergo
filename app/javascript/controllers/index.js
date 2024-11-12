@@ -7,5 +7,7 @@ import { Application } from "@hotwired/stimulus"
 import Clipboard from "@stimulus-components/clipboard"
 
 window.Stimulus = Application.start()
-
 Stimulus.register("clipboard", Clipboard)
+
+// import SplideController from './splide_controller'
+// application.register('splide', SplideController)

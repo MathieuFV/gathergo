@@ -18,6 +18,9 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+
     <%= yield :head %>
   </head>
 
@@ -28,5 +31,6 @@
                   ">
         <%= yield %>
       </div>
+
     </body>
 </html>

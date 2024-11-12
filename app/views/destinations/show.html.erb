@@ -1,46 +1,15 @@
 <div class="sticky-section no-tabbar">
-  <div id="carouselExample" class="carousel slide" data-bs-touch="true">
-    <div class="carousel-indicators">
-      <% @destination.photos.each_with_index do |photo, index| %>
-        <button type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="<%= index %>"
-                class="<%= 'active' if index.zero? %>"
-                aria-current ="<%= "true" if index.zero?%>"
-                aria-label="Slide <%= index + 1 %>"></button>
-      <% end %>
-    </div>
-
-    <div class="carousel-inner">
-      <% @destination.photos.each_with_index do |photo, index| %>
-        <div class="carousel-item <%= "active" if index.zero? %>">
-          <%= cl_image_tag(photo.key, width: 700, height: 400, crop: "fill") %>
-        </div>
-      <% end %>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-
-
-  <!--
-  <div class="splide" id="splide">
+  <div class="splide" data-controller="splide">
     <div class="splide__track">
       <ul class="splide__list">
         <% @destination.photos.each_with_index do |photo, index| %>
-          <li class="splide__slide"><%= cl_image_tag(photo.key, width: 300, aspect_ratio: "3:4", crop: "fill") %></li>
+          <li class="splide__slide">
+              <%= cl_image_tag(photo.key, class: "w-100") %>
+          </li>
         <% end %>
       </ul>
     </div>
   </div>
-  -->
 
 </div>
 

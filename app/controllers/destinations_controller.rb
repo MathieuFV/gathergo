@@ -37,8 +37,13 @@ class DestinationsController < ApplicationController
     @destination.trip = @trip
 
     # Appel du service wikipedia pour récupérer des infos sur la destination
-    results = WikipediaService.new(@destination.name).fetch_wikipedia_summary
-    manage_wiki_results(results)
+    wikipedia_info = WikipediaService.new(@destination.name).fetch_wikipedia_summary
+    manage_wiki_results(wikipedia_info)
+
+    # Appel du service google place pour récupérer des photos sur la destination
+    places_service = GooglePlacesService.new(GOOGLE_PLACES_API_KEY)
+    google_place_info = places_service.fetch_place_details(@destination.name)
+    manage_googe_place_results(google_place_info)
 
     # Sauvegarde de la nouvelle destination
     if @destination.save
@@ -54,18 +59,36 @@ class DestinationsController < ApplicationController
     params.require(:destination).permit(:name)
   end
 
-  def manage_wiki_results(results)
+  def manage_wiki_results(wikipedia_info)
     # Si la recherche est fructueuse
-    if results.present?
+    if wikipedia_info.present?
       # Ajout du résumé en tant que description de la nouvelle destination
-      @destination.description = results[:summary]
+      @destination.description = wikipedia_info[:summary]
+    else
+      # Si aucune information wikipédia trouvée
+      @destination.description = "No information found on Wikipedia about #{@destination.name}"
+    end
+  end
 
-      # Si une image a été trouvée
-      if results[:image].present?
-        # Attach image to cloudinary
-        image_url = results[:image]
-        @destination.photo.attach(io: URI.open(image_url), filename: "#{@destination.name}.jpg", content_type: "image/jpeg")
+  def manage_googe_place_results(google_place_info)
+    if google_place_info[:photos_url].present?
+      begin
+                            # Limite à 5 photos
+        google_place_info[:photos_url].take(5).each_with_index do |photo_url, index|
+          puts "Ajout de la photo #{index} pour #{@destination.name}"
+          # Ajout de la photo à la destination
+          @destination.photos.attach(
+            io: URI.open(photo_url),
+            filename: "#{@destination.name}#{index}.jpg",
+            content_type: "image/jpeg"
+          )
+          puts "Photo #{index} ajoutée avec succès pour #{@destination.name}"
+        end
+      rescue => e
+        puts "Erreur lors de l'ajout de la photo pour #{@destination.name}: #{e.message}"
       end
+    else
+      puts "Pas de photo disponible pour #{@destination.name}"
     end
   end
 end

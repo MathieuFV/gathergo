@@ -1,6 +1,6 @@
 # Initialisation du service Google Places
 service = GooglePlacesService.new(GOOGLE_PLACES_API_KEY)
-result = service.fetch_place_details("Méribel")
+result = service.fetch_place_details("Val d'Isère")
 
 p result
 

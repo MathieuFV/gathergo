@@ -1,5 +1,9 @@
-places_service = GooglePlacesService.new(GOOGLE_PLACES_API_KEY)
+# Initialisation du service Google Places
+service = GooglePlacesService.new(GOOGLE_PLACES_API_KEY)
+marin = User.where(first_name: "Marin").first
 
-result = places_service.fetch_place_details("Méribel")
+origin = { lat: 45.904427, lng: 6.423353 }
+destination = { lat: marin.latitude, lng: marin.longitude }
+distance_info = service.fetch_distance(origin, destination)
 
-p result[:photo_url].size
+puts distance_info

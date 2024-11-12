@@ -114,11 +114,11 @@ Destination.all.each do |destination|
     end
 
     # Ajoute les coordonnées si ton modèle les supporte
-    if destination.respond_to?(:latitude=) && destination.respond_to?(:longitude=)
-      destination.latitude = result[:latitude]
-      destination.longitude = result[:longitude]
-      puts "Coordonnées ajoutées pour #{destination.name}"
-    end
+    # if destination.respond_to?(:latitude=) && destination.respond_to?(:longitude=)
+    #   destination.latitude = result[:latitude]
+    #   destination.longitude = result[:longitude]
+    #   puts "Coordonnées ajoutées pour #{destination.name}"
+    # end
 
     if destination.save
       puts "#{destination.name} mis à jour avec succès"

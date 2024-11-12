@@ -13,6 +13,14 @@ class DestinationsController < ApplicationController
     @destination = Destination.find(params[:id])
 
     @display_top_menu = false
+
+    # Récupération de la distance et du trajet
+    service = GooglePlacesService.new(GOOGLE_PLACES_API_KEY)
+
+    origin = { lat: @destination.latitude, lng: @destination.longitude }
+    destination = { lat: current_user.latitude, lng: current_user.longitude }
+
+    @distance_info = service.fetch_distance(origin, destination)
   end
 
   def new

@@ -43,6 +43,32 @@ class GooglePlacesService
     end
   end
 
+  # Méthode pour obtenir la distance et le temps de trajet
+  def fetch_distance(origin, destination)
+    url = URI("https://maps.googleapis.com/maps/api/distancematrix/json?origins=#{origin[:lat]},#{origin[:lng]}&destinations=#{destination[:lat]},#{destination[:lng]}&key=#{@api_key}")
+
+    response = Net::HTTP.get(url)
+    data = JSON.parse(response)
+
+    p data
+
+    if data["status"] == "OK"
+      element = data["rows"].first["elements"].first
+      {
+        distance_text: element["distance"]["text"],
+        distance_value: element["distance"]["value"], # en mètres
+        duration_text: element["duration"]["text"],
+        duration_value: element["duration"]["value"] # en secondes
+      }
+    else
+      Rails.logger.error("Error fetching distance: #{data['error_message']}")
+      nil
+    end
+  rescue => e
+    Rails.logger.error("Error in fetch_distance: #{e.message}")
+    nil
+  end
+
   private
 
   def build_photo_url(photo_reference)

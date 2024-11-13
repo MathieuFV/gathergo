@@ -32,3 +32,19 @@
   min-height: calc(100vh - 60px - 86px);
   background-color: white;
 }
+
+.main-wiki {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--read-more-line-clamp, 4);
+}
+
+.read-more {
+  margin: 0;
+  background-color: white;
+  border: none;
+  padding: 0;
+  color: #042040;
+  font-weight: bolder;
+}

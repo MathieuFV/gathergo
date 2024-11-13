@@ -16,13 +16,12 @@ class DestinationsController < ApplicationController
 
     # Récupération de la distance et du trajet
     service = GooglePlacesService.new(GOOGLE_PLACES_API_KEY)
-
     origin = { lat: @destination.latitude, lng: @destination.longitude }
     destination = { lat: current_user.latitude, lng: current_user.longitude }
-
     @distance_info = service.fetch_distance(origin, destination)
 
-    # Nouvelle table pour stocker les données
+    # Affichage des commentaires
+    @comments = @destination.comments
   end
 
   def new

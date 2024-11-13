@@ -1,13 +1,28 @@
 /* Structure de base pour la page de connexion */
+
+#background-carousel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Place le carrousel en arrière-plan */
+}
+
+#background-carousel .carousel-item img {
+  object-fit: cover; /* Assure que les images prennent tout le conteneur sans distorsion */
+  height: 100vh; /* Prend toute la hauteur de l'écran */
+}
+
 .login-page {
   display: flex;                /* Active le mode flexbox pour centrer */
   justify-content: center;      /* Centre horizontalement */
   align-items: center;          /* Centre verticalement */              /* Occupe toute la hauteur de l'écran */
-  background-color: #ECF4FE;    /* Couleur de fond de la page */
-  background-image: url( asset_path('arcs.jpg') );
+  /*background-color: #ECF4FE;*/    /* Couleur de fond de la page */
+  /*background-image: url( asset_path('arcs.jpg') );
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;*/
   height: calc(100vh - 80px);
 }
 

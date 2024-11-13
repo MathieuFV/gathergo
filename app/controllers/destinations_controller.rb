@@ -20,10 +20,10 @@ class DestinationsController < ApplicationController
 
     origin = { lat: @destination.latitude, lng: @destination.longitude }
     destination = { lat: current_user.latitude, lng: current_user.longitude }
-
     @distance_info = service.fetch_distance(origin, destination)
 
-    # Nouvelle table pour stocker les données
+    # Affichage des commentaires
+    @comments = @destination.comments
   end
 
   def new
@@ -37,14 +37,22 @@ class DestinationsController < ApplicationController
 
     @destination.trip = @trip
 
-    # Appel du service wikipedia pour récupérer des infos sur la destination
-    wikipedia_info = WikipediaService.new(@destination.name).fetch_wikipedia_summary
-    manage_wiki_results(wikipedia_info)
-
     # Appel du service google place pour récupérer des photos sur la destination
     places_service = GooglePlacesService.new(ENV['GOOGLE_GEOCODING_API_KEY'])
     google_place_info = places_service.fetch_place_details(@destination.name)
     manage_googe_place_results(google_place_info)
+
+    # Appel de l'api wikipedia
+    if google_place_info[:name].present?
+      # Utilisation du nom normalisé par google place
+      wikipedia_info = WikipediaService.new(google_place_info[:name]).fetch_wikipedia_summary
+    else
+      # Utilisation du nom brut sinon
+      wikipedia_info = WikipediaService.new(@destination.name).fetch_wikipedia_summary
+    end
+
+    # Appel du service wikipedia pour récupérer des infos sur la destination
+    manage_wiki_results(wikipedia_info)
 
     # Sauvegarde de la nouvelle destination
     if @destination.save
@@ -52,6 +60,14 @@ class DestinationsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @destination = Destination.find(params[:id])
+    @destination.destroy
+
+    @trip = Trip.find(params[:trip_id])
+    redirect_to trip_path(@trip)
   end
 
   private

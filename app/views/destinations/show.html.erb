@@ -1,17 +1,16 @@
 <div class="sticky-section no-tabbar">
   <div class="splide" data-controller="splide">
     <div class="splide__track">
-      <ul class="splide__list">
+      <ul class="splide__list" data-controller="zoom">
         <% @destination.photos.each_with_index do |photo, index| %>
           <li class="splide__slide">
               <%# <%= cl_image_tag(photo.key, class:"w-100", width: 400, height: 400, crop: "fill") %>
-              <%= cl_image_tag(photo.key, class:"w-100" ) %>
+              <%= cl_image_tag(photo.key, data: { action: 'click->zoom#zoom', zoom_target: "photo" }) %>
           </li>
         <% end %>
       </ul>
     </div>
   </div>
-
 </div>
 
 <div>
@@ -49,20 +48,53 @@
       </div>
 
       <div class="border-top border-primary mx-4 text-center">
-        <p class="bg-white px-2 d-inline position-relative" style="top: -15px;">Description</p>
+        <p class="bg-white px-2 d-inline position-relative fw-bold" style="top: -15px;">Description</p>
       </div>
 
-      <div class="main-wiki px-5 pt-1 pb-3">
-        <p><%= @destination.description %></p>
+      <div class="px-4 pt-1 pb-3" data-controller="read-more" data-read-more-more-text-value="Read more" data-read-more-less-text-value="Read less">
+        <p class="main-wiki" data-read-more-target="content"><%= @destination.description %></p>
+        <div class="d-flex justify-content-end align-items-center">
+          <button class="read-more me-2" data-action="read-more#toggle">Read more</button>
+          <i data-read-more-target="icon" class="fa-solid fa-angle-down"></i>
+        </div>
       </div>
 
       <div class="border-top border-primary mx-4 text-center">
-        <p class="bg-white px-2 d-inline position-relative" style="top: -15px;">Comments</p>
+        <p class="bg-white px-2 d-inline position-relative fw-bold" style="top: -15px;">Comments</p>
+      </div>
+
+      <div class="mx-4">
+        <%# Commentaires %>
+        <% @comments.each do |comment| %>
+          <div class="mb-32 bg-gray-500">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
+                <%= cl_image_tag(comment.user.photo.key, height: 40, width: 40, class: "rounded-circle") %>
+                <p class="m-0 ms-2"><%= comment.user.first_name %></p>
+              </div>
+              <i class="fa-solid fa-ellipsis-vertical text-end"></i>
+            </div>
+
+            <p class="mt-2 fst-italic ms-3 border-start ps-3 border-gray-600"><%= comment.content %></p>
+          </div>
+        <% end %>
+
+        <%# Nouveau commentaire %>
+        <!--
+        <%= cl_image_tag(current_user.photo.key, height: 40, width: 40, class: "rounded-circle") %>
+        <input type="text">
+        -->
+      </div>
+
+      <%# Ajout d'un bouton supprimer %>
+      <div class="d-flex justify-content-center align-items-end mt-5">
+        <%= link_to "Delete destination",
+          trip_destination_path(trip_id: @trip.id, id: @destination.id),
+          data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'},
+          class: "btn border-secondary text-center" %>
       </div>
 
     </div>
-
-
   </div>
 </main>
 

@@ -50,14 +50,12 @@ class GooglePlacesService
     response = Net::HTTP.get(url)
     data = JSON.parse(response)
 
-    p data
-
     if data["status"] == "OK"
       element = data["rows"].first["elements"].first
       {
         distance_text: element["distance"]["text"],
         distance_value: element["distance"]["value"], # en mètres
-        duration_text: element["duration"]["text"],
+        duration_text: element["duration"]["text"].gsub(/\s?hour(s)?\b/, "h"),
         duration_value: element["duration"]["value"] # en secondes
       }
     else

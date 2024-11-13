@@ -41,7 +41,6 @@ class WikipediaService
 
         # Vérification de la présence d'une image
         if result && result.dig("thumbnail", "source")
-          p result
           image = result["thumbnail"]["source"]
         end
 

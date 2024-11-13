@@ -63,9 +63,15 @@
         <p class="bg-white px-2 d-inline position-relative" style="top: -15px;">Comments</p>
       </div>
 
+      <%# Ajout d'un bouton supprimer %>
+      <div class="d-flex justify-content-center align-items-end">
+        <%= link_to "Delete destination",
+          trip_destination_path(trip_id: @trip.id, id: @destination.id),
+          data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'},
+          class: "btn btn-danger text-center" %>
+      </div>
+
     </div>
-
-
   </div>
 </main>
 

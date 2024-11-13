@@ -13,7 +13,14 @@
 
 <div class="destinations-container">
   <% if @destinations.any? %>
-    <% @destinations.each do |destination| %>
+    <%# Separator pour la première destination (la plus votée) %>
+    <%= render 'shared/separator', text: "Ranked first !" %>
+
+    <%# On utilise each_with_index pour savoir où on est dans l'itération %>
+    <% @destinations.each_with_index do |destination, index| %>
+      <%# On ajoute un separator avant la deuxième destination %>
+      <%= render 'shared/separator', text: "Other destinations" if index == 1 %>
+
       <%= render 'shared/proposal_section',
             destination: destination,
             proposal: destination_proposal_data(destination) %>

@@ -1,17 +1,16 @@
 <div class="sticky-section no-tabbar">
   <div class="splide" data-controller="splide">
     <div class="splide__track">
-      <ul class="splide__list">
+      <ul class="splide__list" data-controller="zoom">
         <% @destination.photos.each_with_index do |photo, index| %>
           <li class="splide__slide">
               <%# <%= cl_image_tag(photo.key, class:"w-100", width: 400, height: 400, crop: "fill") %>
-              <%= cl_image_tag(photo.key, class:"w-100" ) %>
+              <%= cl_image_tag(photo.key, data: { action: 'click->zoom#zoom', zoom_target: "photo" }) %>
           </li>
         <% end %>
       </ul>
     </div>
   </div>
-
 </div>
 
 <div>
@@ -52,7 +51,7 @@
         <p class="bg-white px-2 d-inline position-relative" style="top: -15px;">Description</p>
       </div>
 
-      <div class="main-wiki px-5 pt-1 pb-3">
+      <div class="main-wiki px-4 pt-1 pb-3">
         <p><%= @destination.description %></p>
       </div>
 

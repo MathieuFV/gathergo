@@ -13,7 +13,8 @@ module DestinationHelper
         name: admin_user&.first_name || "Unknown",
         avatar_url: user_avatar_url(admin_user)
       },
-      created_at: destination.created_at
+      created_at: destination.created_at,
+      link_path: Rails.application.routes.url_helpers.trip_destination_path(destination.trip, destination)
     }
   end
 

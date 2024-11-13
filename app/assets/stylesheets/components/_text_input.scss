@@ -1,0 +1,91 @@
+// app/assets/stylesheets/components/_text_input.scss
+
+.text-input-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem;
+
+  // Label (optionnel)
+  .text-input-label {
+    display: block;
+    font-size: 0.875rem;
+    color: $gray-700;
+    margin-bottom: 0.5rem;
+  }
+
+  // Wrapper pour l'input et les icônes
+  .text-input-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  // Input principal
+  .text-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: $gray-900;
+    background-color: white;
+    border: 1px solid $primary-text-color;
+    border-radius: 2.5rem;
+    appearance: none;
+    transition: border-color 0.15s ease-in-out;
+
+    &:focus {
+      outline: none;
+      border-color: $primary;
+      box-shadow: 0 0 0 3px rgba($primary, 0.1);
+    }
+
+    &.with-icon {
+      padding-left: 2.5rem;
+    }
+
+    // Évite le zoom sur mobile
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+  }
+
+  // Icône à gauche
+  .text-input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $gray-500;
+    font-size: 1rem;
+    pointer-events: none;
+  }
+
+  // Bouton clear
+  .text-input-clear {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0.25rem;
+    color: $gray-400;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: none;
+
+    &:focus {
+      outline: none;
+      color: $gray-600;
+    }
+  }
+
+  // Affiche le bouton clear quand l'input a du contenu
+  .text-input:not(:placeholder-shown) ~ .text-input-clear {
+    display: block;
+  }
+
+  // Message d'erreur
+  .text-input-error {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: $danger;
+  }
+}

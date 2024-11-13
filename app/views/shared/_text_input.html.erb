@@ -1,0 +1,21 @@
+<%# app/views/shared/_text_input.html.erb %>
+<div class="text-input-container">
+  <div class="text-input-wrapper">
+    <% if local_assigns[:icon_class].present? %>
+      <i class="text-input-icon fa-solid <%= icon_class %>"></i>
+    <% end %>
+
+    <%= text_field_tag input_id,
+        local_assigns[:value],
+        {
+          class: "text-input #{local_assigns[:icon_class].present? ? 'with-icon' : ''}",
+          placeholder: local_assigns[:placeholder],
+          autocomplete: 'off',
+          data: {
+            places_autocomplete_target: "input",
+            action: "input->places-autocomplete#onInput keydown->places-autocomplete#onKeydown"
+          }
+        }
+    %>
+  </div>
+</div>

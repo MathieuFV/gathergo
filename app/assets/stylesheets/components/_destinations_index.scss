@@ -1,4 +1,3 @@
-// app/assets/stylesheets/components/_destination_index.scss
 .destinations-container {
   // Padding horizontal
   padding-left: 1rem;
@@ -41,4 +40,13 @@
       margin-bottom: 1.5rem;
     }
   }
+
+  .search-destination-wrapper {
+    .btn-primary {
+      // Vos styles pour le bouton
+      margin-top: 1rem;
+      border-radius: 8px;
+    }
+  }  
 }
+

@@ -1,3 +1,4 @@
+<%# app/views/destinations/index.html.erb %>
 <%= render partial: 'shared/header_card',
   locals: {
     title: "Destinations",
@@ -12,20 +13,52 @@
 %>
 
 <div class="destinations-container">
+  <div data-controller="places-autocomplete">
+    <%# Formulaire caché %>
+    <%= simple_form_for [@trip, Destination.new], html: { class: 'd-none', data: { places_autocomplete_target: 'form' } } do |f| %>
+      <%= f.input :name, input_html: { data: { places_autocomplete_target: 'hiddenInput' } } %>
+    <% end %>
+
+    <%# Champ de recherche %>
+    <div class="search-destination-wrapper">
+      <%= render 'shared/text_input',
+        input_id: 'destination-search',
+        icon_class: 'fa-magnifying-glass',
+        placeholder: 'Search for a destination to add your proposal',
+        value: ''
+      %>
+      <%# Conteneur pour le bouton %>
+      <div data-places-autocomplete-target="submitButtonContainer"></div>
+    </div>
+
+    <%# Container pour les résultats %>
+    <div class="places-autocomplete-results" data-places-autocomplete-target="results">
+    </div>
+  </div>
+
   <% if @destinations.any? %>
     <%# Separator pour la première destination (la plus votée) %>
     <%= render 'shared/separator', text: "Ranked first !" %>
 
-    <%# On utilise each_with_index pour savoir où on est dans l'itération %>
-    <% @destinations.each_with_index do |destination, index| %>
-      <%# On ajoute un separator avant la deuxième destination %>
-      <%= render 'shared/separator', text: "Other destinations" if index == 1 %>
+    <%# Premier élément %>
+    <%= render 'shared/proposal_section',
+          destination: @destinations.first,
+          proposal: destination_proposal_data(@destinations.first).merge({
+            link_path: trip_destination_path(@trip, @destinations.first)
+          }) %>
 
-      <%= render 'shared/proposal_section',
-            destination: destination,
-            proposal: destination_proposal_data(destination).merge({
-              link_path: trip_destination_path(@trip, destination)
-            }) %>
+    <%# Si il y a d'autres destinations %>
+    <% if @destinations.count > 1 %>
+      <%= render 'shared/separator', text: "Other destinations" %>
+
+      <%# Reste des destinations %>
+      <% @destinations.drop(1).each do |destination| %>
+        <%= render 'shared/proposal_section',
+              destination: destination,
+              proposal: destination_proposal_data(destination).merge({
+                link_path: trip_destination_path(@trip, destination)
+              }) %>
+      <% end %>
     <% end %>
   <% else %>
     <div class="empty-state">

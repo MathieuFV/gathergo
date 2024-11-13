@@ -14,4 +14,8 @@ Rails.application.routes.draw do
     resources :destinations
     resources :availabilities, except: [:show]
   end
+
+  namespace :api do
+    get 'places/autocomplete', to: 'places#autocomplete'
+  end
 end

@@ -1,13 +1,3 @@
-.sticky-section {
-  // height: 100vh;
-  position: sticky;
-  top: 0;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // flex-direction: column;
-}
-
 .carousel-indicators [data-bs-target] {
   width: 10px; /* change width */
   height: 10px; /* change height */
@@ -29,27 +19,11 @@
   padding: 0 5px;
 }
 
-.main-title {
-  text-align: center;
-  padding-top: 10px;
-  margin-top: -28px;
-  border-bottom: 1px solid $icone-color;
-  background-color: white;
-  border-top-left-radius: 28px;
-  border-top-right-radius: 28px;
-}
-
-.main-title.--on-top {
-  background-color: $light-blue-background;
-  border-radius: 0; /* Peut-être ajusté */
-}
-
-.main-title.--not-on-top {
-  background-color: white; /* Exemple */
-  border-radius: 28px; /* Ajuste selon besoin */
-}
-
-.content {
-  min-height: calc(100vh - 60px - 80px);
-  background-color: white;
+.splide__slide {
+  height: 200px;
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
 }

@@ -1,31 +1,17 @@
 <div class="sticky-section no-tabbar">
-  <div id="carouselExample" class="carousel slide" data-bs-touch="true">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  <div class="splide" data-controller="splide">
+    <div class="splide__track">
+      <ul class="splide__list">
+        <% @destination.photos.each_with_index do |photo, index| %>
+          <li class="splide__slide">
+              <%# <%= cl_image_tag(photo.key, class:"w-100", width: 400, height: 400, crop: "fill") %>
+              <%= cl_image_tag(photo.key, class:"w-100" ) %>
+          </li>
+        <% end %>
+      </ul>
     </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <%= cl_image_tag(@destination.photo.key, class: "img d-block") if @destination.photo.present? %>
-      </div>
-      <div class="carousel-item">
-        <%= cl_image_tag(@destination.photo.key, class: "img d-block") if @destination.photo.present? %>
-      </div>
-      <div class="carousel-item">
-        <%= cl_image_tag(@destination.photo.key, class: "img d-block") if @destination.photo.present? %>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
   </div>
+
 </div>
 
 <div>
@@ -42,21 +28,43 @@
   <div data-controller="scroll" class="sticky-section">
     <div data-scroll-target="element" class="sticky-section main-title">
       <h2 class="mb-0"><%= @destination.name %></h2>
-      <p class="mb-0"><%= @trip.name %></p>
+      <p class="mb-1"><%= @trip.name %></p>
     </div>
 
     <div class="content">
-      <div class="main-maps">
-        <%= @destination.name %>
+      <div class="main-maps d-flex pt-4 pb-4 px-4 justify-content-between">
+        <div>
+          <div>
+            <h3 class="mb-0"><%= @distance_info[:distance_text] %></h3>
+          </div>
+          <p class="m-0">from your location</p>
+        </div>
+
+        <div>
+          <div>
+            <h3 class="mb-0"><%= @distance_info[:duration_text] %></h3>
+          </div>
+          <p class="m-0">travel time</p>
+        </div>
       </div>
 
-      <div class="main-wiki container">
-        <%= @destination.description %>
+      <div class="border-top border-primary mx-4 text-center">
+        <p class="bg-white px-2 d-inline position-relative" style="top: -15px;">Description</p>
       </div>
+
+      <div class="main-wiki px-5 pt-1 pb-3">
+        <p><%= @destination.description %></p>
+      </div>
+
+      <div class="border-top border-primary mx-4 text-center">
+        <p class="bg-white px-2 d-inline position-relative" style="top: -15px;">Comments</p>
+      </div>
+
     </div>
 
 
   </div>
 </main>
+
 
 <%= render "shared/tabbar", active_button: "none" %>

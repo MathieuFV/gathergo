@@ -9,12 +9,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="mobile-web-app-capable" content="yes">
 
-    <%# Icons & Manifest %>
-    <%# <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="theme-color" content="#ffffff"> %>
-
     <%# SEO %>
     <meta name="description" content="Collaborative trip planning made easy">
     <meta name="robots" content="index, follow">
@@ -24,6 +18,9 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+
     <%= yield :head %>
   </head>
 
@@ -34,5 +31,6 @@
                   ">
         <%= yield %>
       </div>
+
     </body>
 </html>

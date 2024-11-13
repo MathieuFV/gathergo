@@ -6,6 +6,27 @@ class TripsController < ApplicationController
   end
 
   def index
-    @trips = Trip.all
+    @trips = current_user.trips
+  end
+
+  def join
+    @trip = Trip.find(params[:trip_id])
+
+    # Si le user appartient déjà au voyage
+    if current_user.trips.include?(@trip)
+      redirect_to trip_path(@trip)
+    end
+  end
+
+  def add_participant
+    @trip = Trip.find(params[:trip_id])
+
+    # Create new participation
+    @participation = Participation.new(user: current_user, trip: @trip, role: "participant")
+    if @participation.save
+      redirect_to trip_path(@trip)
+    else
+      render :join, status: :unprocessable_entity
+    end
   end
 end

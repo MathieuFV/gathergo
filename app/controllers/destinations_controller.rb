@@ -61,6 +61,14 @@ class DestinationsController < ApplicationController
     end
   end
 
+  def destroy
+    @destination = Destination.find(params[:id])
+    @destination.destroy
+
+    @trip = Trip.find(params[:trip_id])
+    redirect_to trip_path(@trip)
+  end
+
   private
 
   def destination_params

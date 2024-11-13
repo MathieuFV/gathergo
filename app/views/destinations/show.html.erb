@@ -48,7 +48,7 @@
       </div>
 
       <div class="border-top border-primary mx-4 text-center">
-        <p class="bg-white px-2 d-inline position-relative" style="top: -15px;">Description</p>
+        <p class="bg-white px-2 d-inline position-relative fw-bold" style="top: -15px;">Description</p>
       </div>
 
       <div class="px-4 pt-1 pb-3" data-controller="read-more" data-read-more-more-text-value="Read more" data-read-more-less-text-value="Read less">
@@ -60,7 +60,19 @@
       </div>
 
       <div class="border-top border-primary mx-4 text-center">
-        <p class="bg-white px-2 d-inline position-relative" style="top: -15px;">Comments</p>
+        <p class="bg-white px-2 d-inline position-relative fw-bold" style="top: -15px;">Comments</p>
+      </div>
+
+      <div class="mx-4">
+        <% @comments.each do |comment| %>
+        <div class="mb-3">
+          <div class="d-flex align-items-center ">
+            <%= cl_image_tag(comment.user.photo.key, height: 40, width: 40, class: "rounded-circle") %>
+            <p class="m-0 ms-2"><%= comment.user.first_name %></p>
+          </div>
+          <p class="mt-2 fst-italic"><%= comment.content %></p>
+        </div>
+        <% end %>
       </div>
 
       <%# Ajout d'un bouton supprimer %>

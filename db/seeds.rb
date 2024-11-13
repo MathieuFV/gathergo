@@ -74,19 +74,19 @@ places_service = GooglePlacesService.new(GOOGLE_PLACES_API_KEY)
 puts "Ajout des descriptions et photos aux destinations"
 Destination.all.each do |destination|
 
-  # Appel du service WikipediaService (créé dans "app/services" pour pouvoir être réutilisé ailleurs)
-  puts "Recherche d'informations wikipedia sur #{destination.name}"
-  result = WikipediaService.new(destination.name).fetch_wikipedia_summary
-  if result.present?
-    destination.description = result[:summary]
-  end
-
   # Appel du service Google Place
   puts "Récupération des informations Google Place pour #{destination.name}"
   result = places_service.fetch_place_details(destination.name)
 
   # Si l'API a bien renvoyé un résultat sur la destination
   if result.present?
+    # Appel du service WikipediaService (créé dans "app/services" pour pouvoir être réutilisé ailleurs)
+    puts "Recherche d'informations wikipedia sur #{destination.name}"
+    wikipedia_infos = WikipediaService.new(result[:name]).fetch_wikipedia_summary
+    if wikipedia_infos.present?
+      destination.description = wikipedia_infos[:summary]
+    end
+
     puts "Informations Google Place trouvées pour #{destination.name}"
 
     # Si au moins une photo est rattachée à la destination
@@ -123,7 +123,13 @@ Destination.all.each do |destination|
       puts "Erreur lors de la sauvegarde de #{destination.name}: #{destination.errors.full_messages.join(', ')}"
     end
   else
-    puts "Aucune information trouvée pour #{destination.name}"
+    puts "Aucune information google trouvée pour #{destination.name}"
+    # Essai de la recherche wikipedia avec le nom seulement
+    puts "Recherche d'informations wikipedia sur #{destination.name}"
+    wikipedia_infos = WikipediaService.new(destination.name).fetch_wikipedia_summary
+    if wikipedia_infos.present?
+      destination.description = wikipedia_infos[:summary]
+    end
   end
 
   # Pause pour respecter les limites de l'API

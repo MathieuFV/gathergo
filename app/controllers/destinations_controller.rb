@@ -36,14 +36,22 @@ class DestinationsController < ApplicationController
 
     @destination.trip = @trip
 
-    # Appel du service wikipedia pour récupérer des infos sur la destination
-    wikipedia_info = WikipediaService.new(@destination.name).fetch_wikipedia_summary
-    manage_wiki_results(wikipedia_info)
-
     # Appel du service google place pour récupérer des photos sur la destination
     places_service = GooglePlacesService.new(GOOGLE_PLACES_API_KEY)
     google_place_info = places_service.fetch_place_details(@destination.name)
     manage_googe_place_results(google_place_info)
+
+    # Appel de l'api wikipedia
+    if google_place_info[:name].present?
+      # Utilisation du nom normalisé par google place
+      wikipedia_info = WikipediaService.new(google_place_info[:name]).fetch_wikipedia_summary
+    else
+      # Utilisation du nom brut sinon
+      wikipedia_info = WikipediaService.new(@destination.name).fetch_wikipedia_summary
+    end
+
+    # Appel du service wikipedia pour récupérer des infos sur la destination
+    manage_wiki_results(wikipedia_info)
 
     # Sauvegarde de la nouvelle destination
     if @destination.save

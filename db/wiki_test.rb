@@ -2,62 +2,62 @@
 # require 'json'
 # require 'uri'
 
-# def fetch_wikipedia_summary(title)
-#   if title.present?
-#     correct_title = title
+def fetch_wikipedia_summary(title)
+  if title.present?
+    correct_title = title
 
-#     # Construction de l'URL pour l'Action API de Wikipédia
-#     api_url = URI("https://fr.wikipedia.org/w/api.php")
+    # Construction de l'URL pour l'Action API de Wikipédia
+    api_url = URI("https://fr.wikipedia.org/w/api.php")
 
-#     # Définition des paramètres pour obtenir un extrait complet et les coordonnées
-#     params = {
-#       action: 'query',
-#       format: 'json',
-#       prop: 'extracts|pageimages',
-#       exintro: 1,
-#       explaintext: 1,
-#       redirects: 1,           # Redirige vers une orthographe plausible
-#       titles: correct_title,
-#       exsectionformat: 'plain', # Format des sections en texte brut
-#       pithumbsize: 500
-#     }
+    # Définition des paramètres pour obtenir un extrait complet et les coordonnées
+    params = {
+      action: 'query',
+      format: 'json',
+      prop: 'extracts|pageimages',
+      exintro: 1,
+      explaintext: 1,
+      redirects: 1,           # Redirige vers une orthographe plausible
+      titles: correct_title,
+      exsectionformat: 'plain', # Format des sections en texte brut
+      pithumbsize: 500
+    }
 
-#     # Construction de la requête avec les paramètres
-#     api_url.query = URI.encode_www_form(params)
+    # Construction de la requête avec les paramètres
+    api_url.query = URI.encode_www_form(params)
 
-#     # Appel à l'API avec le bon titre
-#     summary_response = Net::HTTP.get(api_url)
+    # Appel à l'API avec le bon titre
+    summary_response = Net::HTTP.get(api_url)
 
-#     unless summary_response.empty?
-#       data = JSON.parse(summary_response)
+    unless summary_response.empty?
+      data = JSON.parse(summary_response)
 
-#       result = data["query"]["pages"].values.first
-#       title = result["title"]
-#       image = result["thumbnail"]["source"]
+      result = data["query"]["pages"].values.first
+      title = result["title"]
+      image = result["thumbnail"]["source"]
 
-#       # Navigue dans la structure JSON pour obtenir l'extrait
-#       pages = data["query"]["pages"]
-#       page = pages.values.first
+      # Navigue dans la structure JSON pour obtenir l'extrait
+      pages = data["query"]["pages"]
+      page = pages.values.first
 
-#       if page && result && image
-#         p "summary and image"
-#         fetched_data = { summary: result["extract"], image: image }
-#       elsif page && result
-#         p "only summary"
-#         fetched_data = { summary: result["extract"] }
-#       else
-#         puts "Aucun extrait trouvé pour le titre : #{correct_title}"
-#         return nil
-#       end
-#     else
-#       puts "Réponse vide de l'API pour le titre : #{correct_title}"
-#       return nil
-#     end
-#   else
-#     puts "Titre invalide ou vide : #{title}"
-#     return nil
-#   end
-# end
+      if page && result && image
+        p "summary and image"
+        fetched_data = { summary: result["extract"], image: image }
+      elsif page && result
+        p "only summary"
+        fetched_data = { summary: result["extract"] }
+      else
+        puts "Aucun extrait trouvé pour le titre : #{correct_title}"
+        return nil
+      end
+    else
+      puts "Réponse vide de l'API pour le titre : #{correct_title}"
+      return nil
+    end
+  else
+    puts "Titre invalide ou vide : #{title}"
+    return nil
+  end
+end
 
 # # Ne fonctionne pas, sans raison
 # def fetch_wikipedia_coordinates(title)
@@ -116,4 +116,6 @@
 # end
 
 
-WikipediaService.new("Meribel").fetch_wikipedia_summary
+# WikipediaService.new("Meribel").fetch_wikipedia_summary
+
+p fetch_wikipedia_summary("la clusaz")

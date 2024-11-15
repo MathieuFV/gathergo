@@ -22,11 +22,16 @@ users = [
     address: "Lyon"
   }
 ]
+
+# Stockons les users créés dans des variables pour les réutiliser
+created_users = {}
+
 users.each do |user|
   puts "Creation de #{user[:name]}"
   new_user = User.new(first_name: "#{user[:name]}", address: user[:address], email: "#{user[:name].downcase}@example.com", password: "password")
 
   if new_user.save
+    created_users[user[:name]] = new_user  # Stockage de l'instance User
     photo_path = Rails.root.join("app/assets/images/users/#{user[:name].downcase}.png")
     new_user.photo.attach(
       io: File.open(photo_path),
@@ -41,34 +46,34 @@ puts "Creation de Ski 2025"
 trip = Trip.create(name: "Ski 2025!", start_date: '2025-01-20', end_date: '2025-03-12')
 puts "Ajout des destinations à Ski 2025"
 # Destinations for trip Ski 2025
-Destination.create(trip: trip, name: "La Clusaz")
-Destination.create(trip: trip, name: "Courchevel")
-# Destination.create(trip: trip, name: "meribel")
-# Destination.create(trip: trip, name: "Puy-Saint-Vincent")
-# Participations for trip ski 2025
-puts "Ajout des participants à Ski 2025"
-Participation.create(user: User.where(first_name: "Marin").first, trip: trip, role: "admin" )
-Participation.create(user: User.where(first_name: "Mathieu").first, trip: trip, role: "participant" )
-Participation.create(user: User.where(first_name: "Pierre").first, trip: trip, role: "participant" )
+Destination.create(
+  trip: trip, 
+  name: "La Clusaz",
+  owner_id: created_users["Marin"].id
+)
+Destination.create(
+  trip: trip, 
+  name: "Courchevel",
+  owner_id: created_users["Mathieu"].id
+)
 
 puts "Creation de Summer 25"
 trip = Trip.create(name: "Summer 25", start_date: '2025-06-26', end_date: '2025-08-31')
 # Destinations for trip Summer 25
 puts "Ajout des destinations à Summer 25"
-Destination.create(trip: trip, name: "Mykonos")
-Destination.create(trip: trip, name: "Belle-Île-en-Mer")
-# Destination.create(trip: trip, name: "Marrakech")
-# Destination.create(trip: trip, name: "Madrid")
-# Destination.create(trip: trip, name: "Barcelone")
-# Destination.create(trip: trip, name: "Lisbonne")
-# Participations
-puts "Ajout des participants à Summer 25"
-Participation.create(user: User.where(first_name: "Mathieu").first, trip: trip, role: "admin" )
-Participation.create(user: User.where(first_name: "Marin").first, trip: trip, role: "participant" )
-Participation.create(user: User.where(first_name: "Pierre").first, trip: trip, role: "participant" )
+Destination.create(
+  trip: trip, 
+  name: "Mykonos",
+  owner_id: created_users["Pierre"].id 
+)
+Destination.create(
+  trip: trip, 
+  name: "Belle-Île-en-Mer",
+  owner_id: created_users["Mathieu"].id  
+)
 
 # Initialisation du service Google Places
-places_service = GooglePlacesService.new(GOOGLE_PLACES_API_KEY)
+places_service = GooglePlacesService.new(ENV['GOOGLE_GEOCODING_API_KEY'])
 
 # Ajout de la description à chaque destination
 puts "Ajout des descriptions et photos aux destinations"
@@ -92,7 +97,7 @@ Destination.all.each do |destination|
     # Si au moins une photo est rattachée à la destination
     if result[:photos_url].present?
       begin
-                          # Limite à 5 photos
+        # Limite à 5 photos
         result[:photos_url].take(5).each_with_index do |photo_url, index|
           puts "Ajout de la photo #{index} pour #{destination.name}"
           # Ajout de la photo à la destination

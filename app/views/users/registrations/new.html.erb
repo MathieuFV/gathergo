@@ -1,32 +1,57 @@
-<h2>Sign up</h2>
-
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :first_name,
-                required: true,
-                input_html: { autocomplete: "first name" } %>
-    <%= f.input :address,
-                required: true,
-                input_html: { autocomplete: "address" } %>
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :photo, as: :file %>
+<%= render 'devise/shared/navbar' %>
+<div id="background-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="<%= asset_path('destinations/ski.jpeg') %>" class="d-block w-100" alt="Ski trip background">
+    </div>
+    <div class="carousel-item">
+      <img src="<%= asset_path('destinations/barcelona.jpeg') %>" class="d-block w-100" alt="Barcelona trip background">
+    </div>
+    <div class="carousel-item">
+      <img src="<%= asset_path('destinations/nice.jpeg') %>" class="d-block w-100" alt="Nice trip background">
+    </div>
+    <div class="carousel-item">
+      <img src="<%= asset_path('destinations/london.jpeg') %>" class="d-block w-100" alt="London trip background">
+    </div>
+    <div class="carousel-item">
+      <img src="<%= asset_path('destinations/lisbon.jpeg') %>" class="d-block w-100" alt="Lisbon trip background">
+    </div>
+    <!-- Ajoute autant de carousel-item que nécessaire pour les images -->
   </div>
+</div>
+<div class="login-page">
+  <div class="login-box">
+    <h2>Sign up</h2>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.error_notification %>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
+      <div class="form-inputs">
+        <%= f.input :first_name,
+                    required: true,
+                    input_html: { autocomplete: "first name" } %>
+        <%= f.input :address,
+                    required: true,
+                    input_html: { autocomplete: "address" } %>
+        <%= f.input :email,
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "email" }%>
+        <%= f.input :password,
+                    required: true,
+                    hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                    input_html: { autocomplete: "new-password" } %>
+        <%= f.input :password_confirmation,
+                    required: true,
+                    input_html: { autocomplete: "new-password" } %>
+        <%= f.input :photo, as: :file %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Sign up" %>
+      </div>
+    <% end %>
+
+    <!-- Liens supplémentaires pour inscription et récupération du mot de passe -->
+    <%= render "devise/shared/links" %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

@@ -1,24 +1,43 @@
 <section class="proposal-section" data-searchable-name="<%= proposal[:title] %>">
   <%# Proposal Card %>
-  <div class="proposal-card" style="background-image: url('<%= proposal[:image_url] %>')">
-    <div class="card-overlay"></div>
-    <div class="card-body">
-      <h3 class="card-title"><%= proposal[:title] %></h3>
-      <%= link_to proposal[:link_path], class: "card-arrow-link" do %>
-        <i class="fa-solid fa-chevron-right card-arrow"></i>
-      <% end if proposal[:link_path].present? %>
-      <div class="card-stats">
-        <span class="stats-item">
-          <i class="fa-regular fa-comment"></i>
-          <%= proposal[:comments_count] %>
-        </span>
-        <span class="stats-item">
-          <i class="fa-regular fa-heart"></i>
-          <%= proposal[:likes_count] %>
-        </span>
+  <% if proposal[:link_path].present? %>
+    <%= link_to proposal[:link_path], class: "proposal-card-link" do %>
+      <div class="proposal-card" style="background-image: url('<%= proposal[:image_url] %>')">
+        <div class="card-overlay"></div>
+        <div class="card-body">
+          <h3 class="card-title"><%= proposal[:title] %></h3>
+          <i class="fa-solid fa-chevron-right card-arrow"></i>
+          <div class="card-stats">
+            <span class="stats-item">
+              <i class="fa-regular fa-comment"></i>
+              <%= proposal[:comments_count] %>
+            </span>
+            <span class="stats-item">
+              <i class="fa-regular fa-heart"></i>
+              <%= proposal[:likes_count] %>
+            </span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="proposal-card" style="background-image: url('<%= proposal[:image_url] %>')">
+      <div class="card-overlay"></div>
+      <div class="card-body">
+        <h3 class="card-title"><%= proposal[:title] %></h3>
+        <div class="card-stats">
+          <span class="stats-item">
+            <i class="fa-regular fa-comment"></i>
+            <%= proposal[:comments_count] %>
+          </span>
+          <span class="stats-item">
+            <i class="fa-regular fa-heart"></i>
+            <%= proposal[:likes_count] %>
+          </span>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 
   <%# Proposal Controls %>
   <div class="proposal-controls">

@@ -2,12 +2,20 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["input", "results", "form", "hiddenInput", "modal", "destinationName"]
+  static targets = ["input", "results", "form", "hiddenInput", "modal", "destinationName", "proposalsList", "noResults", "addDestination", "separator", "searchSeparator"]
 
   connect() {
     this.performSearch = this.performSearch.bind(this)
     this.debouncedSearch = this.debounce(this.performSearch, 300)
     this.initModal()
+    
+    // Ajouter un event listener pour le blur
+    this.inputTarget.addEventListener('blur', () => {
+      // On utilise setTimeout pour permettre la sélection d'un résultat avant de les cacher
+      setTimeout(() => {
+        this.hideResults()
+      }, 200)
+    })
   }
 
   initModal() {
@@ -19,12 +27,55 @@ export default class extends Controller {
   }
 
   onInput(event) {
-    const query = event.target.value.trim()
-    if (query.length < 2) {
+    const query = event.target.value.trim().toLowerCase()
+    
+    // Filtrer les destinations existantes
+    this.filterExistingDestinations(query)
+    
+    // Gérer l'autocomplete
+    if (query.length >= 3) {
+      this.debouncedSearch(query)
+    } else {
       this.hideResults()
-      return
     }
-    this.debouncedSearch(query)
+  }
+
+  filterExistingDestinations(query) {
+    const proposals = this.proposalsListTarget.querySelectorAll('.proposal-section')
+    let visibleCount = 0
+
+    // Gérer l'affichage des séparateurs
+    this.separatorTargets.forEach(separator => {
+      if (query.length > 0) {
+        separator.classList.add('d-none')
+      } else {
+        separator.classList.remove('d-none')
+      }
+    })
+
+    // Gérer l'affichage du séparateur de recherche
+    if (query.length > 0) {
+      this.searchSeparatorTarget.classList.remove('d-none')
+    } else {
+      this.searchSeparatorTarget.classList.add('d-none')
+    }
+
+    proposals.forEach(proposal => {
+      const searchableName = proposal.dataset.searchableName.toLowerCase()
+      if (searchableName.startsWith(query)) {
+        proposal.classList.remove('d-none')
+        visibleCount++
+      } else {
+        proposal.classList.add('d-none')
+      }
+    })
+
+    // Gérer l'affichage du message "No results"
+    if (visibleCount === 0) {
+      this.noResultsTarget.classList.remove('d-none')
+    } else {
+      this.noResultsTarget.classList.add('d-none')
+    }
   }
 
   async performSearch(query) {
@@ -84,9 +135,15 @@ export default class extends Controller {
     this.hiddenInputTarget.value = mainText
     
     this.hideResults()
+    this.filterExistingDestinations(mainText.toLowerCase())
     
-    this.destinationNameTarget.textContent = mainText
-    this.modal.show()
+    // Si aucune destination ne correspond, afficher le bouton d'ajout
+    if (this.noResultsTarget.classList.contains('d-none') === false) {
+      this.addDestinationTarget.classList.remove('d-none')
+      this.addDestinationTarget.querySelector('span').textContent = mainText
+    } else {
+      this.addDestinationTarget.classList.add('d-none')
+    }
   }
 
   confirmDestination() {

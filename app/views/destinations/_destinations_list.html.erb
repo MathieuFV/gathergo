@@ -1,0 +1,23 @@
+<%# Séparation et tri des destinations %>
+<% ranked_destinations = destinations.sort_by { |d| [-d[:likes_count], d[:created_at]] } %>
+<% first_place = ranked_destinations.first %>
+<% other_destinations = ranked_destinations[1..-1] || [] %>
+
+<%# Affichage de la destination la plus votée %>
+<% if first_place && first_place[:likes_count] > 0 %>
+  <%= render 'shared/separator', text: "Ranked first!" %>
+  <%= render 'shared/proposal_section', proposal: first_place %>
+<% end %>
+
+<%# Affichage des autres destinations %>
+<% if other_destinations.any? %>
+  <%= render 'shared/separator', text: "Other destinations" %>
+  <% other_destinations.each do |destination| %>
+    <%= render 'shared/proposal_section', proposal: destination %>
+  <% end %>
+<% end %>
+
+<%# Si aucune destination n'est présente %>
+<% if destinations.empty? %>
+  <%= render 'empty_state', trip: trip %>
+<% end %> 

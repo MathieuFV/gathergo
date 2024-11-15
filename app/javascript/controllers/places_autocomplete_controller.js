@@ -8,6 +8,7 @@ export default class extends Controller {
     this.performSearch = this.performSearch.bind(this)
     this.debouncedSearch = this.debounce(this.performSearch, 300)
     this.initModal()
+    this.lastSelectedSuggestion = null
     
     // Ajouter un event listener pour le blur
     this.inputTarget.addEventListener('blur', () => {
@@ -28,6 +29,9 @@ export default class extends Controller {
 
   onInput(event) {
     const query = event.target.value.trim().toLowerCase()
+    
+    // On cache systématiquement le bouton d'ajout dès qu'on tape
+    this.addDestinationTarget.classList.add('d-none')
     
     // Filtrer les destinations existantes
     this.filterExistingDestinations(query)
@@ -133,6 +137,7 @@ export default class extends Controller {
     
     this.inputTarget.value = mainText
     this.hiddenInputTarget.value = mainText
+    this.lastSelectedSuggestion = mainText
     
     this.hideResults()
     this.filterExistingDestinations(mainText.toLowerCase())

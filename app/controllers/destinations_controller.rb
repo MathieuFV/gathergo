@@ -4,6 +4,7 @@ class DestinationsController < ApplicationController
   def index
     @trip = Trip.find(params[:trip_id])
     @destinations = @trip.destinations
+                        .order(votes_count: :desc)
                         .includes(:comments, :votes)
                         .includes(trip: { participations: { user: :photo_attachment } })
   end
@@ -15,7 +16,8 @@ class DestinationsController < ApplicationController
     @display_top_menu = false
 
     # Récupération de la distance et du trajet
-    service = GooglePlacesService.new(GOOGLE_PLACES_API_KEY)
+    service = GooglePlacesService.new(ENV['GOOGLE_GEOCODING_API_KEY'])
+
     origin = { lat: @destination.latitude, lng: @destination.longitude }
     destination = { lat: current_user.latitude, lng: current_user.longitude }
     @distance_info = service.fetch_distance(origin, destination)
@@ -36,7 +38,7 @@ class DestinationsController < ApplicationController
     @destination.trip = @trip
 
     # Appel du service google place pour récupérer des photos sur la destination
-    places_service = GooglePlacesService.new(GOOGLE_PLACES_API_KEY)
+    places_service = GooglePlacesService.new(ENV['GOOGLE_GEOCODING_API_KEY'])
     google_place_info = places_service.fetch_place_details(@destination.name)
     manage_googe_place_results(google_place_info)
 

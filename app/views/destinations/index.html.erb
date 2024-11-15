@@ -1,3 +1,4 @@
+<%# app/views/destinations/index.html.erb %>
 <%= render partial: 'shared/header_card',
   locals: {
     title: "Destinations",
@@ -11,11 +12,81 @@
   }
 %>
 
-<div class="destinations-container mt-4">
-  <% @destinations.each do |destination| %>
+<div class="destinations-container">
+  <div data-controller="places-autocomplete">
+    <%# Formulaire caché %>
+    <%= simple_form_for [@trip, Destination.new], html: { class: 'd-none', data: { places_autocomplete_target: 'form' } } do |f| %>
+      <%= f.input :name, input_html: { data: { places_autocomplete_target: 'hiddenInput' } } %>
+    <% end %>
+
+    <%# Champ de recherche %>
+    <div class="search-destination-wrapper">
+      <%= render 'shared/text_input',
+        input_id: 'destination-search',
+        icon_class: 'fa-magnifying-glass',
+        placeholder: 'Search for a destination to add your proposal',
+        value: ''
+      %>
+    </div>
+
+    <%# Container pour les résultats %>
+    <div class="places-autocomplete-results" data-places-autocomplete-target="results">
+    </div>
+
+    <%# Modale de confirmation %>
+    <div class="modal fade" data-places-autocomplete-target="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirm destination</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" data-places-autocomplete-target="modalBody">
+            Do you want to propose <strong data-places-autocomplete-target="destinationName"></strong> as a destination?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" data-action="click->places-autocomplete#confirmDestination">
+              Confirm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% if @destinations.any? %>
+    <%# Separator pour la première destination (la plus votée) %>
+    <%= render 'shared/separator', text: "Ranked first !" %>
+
+    <%# Premier élément %>
     <%= render 'shared/proposal_section',
-          destination: destination,
-          proposal: destination_proposal_data(destination) %>
+          destination: @destinations.first,
+          proposal: destination_proposal_data(@destinations.first).merge({
+            link_path: trip_destination_path(@trip, @destinations.first)
+          }) %>
+
+    <%# Si il y a d'autres destinations %>
+    <% if @destinations.count > 1 %>
+      <%= render 'shared/separator', text: "Other destinations" %>
+
+      <%# Reste des destinations %>
+      <% @destinations.drop(1).each do |destination| %>
+        <%= render 'shared/proposal_section',
+              destination: destination,
+              proposal: destination_proposal_data(destination).merge({
+                link_path: trip_destination_path(@trip, destination)
+              }) %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <div class="empty-state">
+      <i class="fa-solid fa-map-location-dot"></i>
+      <p>No destinations yet</p>
+      <%= link_to new_trip_destination_path(@trip), class: "btn btn-primary" do %>
+        Add first destination
+      <% end %>
+    </div>
   <% end %>
 </div>
 

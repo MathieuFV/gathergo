@@ -2,11 +2,20 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["input", "results", "form", "hiddenInput"]
+  static targets = ["input", "results", "form", "hiddenInput", "modal", "destinationName"]
 
   connect() {
     this.performSearch = this.performSearch.bind(this)
     this.debouncedSearch = this.debounce(this.performSearch, 300)
+    this.initModal()
+  }
+
+  initModal() {
+    if (typeof bootstrap !== 'undefined') {
+      this.modal = new bootstrap.Modal(this.modalTarget)
+    } else {
+      console.error('Bootstrap is not loaded')
+    }
   }
 
   onInput(event) {
@@ -76,6 +85,12 @@ export default class extends Controller {
     
     this.hideResults()
     
+    this.destinationNameTarget.textContent = mainText
+    this.modal.show()
+  }
+
+  confirmDestination() {
+    this.modal.hide()
     this.formTarget.submit()
   }
 

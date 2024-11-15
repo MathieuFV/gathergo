@@ -42,11 +42,44 @@
   }
 
   .search-destination-wrapper {
+    padding: 0.5rem 0rem;
     .btn-primary {
-      // Vos styles pour le bouton
       margin-top: 1rem;
       border-radius: 8px;
     }
-  }  
+  }
 }
 
+.modal {
+  .modal-content {
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .modal-header {
+    border-bottom: none;
+    padding: 1.5rem 1.5rem 0.5rem;
+
+    .modal-title {
+      font-weight: 600;
+    }
+  }
+
+  .modal-body {
+    padding: 1rem 1.5rem;
+    text-align: center;
+  }
+
+  .modal-footer {
+    border-top: none;
+    padding: 0.5rem 1.5rem 1.5rem;
+    justify-content: center;
+    gap: 1rem;
+
+    .btn {
+      min-width: 120px;
+      border-radius: 2rem;
+    }
+  }
+}

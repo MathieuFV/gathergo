@@ -86,6 +86,11 @@ class DestinationsController < ApplicationController
   end
 
   def manage_googe_place_results(google_place_info)
+    if google_place_info[:latitude] && google_place_info[:longitude]
+      @destination.latitude = google_place_info[:latitude]
+      @destination.longitude = google_place_info[:longitude]
+    end
+
     if google_place_info[:photos_url].present?
       begin
                             # Limite à 5 photos

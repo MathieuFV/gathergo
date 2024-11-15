@@ -1,0 +1,9 @@
+@mixin absolute-center-y {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+} 

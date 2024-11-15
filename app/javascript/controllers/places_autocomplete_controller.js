@@ -2,12 +2,11 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["input", "results", "form", "hiddenInput", "modal", "destinationName", "proposalsList", "noResults", "addDestination", "separator", "searchSeparator"]
+  static targets = ["input", "results", "form", "hiddenInput", "proposalsList", "noResults", "addDestination", "separator", "searchSeparator"]
 
   connect() {
     this.performSearch = this.performSearch.bind(this)
     this.debouncedSearch = this.debounce(this.performSearch, 300)
-    this.initModal()
     
     // Ajouter un event listener pour le blur
     this.inputTarget.addEventListener('blur', () => {
@@ -16,14 +15,6 @@ export default class extends Controller {
         this.hideResults()
       }, 200)
     })
-  }
-
-  initModal() {
-    if (typeof bootstrap !== 'undefined') {
-      this.modal = new bootstrap.Modal(this.modalTarget)
-    } else {
-      console.error('Bootstrap is not loaded')
-    }
   }
 
   onInput(event) {
@@ -91,8 +82,6 @@ export default class extends Controller {
   }
 
   showResults(data) {
-    console.log('Showing results:', data)
-    
     const predictions = data.predictions || []
 
     if (!predictions.length) {
@@ -144,11 +133,6 @@ export default class extends Controller {
     } else {
       this.addDestinationTarget.classList.add('d-none')
     }
-  }
-
-  confirmDestination() {
-    this.modal.hide()
-    this.formTarget.submit()
   }
 
   onKeydown(event) {

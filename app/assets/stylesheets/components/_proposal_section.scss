@@ -1,21 +1,25 @@
 .proposal-section {
-
+  // Variables locales
+  $card-height: 7rem;
+  $card-border-radius: 26px;
+  $card-padding: 1rem;
+  $arrow-right-spacing: 1.5rem;
+  
   .proposal-card {
-    height: 7rem;
-    border-radius: 26px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    height: $card-height;
+    border-radius: $card-border-radius;
+    background: {
+      size: cover;
+      position: center;
+      repeat: no-repeat;
+    }
     position: relative;
     overflow: hidden;
     margin-bottom: 0.5rem;
 
     .card-overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       background: linear-gradient(
         180deg,
         rgba(0, 0, 0, 0.2) 0%,
@@ -28,7 +32,7 @@
       position: relative;
       height: 100%;
       z-index: 2;
-      padding: 1rem;
+      padding: $card-padding;
     }
 
     .card-title {
@@ -39,51 +43,32 @@
       color: white;
       margin: 0;
       text-align: center;
-      width: calc(100% - 4rem); // Laisse de l'espace pour la flèche
+      width: calc(100% - 4rem);
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     .card-arrow {
-      position: absolute;
-      right: 1.5rem;
-      top: 50%;
-      transform: translateY(-50%);
+      @include absolute-center-y;
+      right: $arrow-right-spacing;
       color: white;
-      transition: transform 0.2s ease;
-    }
-
-    &:hover {
-      .card-arrow {
-        transform: translateY(-50%) translateX(5px);
-      }
-    }
-
-    .card-arrow-link {
-      position: absolute;
-      right: 1.5rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: white;
-      text-decoration: none;
       transition: transform 0.2s ease;
 
       &:hover {
         transform: translateY(-50%) translateX(5px);
-        color: white;
       }
     }
 
     .card-stats {
       position: absolute;
       bottom: 0.5rem;
-      right: 1rem;
+      right: $card-padding;
       display: flex;
       gap: 0.75rem;
 
       .stats-item {
+        @include text-shadow;
         color: white;
         font-size: 0.9rem;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 
         i {
           margin-right: 0.2rem;
@@ -122,7 +107,7 @@
       }
     }
 
-    .upvote-btn {
+    .vote-btn {
       padding: 0.5rem 1rem;
       border-radius: 1rem;
     }

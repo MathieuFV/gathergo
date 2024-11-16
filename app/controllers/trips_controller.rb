@@ -7,6 +7,8 @@ class TripsController < ApplicationController
 
   def index
     @trips = current_user.trips
+    @display_bottom_menu = false
+@display_top_menu = false
   end
 
   def join

@@ -55,6 +55,8 @@ class DestinationsController < ApplicationController
 
     @destination.trip = @trip
 
+    @destination.owner = current_user
+
     # Appel du service google place pour récupérer des photos sur la destination
     places_service = GooglePlacesService.new(ENV['GOOGLE_GEOCODING_API_KEY'])
     google_place_info = places_service.fetch_place_details(@destination.name)

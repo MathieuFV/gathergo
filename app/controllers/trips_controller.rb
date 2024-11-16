@@ -10,7 +10,7 @@ class TripsController < ApplicationController
   end
 
   def join
-    @trip = Trip.find(params[:trip_id])
+    @trip = Trip.find(params[:id])
 
     # Si le user appartient déjà au voyage
     if current_user.trips.include?(@trip)

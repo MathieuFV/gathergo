@@ -12,8 +12,8 @@ class Destination < ApplicationRecord
 
   # Geocoding
   geocoded_by :name
-
   after_validation :geocode, if: :will_save_change_to_name?
+
   def voted_by?(user)
     votes.exists?(user: user)
   end

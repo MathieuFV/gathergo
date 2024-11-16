@@ -6,7 +6,8 @@ export default class extends Controller {
     const splide = new Splide(this.element, {
       height: 400,
       perPage: 1,
-      focus : 'center'
+      focus : 'center',
+      type: "loop"
     });
 
     splide.mount();

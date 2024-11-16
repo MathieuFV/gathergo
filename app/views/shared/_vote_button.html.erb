@@ -1,0 +1,29 @@
+<% if voted %>
+  <%= button_to trip_destination_votes_path(trip_id, destination_id), 
+        method: :delete,
+        class: "btn btn-danger vote-btn",
+        form: {
+          data: { 
+            controller: "votes",
+            action: "submit->votes#remove",
+            trip_id: trip_id,
+            destination_id: destination_id
+          }
+        } do %>
+    Downvote
+  <% end %>
+<% else %>
+  <%= button_to trip_destination_votes_path(trip_id, destination_id), 
+        method: :post,
+        class: "btn btn-primary vote-btn",
+        form: {
+          data: { 
+            controller: "votes",
+            action: "submit->votes#add",
+            trip_id: trip_id,
+            destination_id: destination_id
+          }
+        } do %>
+    Upvote
+  <% end %>
+<% end %> 

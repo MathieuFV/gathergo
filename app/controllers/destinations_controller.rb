@@ -3,10 +3,28 @@ class DestinationsController < ApplicationController
 
   def index
     @trip = Trip.find(params[:trip_id])
-    @destinations = @trip.destinations
-                        .order(votes_count: :desc)
-                        .includes(:comments, :votes)
-                        .includes(trip: { participations: { user: :photo_attachment } })
+    @destinations = @trip.destinations.includes(:votes, :owner)
+    @destinations = @destinations.map do |destination|
+      {
+        id: destination.id,
+        trip_id: @trip.id,
+        title: destination.name,
+        image_url: destination.photos.first ? 
+                  helpers.url_for(destination.photos.first) : 
+                  helpers.asset_path('default_destination.jpg'),
+        link_path: trip_destination_path(@trip, destination),
+        comments_count: destination.comments_count || 0,
+        likes_count: destination.votes.count || 0,
+        voted_by_current_user: destination.votes.exists?(user: current_user),
+        user: {
+          avatar_url: destination.owner.photo.attached? ? 
+                     helpers.url_for(destination.owner.photo) : 
+                     helpers.asset_path('default_avatar.png'),
+          name: destination.owner.first_name
+        },
+        created_at: destination.created_at
+      }
+    end
   end
 
   def show

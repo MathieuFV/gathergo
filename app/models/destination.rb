@@ -1,5 +1,7 @@
 class Destination < ApplicationRecord
   belongs_to :trip
+  belongs_to :owner, class_name: 'User'
+
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :votes, as: :votable, dependent: :destroy
 

@@ -1,0 +1,7 @@
+<div class="user-info">
+  <%= image_tag avatar_url, class: "user-avatar" %>
+  <span class="addition-info">
+    Added <%= time_ago_in_words(created_at) %> ago by
+    <strong><%= name %></strong>
+  </span>
+</div> 

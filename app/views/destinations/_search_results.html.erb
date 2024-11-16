@@ -1,0 +1,7 @@
+<% destinations.each do |destination| %>
+  <%= render 'shared/proposal_section',
+    proposal: destination_proposal_data(destination).merge({
+      link_path: trip_destination_path(@trip, destination)
+    })
+  %>
+<% end %> 

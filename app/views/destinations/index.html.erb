@@ -29,65 +29,37 @@
       %>
     </div>
 
-    <%# Container pour les résultats %>
+    <%# Container pour les résultats d'autocomplete %>
     <div class="places-autocomplete-results" data-places-autocomplete-target="results">
     </div>
 
-    <%# Modale de confirmation %>
-    <div class="modal fade" data-places-autocomplete-target="modal" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Confirm destination</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body" data-places-autocomplete-target="modalBody">
-            Do you want to propose <strong data-places-autocomplete-target="destinationName"></strong> as a destination?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" data-action="click->places-autocomplete#confirmDestination">
-              Confirm
-            </button>
-          </div>
-        </div>
-      </div>
+    <%# Séparateur pour la recherche %>
+    <div data-places-autocomplete-target="searchSeparator" class="d-none">
+      <%= render 'shared/separator', text: "Your research" %>
+    </div>
+
+    <%# Messages et boutons de feedback %>
+    <div data-places-autocomplete-target="noResults" class="text-center my-3 d-none">
+      <p>No destination matching your research. Please select a destination from the suggested places in order to add a new one.</p>
+    </div>
+
+    <div data-places-autocomplete-target="addDestination" class="text-center my-3 d-none">
+      <button class="btn btn-primary">
+        Add <span></span>
+      </button>
+    </div>
+
+    <%# Liste des destinations %>
+    <div data-places-autocomplete-target="proposalsList">
+      <% if @destinations.any? %>
+        <%= render 'destinations_list', 
+              destinations: @destinations,
+              trip: @trip %>
+      <% else %>
+        <%= render 'empty_state', trip: @trip %>
+      <% end %>
     </div>
   </div>
-
-  <% if @destinations.any? %>
-    <%# Separator pour la première destination (la plus votée) %>
-    <%= render 'shared/separator', text: "Ranked first !" %>
-
-    <%# Premier élément %>
-    <%= render 'shared/proposal_section',
-          destination: @destinations.first,
-          proposal: destination_proposal_data(@destinations.first).merge({
-            link_path: trip_destination_path(@trip, @destinations.first)
-          }) %>
-
-    <%# Si il y a d'autres destinations %>
-    <% if @destinations.count > 1 %>
-      <%= render 'shared/separator', text: "Other destinations" %>
-
-      <%# Reste des destinations %>
-      <% @destinations.drop(1).each do |destination| %>
-        <%= render 'shared/proposal_section',
-              destination: destination,
-              proposal: destination_proposal_data(destination).merge({
-                link_path: trip_destination_path(@trip, destination)
-              }) %>
-      <% end %>
-    <% end %>
-  <% else %>
-    <div class="empty-state">
-      <i class="fa-solid fa-map-location-dot"></i>
-      <p>No destinations yet</p>
-      <%= link_to new_trip_destination_path(@trip), class: "btn btn-primary" do %>
-        Add first destination
-      <% end %>
-    </div>
-  <% end %>
 </div>
 
 <%= render "shared/tabbar", active_button: "none" %>

@@ -26,7 +26,7 @@
     <div class="search-destination-wrapper">
       <%= render 'shared/text_input',
         input_id: 'destination-search',
-        icon_class: 'fa-magnifying-glass',
+        icon_class: 'fa-solid fa-magnifying-glass',
         placeholder: 'Search for a destination to add your proposal',
         value: '',
         data: { 
@@ -59,7 +59,7 @@
     <%# Liste des destinations %>
     <div data-places-autocomplete-target="proposalsList" data-places-autocomplete-outlet>
       <% if @destinations.any? %>
-        <%= render 'destinations_list', 
+        <%= render 'destinations_list',
               destinations: @destinations,
               trip: @trip %>
       <% else %>

@@ -2,7 +2,7 @@
 <div class="text-input-container">
   <div class="text-input-wrapper">
     <% if local_assigns[:icon_class].present? %>
-      <i class="text-input-icon fa-solid <%= icon_class %>"></i>
+      <i class="text-input-icon <%= icon_class %>"></i>
     <% end %>
 
     <%= text_field_tag input_id,

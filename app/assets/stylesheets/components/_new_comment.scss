@@ -1,0 +1,26 @@
+.add-comment {
+  display: flex;
+  align-items: center;
+
+  input {
+    flex-grow: 1;
+    margin: 0px 16px;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: $gray-900;
+    background-color: white;
+    border: 1px solid $primary-text-color;
+    border-radius: 2.5rem;
+    appearance: none;
+    transition: border-color 0.15s ease-in-out;
+  }
+}
+
+.add-comment-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: larger;
+}

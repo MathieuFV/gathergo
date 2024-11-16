@@ -1,0 +1,77 @@
+.trip-card {
+  background-color: $gray-400;
+  border: 1px solid $primary-text-color;
+  border-radius: 16px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .trip-card-content {
+    flex-grow: 1;
+  }
+
+  .trip-name {
+    color: $primary-text-color;
+    margin-bottom: 0.25rem;
+    font-size: 1.25rem;
+  }
+
+  .trip-dates {
+    color: $secondary-text-color;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .participants-avatars {
+    display: flex;
+    align-items: center;
+
+    .participant-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid $primary-text-color;
+      object-fit: cover;
+      margin-right: -10px;
+    }
+
+    .more-participants {
+      color: $secondary-text-color;
+      font-size: 0.8rem;
+      margin-left: 1rem;
+    }
+  }
+
+  .trip-chevron {
+    color: $primary-text-color;
+    font-size: 1.2rem;
+  }
+
+  &.search-match {
+    position: relative;
+    z-index: 101;
+    background-color: $gray-400;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.trip-card-link {
+  text-decoration: none;
+  display: block;
+  
+  &:hover {
+    text-decoration: none;
+  }
+
+  .trip-card.search-match {
+    position: relative;
+    z-index: 101;
+  }
+} 

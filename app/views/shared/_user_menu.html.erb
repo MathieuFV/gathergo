@@ -1,0 +1,16 @@
+<div class="user-menu-offcanvas d-none" data-user-menu-target="offcanvas">
+  <%= link_to "#", class: "user-menu-item" do %>
+    <i class="fa-regular fa-user"></i>
+    <span>My account</span>
+  <% end %>
+  
+  <%= link_to destroy_user_session_path, 
+    class: "user-menu-item text-danger",
+    data: { 
+      turbo_method: :delete,
+      turbo_confirm: 'Are you sure you want to disconnect?'
+    } do %>
+    <i class="fa-solid fa-right-from-bracket"></i>
+    <span>Disconnect</span>
+  <% end %>
+</div> 

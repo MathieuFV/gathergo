@@ -134,9 +134,15 @@ export default class extends Controller {
     if (this.noResultsTarget.classList.contains('d-none') === false) {
       this.addDestinationTarget.classList.remove('d-none')
       this.addDestinationTarget.querySelector('span').textContent = mainText
+      this.addDestinationTarget.querySelector('button').setAttribute('data-action', 'click->places-autocomplete#submitForm')
     } else {
       this.addDestinationTarget.classList.add('d-none')
     }
+  }
+
+  submitForm(event) {
+    event.preventDefault()
+    this.formTarget.requestSubmit()
   }
 
   onKeydown(event) {

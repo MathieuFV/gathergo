@@ -1,0 +1,22 @@
+.search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+// S'assurer que la barre de recherche et les résultats sont au-dessus de l'overlay
+.search-destination-wrapper,
+.places-autocomplete-results {
+  position: relative;
+  z-index: 101;
+} 

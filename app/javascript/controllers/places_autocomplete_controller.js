@@ -2,7 +2,9 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["input", "results", "form", "hiddenInput", "proposalsList", "noResults", "addDestination", "separator", "searchSeparator"]
+  static targets = ["input", "results", "form", "hiddenInput", "proposalsList", "noResults", "addDestination", "separator", "searchSeparator", "overlay"]
+
+  static outlets = ["places-autocomplete"]
 
   connect() {
     this.performSearch = this.performSearch.bind(this)
@@ -32,32 +34,46 @@ export default class extends Controller {
   }
 
   filterExistingDestinations(query) {
+    // Trouver les séparateurs dans proposalsList comme pour les proposals
+    const separators = this.proposalsListTarget.querySelectorAll('[data-places-autocomplete-target="separator"]')
     const proposals = this.proposalsListTarget.querySelectorAll('.proposal-section')
     let visibleCount = 0
 
-    // Gérer l'affichage des séparateurs
-    this.separatorTargets.forEach(separator => {
+    console.log("Nombre de séparateurs trouvés:", separators.length)
+
+    // Gérer les séparateurs
+    separators.forEach(separator => {
+      console.log("Traitement du séparateur:", separator)
       if (query.length > 0) {
+        console.log("Masquage du séparateur de classement")
         separator.classList.add('d-none')
       } else {
+        console.log("Affichage du séparateur de classement")
         separator.classList.remove('d-none')
       }
     })
 
-    // Gérer l'affichage du séparateur de recherche
+    // Gérer le séparateur de recherche
     if (query.length > 0) {
+      console.log("Affichage du séparateur de recherche")
       this.searchSeparatorTarget.classList.remove('d-none')
     } else {
+      console.log("Masquage du séparateur de recherche")
       this.searchSeparatorTarget.classList.add('d-none')
     }
 
+    // Gérer les proposals
     proposals.forEach(proposal => {
       const searchableName = proposal.dataset.searchableName.toLowerCase()
+      const proposalCard = proposal.querySelector('.proposal-card')
+      
       if (searchableName.startsWith(query)) {
         proposal.classList.remove('d-none')
+        proposalCard.classList.add('search-match')
         visibleCount++
       } else {
         proposal.classList.add('d-none')
+        proposalCard.classList.remove('search-match')
       }
     })
 
@@ -125,6 +141,7 @@ export default class extends Controller {
     
     this.hideResults()
     this.filterExistingDestinations(mainText.toLowerCase())
+    this.onSearchBlur()
     
     // Si aucune destination ne correspond, afficher le bouton d'ajout
     if (this.noResultsTarget.classList.contains('d-none') === false) {
@@ -165,5 +182,42 @@ export default class extends Controller {
 
   disconnect() {
     this.hideResults()
+  }
+
+  focusSearch() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+
+    setTimeout(() => {
+      this.inputTarget.focus()
+    }, 300)
+  }
+
+  onSearchFocus() {
+    console.log("Focus event triggered")
+    this.overlayTarget.classList.remove('d-none')
+    console.log("d-none removed")
+    setTimeout(() => {
+      this.overlayTarget.classList.add('active')
+      console.log("active class added")
+    }, 0)
+  }
+
+  onSearchBlur() {
+    console.log("Blur event triggered")
+    this.overlayTarget.classList.remove('active')
+    
+    // Nettoyer les classes search-match sur les cards
+    const proposalCards = this.proposalsListTarget.querySelectorAll('.proposal-card')
+    proposalCards.forEach(card => {
+      card.classList.remove('search-match')
+    })
+
+    setTimeout(() => {
+      this.overlayTarget.classList.add('d-none')
+      console.log("d-none added back")
+    }, 300)
   }
 }

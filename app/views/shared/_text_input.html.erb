@@ -11,10 +11,7 @@
           class: "text-input #{local_assigns[:icon_class].present? ? 'with-icon' : ''}",
           placeholder: local_assigns[:placeholder],
           autocomplete: 'off',
-          data: {
-            places_autocomplete_target: "input",
-            action: "input->places-autocomplete#onInput keydown->places-autocomplete#onKeydown"
-          }
+          data: local_assigns[:data] || {}
         }
     %>
   </div>

@@ -1,5 +1,3 @@
-<div class="separator">
-  <span class="separator-line"></span>
+<div class="separator" <%= local_assigns[:html_options]&.map { |k, v| "#{k}=\"#{v}\"" }&.join(' ')&.html_safe %>>
   <span class="separator-text"><%= text %></span>
-  <span class="separator-line"></span>
 </div>

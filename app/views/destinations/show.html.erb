@@ -63,32 +63,29 @@
         <p class="bg-white px-2 d-inline position-relative fw-bold" style="top: -15px;">Comments</p>
       </div>
 
-      <div class="mx-4">
+      <div class="mx-4" data-controller="comment"
+          data-comment-commentable-type-value="Destination"
+          data-comment-commentable-id-value="<%= @destination.id %>">
+
         <%# Commentaires %>
-        <% @comments.each do |comment| %>
-          <div class="mb-32 bg-gray-500">
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="d-flex align-items-center">
-                <%= cl_image_tag(comment.user.photo.key, height: 40, width: 40, class: "rounded-circle") %>
-                <p class="m-0 ms-2"><%= comment.user.first_name %></p>
-              </div>
-              <i class="fa-solid fa-ellipsis-vertical text-end"></i>
-            </div>
+        <div data-comment-target="list">
+          <% @comments.each do |comment| %>
+              <%= render "shared/comment", comment: comment %>
+          <% end %>
+        </div>
 
-            <p class="mt-2 fst-italic ms-3 border-start ps-3 border-gray-600"><%= comment.content %></p>
-          </div>
-        <% end %>
+        <div class="text-input-container d-flex align-items-center">
 
-        <div class="text-input-container" data-controller="comment">
           <%= cl_image_tag(current_user.photo.key, height: 40, width: 40, class: "avatar") %>
 
-          <div>
-            <textarea class="text-input"
+            <textarea class="text-input flex-grow mx-3"
+              rows="1"
+              overflow="hidden"
               placeholder="Add new comment"
               data-comment-target="input"
               data-action="input->comment#write_comment"
+              style="resize: none; overflow: hidden;"
               required></textarea>
-          </div>
 
           <button data-action="click->comment#send_comment" class="add-comment-button"><i data-comment-target="icon" class="fa-regular fa-paper-plane"></i></button>
 

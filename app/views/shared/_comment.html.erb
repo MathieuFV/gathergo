@@ -1,0 +1,11 @@
+<div class="mb-32 bg-gray-500">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+      <%= cl_image_tag(comment.user.photo.key, height: 40, width: 40, class: "rounded-circle") %>
+      <p class="m-0 ms-2"><%= comment.user.first_name %></p>
+    </div>
+    <i class="fa-solid fa-ellipsis-vertical text-end"></i>
+  </div>
+
+  <p class="mt-2 fst-italic ms-3 border-start ps-3 border-gray-600"><%= comment.content %></p>
+</div>

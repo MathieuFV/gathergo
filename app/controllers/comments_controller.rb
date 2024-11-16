@@ -4,10 +4,13 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     @commentable = @comment.commentable  # Récupère l'objet commentable (Destination dans ce cas)
 
-    if @comment.save
-      redirect_back(fallback_location: root_path, notice: 'Comment added!')
-    else
-      redirect_back(fallback_location: root_path, alert: 'Error adding comment')
+    respond_to do |format|
+      if @comment.save
+        comment_html = render_to_string(partial: 'shared/comment', locals: { comment: @comment })
+        format.json { render json: { html: comment_html, status: :created } }
+      else
+        format.json { render json: { errors: @comment.errors.full_messages }, status: :unprocessable_entity }
+      end
     end
   end
 

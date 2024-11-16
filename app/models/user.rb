@@ -20,6 +20,7 @@ class User < ApplicationRecord
   geocoded_by :address
 
   after_validation :geocode, if: :will_save_change_to_address?
+
   def voted_for?(votable)
     votes.exists?(votable: votable)
   end

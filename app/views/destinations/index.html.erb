@@ -14,6 +14,9 @@
 
 <div class="destinations-container">
   <div data-controller="places-autocomplete">
+    <%# Overlay pour le focus %>
+    <div class="search-overlay d-none" data-places-autocomplete-target="overlay"></div>
+
     <%# Formulaire caché %>
     <%= simple_form_for [@trip, Destination.new], html: { class: 'd-none', data: { places_autocomplete_target: 'form' } } do |f| %>
       <%= f.input :name, input_html: { data: { places_autocomplete_target: 'hiddenInput' } } %>
@@ -25,7 +28,11 @@
         input_id: 'destination-search',
         icon_class: 'fa-solid fa-magnifying-glass',
         placeholder: 'Search for a destination to add your proposal',
-        value: ''
+        value: '',
+        data: { 
+          places_autocomplete_target: 'input',
+          action: 'input->places-autocomplete#onInput keydown->places-autocomplete#onKeydown focus->places-autocomplete#onSearchFocus blur->places-autocomplete#onSearchBlur'
+        }
       %>
     </div>
 
@@ -50,7 +57,7 @@
     </div>
 
     <%# Liste des destinations %>
-    <div data-places-autocomplete-target="proposalsList">
+    <div data-places-autocomplete-target="proposalsList" data-places-autocomplete-outlet>
       <% if @destinations.any? %>
         <%= render 'destinations_list',
               destinations: @destinations,
@@ -59,6 +66,15 @@
         <%= render 'empty_state', trip: @trip %>
       <% end %>
     </div>
+
+    <%# Ajout du FAB %>
+    <button 
+      class="fab-button" 
+      data-action="click->places-autocomplete#focusSearch"
+      aria-label="Destination add button"
+    >
+      <i class="fa-solid fa-plus"></i>
+    </button>
   </div>
 </div>
 

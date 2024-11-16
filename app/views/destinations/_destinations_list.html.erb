@@ -5,13 +5,23 @@
 
 <%# Affichage de la destination la plus votée %>
 <% if first_place && first_place[:likes_count] > 0 %>
-  <%= render 'shared/separator', text: "Ranked first!" %>
+  <%= render 'shared/separator', 
+        text: "Ranked first!", 
+        html_options: { 
+          'data-places-autocomplete-target': 'separator'
+        }
+  %>
   <%= render 'shared/proposal_section', proposal: first_place %>
 <% end %>
 
 <%# Affichage des autres destinations %>
 <% if other_destinations.any? %>
-  <%= render 'shared/separator', text: "Other destinations" %>
+  <%= render 'shared/separator', 
+        text: "Other destinations", 
+        html_options: { 
+          'data-places-autocomplete-target': 'separator'
+        }
+  %>
   <% other_destinations.each do |destination| %>
     <%= render 'shared/proposal_section', proposal: destination %>
   <% end %>

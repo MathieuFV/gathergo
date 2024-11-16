@@ -1,0 +1,35 @@
+<%= link_to trip_path(trip), class: "trip-card-link" do %>
+  <div class="trip-card" data-searchable-name="<%= trip.name.downcase %>">
+    <div class="trip-card-content">
+      <h3 class="trip-name"><%= trip.name %></h3>
+      
+      <div class="trip-dates">
+        <i class="fa-regular fa-calendar"></i>
+        <span>
+          from <strong><%= trip.start_date.strftime("%d %b %Y") %></strong>
+          to <strong><%= trip.end_date.strftime("%d %b %Y") %></strong>
+        </span>
+      </div>
+
+      <div class="trip-participants">
+        <div class="participants-avatars">
+          <% trip.participations.includes(:user).first(5).each do |participation| %>
+            <% if participation.user.photo.attached? %>
+              <%= image_tag participation.user.photo, 
+                    class: "participant-avatar",
+                    alt: participation.user.first_name %>
+            <% end %>
+          <% end %>
+          
+          <% if trip.participations.size > 5 %>
+            <span class="more-participants">
+              and <%= trip.participations.size - 5 %> more
+            </span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <i class="fa-solid fa-chevron-right trip-chevron"></i>
+  </div>
+<% end %> 

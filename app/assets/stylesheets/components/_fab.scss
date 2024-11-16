@@ -17,9 +17,12 @@
   z-index: 1000;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
+  text-decoration: none;
 
   &:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    color: white;
   }
 
   &:active {

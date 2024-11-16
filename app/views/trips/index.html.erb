@@ -1,11 +1,51 @@
-<h1>Trips' index</h1>
+<div class="trips-index" data-controller="trip-index-search user-menu">
+  <h1 class="app-title text-center">
+    <span class="title-gather">Gather</span><span class="title-go">Go</span>
+  </h1>
 
-<h2><%= current_user.first_name %></h2>
+  <%# Overlay pour le menu utilisateur %>
+  <div class="user-menu-overlay d-none" data-user-menu-target="overlay" data-action="click->user-menu#closeMenu"></div>
 
-<ul>
-  <% @trips.each do |trip| %>
-    <li><%= link_to trip.name, trip_path(trip) %></li>
+  <div class="user-greeting">
+    <%= image_tag current_user.photo, 
+          class: "user-avatar",
+          data: { action: "click->user-menu#toggleMenu" } if current_user.photo.attached? %>
+    <div class="greeting-text">
+      <p class="greeting">
+        Hello, <%= current_user.first_name %> !
+      </p>
+      <p class="greeting-subtitle">
+        Let's start a new trip together !
+      </p>
+    </div>
+  </div>
+
+  <%= render 'shared/user_menu' %>
+
+  <%# Overlay pour le focus %>
+  <div class="search-overlay d-none" data-trip-index-search-target="overlay"></div>
+
+  <%# Barre de recherche %>
+  <div class="search-trips-wrapper">
+    <%= render 'shared/text_input',
+      input_id: 'trips-search',
+      icon_class: 'fa-magnifying-glass',
+      placeholder: 'Search for a trip',
+      value: '',
+      data: { 
+        trip_index_search_target: 'input',
+        action: 'focus->trip-index-search#onSearchFocus blur->trip-index-search#onSearchBlur input->trip-index-search#onInput'
+      }
+    %>
+  </div>
+
+  <div class="trips-container">
+    <% @trips.each do |trip| %>
+      <%= render 'shared/trip_card', trip: trip %>
+    <% end %>
+  </div>
+
+  <%= link_to new_trip_path, class: "fab-button", aria_label: "Create new trip" do %>
+    <i class="fa-solid fa-plus"></i>
   <% end %>
-</ul>
-
-<%= link_to 'Déconnexion', destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: 'Êtes-vous sûr de vouloir vous déconnecter ?' }, class: 'btn btn-danger' %>
+</div>

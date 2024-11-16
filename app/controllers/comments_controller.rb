@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.user = current_user
+    @commentable = @comment.commentable  # Récupère l'objet commentable (Destination dans ce cas)
 
     if @comment.save
       redirect_back(fallback_location: root_path, notice: 'Comment added!')

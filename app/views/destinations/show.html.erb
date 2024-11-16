@@ -79,11 +79,23 @@
           </div>
         <% end %>
 
-        <%# Nouveau commentaire %>
-        <!--
-        <%= cl_image_tag(current_user.photo.key, height: 40, width: 40, class: "rounded-circle") %>
-        <input type="text">
-        -->
+        <div class="text-input-container" data-controller="comment">
+          <%= cl_image_tag(current_user.photo.key, height: 40, width: 40, class: "avatar") %>
+
+          <div>
+            <textarea class="text-input"
+              placeholder="Add new comment"
+              data-comment-target="input"
+              data-action="input->comment#write_comment"
+              required></textarea>
+          </div>
+
+          <button data-action="click->comment#send_comment" class="add-comment-button"><i data-comment-target="icon" class="fa-regular fa-paper-plane"></i></button>
+
+        </div>
+
+
+
       </div>
 
       <%# Ajout d'un bouton supprimer %>

@@ -36,14 +36,20 @@
           <div>
             <h3 class="mb-0"><%= @distance_info[:distance_text] %></h3>
           </div>
-          <p class="m-0">from your location</p>
+          <div class="d-flex align-items-center">
+            <i class="fa-solid fa-location-dot"></i>
+            <p class="m-0 ms-2">from your location</p>
+          </div>
         </div>
 
         <div>
           <div>
             <h3 class="mb-0"><%= @distance_info[:duration_text] %></h3>
           </div>
-          <p class="m-0">travel time</p>
+          <div class="d-flex align-items-center">
+            <p class="m-0 me-2">travel time</p>
+            <i class="fa-solid fa-car"></i>
+          </div>
         </div>
       </div>
 

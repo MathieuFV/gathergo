@@ -1,7 +1,8 @@
 .trip-card {
-  background-color: $gray-400;
+  // background-color: $gray-400;
+  background-color: $light-blue-background; //Proposition de changer la couleur pour du bleu clair
   border: 1px solid $primary-text-color;
-  border-radius: 16px;
+  border-radius: 28px; // 16px => 28px pour matcher les autres cards
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
   position: relative;
@@ -65,7 +66,7 @@
 .trip-card-link {
   text-decoration: none;
   display: block;
-  
+
   &:hover {
     text-decoration: none;
   }
@@ -74,4 +75,4 @@
     position: relative;
     z-index: 101;
   }
-} 
+}

@@ -36,14 +36,20 @@
           <div>
             <h3 class="mb-0"><%= @distance_info[:distance_text] %></h3>
           </div>
-          <p class="m-0">from your location</p>
+          <div class="d-flex align-items-center">
+            <i class="fa-solid fa-location-dot"></i>
+            <p class="m-0 ms-2">from your location</p>
+          </div>
         </div>
 
         <div>
           <div>
             <h3 class="mb-0"><%= @distance_info[:duration_text] %></h3>
           </div>
-          <p class="m-0">travel time</p>
+          <div class="d-flex align-items-center">
+            <p class="m-0 me-2">travel time</p>
+            <i class="fa-solid fa-car"></i>
+          </div>
         </div>
       </div>
 
@@ -76,23 +82,18 @@
 
         <div class="text-input-container d-flex align-items-center">
 
-          <%= cl_image_tag(current_user.photo.key, height: 40, width: 40, class: "avatar") %>
 
-            <textarea class="text-input flex-grow mx-3"
-              rows="1"
-              overflow="hidden"
-              placeholder="Add new comment"
-              data-comment-target="input"
-              data-action="input->comment#write_comment"
-              style="resize: none; overflow: hidden;"
-              required></textarea>
-
+          <textarea class="text-input flex-grow me-3"
+            rows="1"
+            overflow="hidden"
+            placeholder="Add new comment"
+            data-comment-target="input"
+            data-action="input->comment#write_comment"
+            style="resize: none; overflow: hidden;"
+            required></textarea>
           <button data-action="click->comment#send_comment" class="add-comment-button"><i data-comment-target="icon" class="fa-regular fa-paper-plane"></i></button>
 
         </div>
-
-
-
       </div>
 
       <%# Ajout d'un bouton supprimer %>

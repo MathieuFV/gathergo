@@ -29,7 +29,7 @@
         icon_class: 'fa-solid fa-magnifying-glass',
         placeholder: 'Search for a destination to add your proposal',
         value: '',
-        data: { 
+        data: {
           places_autocomplete_target: 'input',
           action: 'input->places-autocomplete#onInput keydown->places-autocomplete#onKeydown focus->places-autocomplete#onSearchFocus blur->places-autocomplete#onSearchBlur'
         }
@@ -68,8 +68,8 @@
     </div>
 
     <%# Ajout du FAB %>
-    <button 
-      class="fab-button" 
+    <button
+      class="fab-button"
       data-action="click->places-autocomplete#focusSearch"
       aria-label="Destination add button"
     >

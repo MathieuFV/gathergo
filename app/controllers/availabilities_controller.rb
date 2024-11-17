@@ -14,11 +14,11 @@ class AvailabilitiesController < ApplicationController
     @trip = Trip.find(params[:trip_id])
 
     # Get participation
-    @participation = current_user.participations.find(params[:trip_id])
+    @participation = current_user.participations.where(trip: @trip, user: current_user).first
     @availability.participation = @participation
 
     if @availability.save
-      redirect_to trip_availabilities_path(@trip)
+      redirect_to :root
     else
       render :index, status: :unprocessable_entity
     end

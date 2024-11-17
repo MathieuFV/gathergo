@@ -76,23 +76,18 @@
 
         <div class="text-input-container d-flex align-items-center">
 
-          <%= cl_image_tag(current_user.photo.key, height: 40, width: 40, class: "avatar") %>
-
-            <textarea class="text-input flex-grow mx-3"
-              rows="1"
-              overflow="hidden"
-              placeholder="Add new comment"
-              data-comment-target="input"
-              data-action="input->comment#write_comment"
-              style="resize: none; overflow: hidden;"
-              required></textarea>
-
+          <%= cl_image_tag(current_user.photo.key, height: 40, width: 40, class: "avatar add-comment-avatar") %>
+          <textarea class="text-input flex-grow mx-2"
+            rows="1"
+            overflow="hidden"
+            placeholder="Add new comment"
+            data-comment-target="input"
+            data-action="input->comment#write_comment"
+            style="resize: none; overflow: hidden;"
+            required></textarea>
           <button data-action="click->comment#send_comment" class="add-comment-button"><i data-comment-target="icon" class="fa-regular fa-paper-plane"></i></button>
 
         </div>
-
-
-
       </div>
 
       <%# Ajout d'un bouton supprimer %>

@@ -64,6 +64,29 @@ export default class extends Controller {
     this.inputTarget.value.trim().length > 0 ? this.activate_send_icon() : this.deactivate_send_icon()
   }
 
+  delete = (event) => {
+
+    let comment = document.getElementById(`comment-${event.currentTarget.dataset.commentId}`);
+
+    console.log(event.target.dataset.commentId);
+
+    fetch(`/comments/${event.target.dataset.commentId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector("[name='csrf-token']").content
+      }
+    }).then((response) => {
+      if (response.ok) {
+        console.log("Commentaire supprimé")
+        comment.remove()
+      } else {
+        console.error("Erreur lors de la suppression du commentaire.");
+      }
+    })
+
+  }
+
   activate_send_icon = () => {
     this.iconTarget.classList.replace("fa-regular", "fa-solid");
   }

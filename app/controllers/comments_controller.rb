@@ -14,6 +14,17 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment = Comment.find(params[:id])
+
+    if @comment.destroy
+      head :no_content # Réponse 204, pas de contenu
+      p "#{@comment.content} comment destroyed"
+    else
+      render json: { error: "Impossible de supprimer le commentaire" }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def comment_params

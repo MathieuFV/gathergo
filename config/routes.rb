@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
-  
+
   # API endpoints
   namespace :api do
     get 'places/autocomplete', to: 'places#autocomplete'
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
         delete :destroy, on: :collection
       end
     end
-    
+
     resources :availabilities, except: :show
   end
 

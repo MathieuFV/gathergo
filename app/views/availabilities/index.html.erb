@@ -9,4 +9,10 @@
     <% end
 }%>
 
+<%= simple_form_for [@trip, @availability] do |f| %>
+  <%= f.input :start_date, as: :date %>
+  <%= f.input :end_date, as: :date %>
+  <%= f.submit %>
+<% end %>
+
 <%= render "shared/tabbar" %>

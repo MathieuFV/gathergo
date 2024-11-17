@@ -7,7 +7,7 @@
   <div class="user-menu-overlay d-none" data-user-menu-target="overlay" data-action="click->user-menu#closeMenu"></div>
 
   <div class="user-greeting">
-    <%= image_tag current_user.photo, 
+    <%= image_tag current_user.photo,
           class: "user-avatar",
           data: { action: "click->user-menu#toggleMenu" } if current_user.photo.attached? %>
     <div class="greeting-text">
@@ -29,10 +29,10 @@
   <div class="search-trips-wrapper">
     <%= render 'shared/text_input',
       input_id: 'trips-search',
-      icon_class: 'fa-magnifying-glass',
+      icon_class: 'fa-solid fa-magnifying-glass',
       placeholder: 'Search for a trip',
       value: '',
-      data: { 
+      data: {
         trip_index_search_target: 'input',
         action: 'focus->trip-index-search#onSearchFocus blur->trip-index-search#onSearchBlur input->trip-index-search#onInput'
       }

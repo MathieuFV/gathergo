@@ -9,21 +9,34 @@
     <% end
 }%>
 
-<div data-controller="flatpickr" class="d-flex justify-content-center">
-  <%= simple_form_for [@trip, @availability] do |f| %>
-    <%= f.text_field :start_date, data: { target: "flatpickr.startDate" }, class: "invisible", value: @availability.start_date %>
-    <%= f.hidden_field :end_date, data: { target: "flatpickr.endDate" },value: @availability.end_date %>
-    <div class="d-flex justify-content-center w-100">
-      <%= f.submit "Save availability", class: "btn btn-primary mt-4" %>
+
+
+
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Add availability range</button>
+
+<div class="offcanvas offcanvas-bottom h-75" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasBottomLabel">Add a new availability range</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div data-controller="flatpickr" class="d-flex justify-content-center">
+      <%= simple_form_for [@trip, @availability] do |f| %>
+        <%= f.text_field :start_date, data: { target: "flatpickr.startDate" }, class: "invisible", value: @availability.start_date %>
+        <%= f.hidden_field :end_date, data: { target: "flatpickr.endDate" },value: @availability.end_date %>
+        <div class="d-flex justify-content-center w-100">
+          <%= f.submit "Save availability", class: "btn btn-primary mt-4" %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
 
 
-  <%#= simple_form_for [@trip, @availability] do |f| %>
-    <%#= f.hidden_field :start_date, data: { target: "flatpickr.startDate" } %>
-    <%#= f.hidden_field :end_date, data: { target: "flatpickr.endDate" } %>
-    <%#= f.submit %>
-  <%# end %>
+<%#= simple_form_for [@trip, @availability] do |f| %>
+  <%#= f.hidden_field :start_date, data: { target: "flatpickr.startDate" } %>
+  <%#= f.hidden_field :end_date, data: { target: "flatpickr.endDate" } %>
+  <%#= f.submit %>
+<%# end %>
 
 <%= render "shared/tabbar" %>

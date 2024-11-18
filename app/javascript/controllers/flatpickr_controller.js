@@ -11,11 +11,15 @@ export default class extends Controller {
     this.startDateTarget.value
 
     this.calendar = flatpickr(this.startDateTarget, {
-      dateFormat: "F j, Y",
-      mode: "range",
+      // dateFormat: "F j, Y",
       inline: true,
-      position: "above center",
+      // mode: "multiple",
+      mode: "range",
+      position: "auto center",
       closeOnSelect: true,
+      // mode: "multiple",
+      dateFormat: "Y-m-d",
+      defaultDate: ["2024-11-18", "2024-11-19"],
       onClose: (selectedDates) => {
         this.startDateTarget.value = selectedDates[0]
         this.endDateTarget.value = selectedDates[1]

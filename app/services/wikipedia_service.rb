@@ -12,13 +12,12 @@ class WikipediaService
       params = {
         action: 'query',
         format: 'json',
-        prop: 'extracts|pageimages',
+        prop: 'extracts|coordinates',
         exintro: 1,
         explaintext: 1,
         redirects: 1,           # Redirige vers une orthographe plausible
         titles: @destination_name,
-        exsectionformat: 'plain', # Format des sections en texte brut
-        pithumbsize: 500
+        exsectionformat: 'plain' # Format des sections en texte brut
       }
 
       # Construction de la requête avec les paramètres
@@ -39,17 +38,8 @@ class WikipediaService
           page = pages.values.first
         end
 
-        # Vérification de la présence d'une image
-        if result && result.dig("thumbnail", "source")
-          image = result["thumbnail"]["source"]
-        end
-
-        if page && result && image
-          p "summary and image"
-          fetched_data = { summary: result["extract"], image: image }
-        elsif page && result
-          p "only summary"
-          fetched_data = { summary: result["extract"] }
+        if page && result
+          fetched_data = { summary: result["extract"], coordinates: result["coordinates"] }
         else
           puts "Aucun extrait trouvé pour le titre : #{@destination_name}"
           return nil
@@ -63,4 +53,5 @@ class WikipediaService
       return nil
     end
   end
+
 end

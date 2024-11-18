@@ -9,16 +9,16 @@ class DestinationsController < ApplicationController
         id: destination.id,
         trip_id: @trip.id,
         title: destination.name,
-        image_url: destination.photos.first ? 
-                  helpers.url_for(destination.photos.first) : 
+        image_url: destination.photos.first ?
+                  helpers.url_for(destination.photos.first) :
                   helpers.asset_path('default_destination.jpg'),
         link_path: trip_destination_path(@trip, destination),
         comments_count: destination.comments_count || 0,
         likes_count: destination.votes.count || 0,
         voted_by_current_user: destination.votes.exists?(user: current_user),
         user: {
-          avatar_url: destination.owner.photo.attached? ? 
-                     helpers.url_for(destination.owner.photo) : 
+          avatar_url: destination.owner.photo.attached? ?
+                     helpers.url_for(destination.owner.photo) :
                      helpers.asset_path('default_avatar.png'),
           name: destination.owner.first_name
         },
@@ -72,7 +72,7 @@ class DestinationsController < ApplicationController
     end
 
     # Appel du service wikipedia pour récupérer des infos sur la destination
-    manage_wiki_results(wikipedia_info)
+    manage_wiki_results(wikipedia_info, google_place_info)
 
     # Sauvegarde de la nouvelle destination
     if @destination.save
@@ -96,11 +96,51 @@ class DestinationsController < ApplicationController
     params.require(:destination).permit(:name)
   end
 
-  def manage_wiki_results(wikipedia_info)
+  # WIKIPEDIA (A placer dans le service wikipedia pour refacto)
+  def haversine_distance(lat1, lon1, lat2, lon2)
+    # Rayon de la Terre en kilomètres
+    earth_radius = 6371.0
+
+    # Conversion des degrés en radians
+    dlat = (lat2 - lat1) * Math::PI / 180
+    dlon = (lon2 - lon1) * Math::PI / 180
+
+    # Calcul intermédiaire
+    a = Math.sin(dlat / 2) ** 2 +
+        Math.cos(lat1 * Math::PI / 180) * Math.cos(lat2 * Math::PI / 180) *
+        Math.sin(dlon / 2) ** 2
+    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+
+    # Distance en km
+    earth_radius * c
+  end
+
+  # WIKIPEDIA (A placer dans le service wikipedia pour refacto)
+  def wikipedia_page_relevant?(wikipedia_info, google_info)
+    # Coordinates recuperation (from wikipedia result and google)
+    if wikipedia_info[:coordinates]
+      wiki_latitude = wikipedia_info[:coordinates].first["lat"]
+      wiki_longitude = wikipedia_info[:coordinates].first["lon"]
+      google_latitude = google_info[:latitude]
+      google_longitude = google_info[:longitude]
+    else
+      return false
+    end
+
+    distance = haversine_distance(google_latitude, google_longitude, wiki_latitude, wiki_longitude)
+
+    # Distance calculation between the two destinations
+    distance < 3 ? true : false
+  end
+
+  def manage_wiki_results(wikipedia_info, google_info)
     # Si la recherche est fructueuse
     if wikipedia_info.present?
-      # Ajout du résumé en tant que description de la nouvelle destination
-      @destination.description = wikipedia_info[:summary]
+      # Coordinates comparaison (to improve wikipedia accurency)
+      if wikipedia_page_relevant?(wikipedia_info, google_info)
+        puts "Relevant Wikipedia page found for #{google_info[:name]}"
+        @destination.description = wikipedia_info[:summary]
+      end
     else
       # Si aucune information wikipédia trouvée
       @destination.description = "No information found on Wikipedia about #{@destination.name}"

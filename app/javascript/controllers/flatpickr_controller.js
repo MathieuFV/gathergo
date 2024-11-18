@@ -10,10 +10,12 @@ export default class extends Controller {
 
     this.startDateTarget.value
 
-    flatpickr(this.element.querySelector(".start-date"), {
+    this.calendar = flatpickr(this.startDateTarget, {
       dateFormat: "F j, Y",
       mode: "range",
-      closeOnSelect: false,
+      inline: true,
+      position: "above center",
+      closeOnSelect: true,
       onClose: (selectedDates) => {
         this.startDateTarget.value = selectedDates[0]
         this.endDateTarget.value = selectedDates[1]
@@ -21,9 +23,10 @@ export default class extends Controller {
       }
     });
   }
+
+  openCalendar = () => {
+    console.log("coucou");
+  }
 }
 
 // clickOpens: false  //Whether clicking on the input should open the picker. You could disable this if you wish to open the calendar manually with.open()
-
-// Récupération des deux dates
-//

@@ -10,4 +10,6 @@ pin "@popperjs/core", to: "popper.js", preload: true
 pin "@stimulus-components/clipboard", to: "@stimulus-components--clipboard.js" # @5.0.0
 pin "@splidejs/splide", to: "@splidejs--splide.js" # @4.1.4
 pin "@stimulus-components/read-more", to: "@stimulus-components--read-more.js" # @5.0.0
-pin "flatpickr" # @4.6.13
+# pin "flatpickr" # @4.6.13
+pin "flatpickr", to: "https://ga.jspm.io/npm:flatpickr@4.6.13/dist/flatpickr.js"
+pin "flatpickr/dist/l10n/fr.js", to: "https://ga.jspm.io/npm:flatpickr@4.6.13/dist/l10n/fr.js"

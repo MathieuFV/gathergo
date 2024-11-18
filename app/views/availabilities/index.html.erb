@@ -9,16 +9,18 @@
     <% end
 }%>
 
+<button data-controller= "flatpickr"> New </button>
+
 <%= simple_form_for [@trip, @availability], data: { controller: "flatpickr" } do |f| %>
-  <%= f.datetime_field :start_date, class: "start-date" %>
-  <%= f.datetime_field :end_date, class: "end-date" %>
+  <%= f.datetime_field :start_date, class: "start-date", data: { target: "flatpickr.startDate" } %>
+  <%= f.hidden_field :end_date, data: { target: "flatpickr.endDate" } %>
   <%= f.submit %>
 <% end %>
 
 <!--Affichage des Availabilities d'un user-->
 <!--<div data-controller="flatpickr">-->
   <% @availabilities.each do |availability|  %>
-    <p>Available from <%= availability.start_date.strftime("%a, %d %b %Y") %> to <%= availability.start_date.strftime("%a, %d %b %Y") %></p>
+    <p>Available from <%= availability.start_date.strftime("%a, %d %b %Y") %> to <%= availability.end_date.strftime("%a, %d %b %Y") %></p>
   <% end %>
 <!--</div>-->
 

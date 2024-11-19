@@ -17,15 +17,20 @@ export default class extends Controller {
       mode: "range",
       position: "auto center",
       closeOnSelect: true,
-      // mode: "multiple",
+      mode: "multiple",
       dateFormat: "Y-m-d",
-      defaultDate: ["2024-11-18", "2024-11-19"],
       onClose: (selectedDates) => {
         this.startDateTarget.value = selectedDates[0]
         this.endDateTarget.value = selectedDates[1]
         console.log("end date:" + this.endDateTarget.value)
       }
     });
+  }
+
+  range = () => {
+    console.log("Range")
+    this.calendar.clear();
+    this.calendar.set('mode', 'range'); // Change le mode en "range"
   }
 
   openCalendar = () => {

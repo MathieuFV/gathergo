@@ -1,0 +1,103 @@
+/* app/assets/stylesheets/availability_calendar.css */
+
+$cell-width: 26px;
+
+.calendar-container {
+  width: 100%;
+  background-color: white;
+}
+
+.calendar-scroll {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.calendar-content {
+  display: inline-block;
+  min-width: 100%;
+}
+
+.calendar-row {
+  display: flex;
+}
+
+.calendar-header {
+  display: flex;
+}
+
+.user-cell {
+  position: sticky;
+  left: 0;
+  width: 80px;
+  border-right: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  background-color: white;
+  display: flex;
+  align-items: center;
+}
+
+.user-name {
+  padding-left: 8px;
+  font-size: 14px;
+}
+
+.date-cell {
+  width: $cell-width;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: $light-blue-background;
+
+  &.weekend {
+    background-color: #c9e0fc;
+    // background-color: #e0e9f5;
+  }
+}
+
+.grid-cell {
+  width: $cell-width;
+  height: 48px;
+  border-right: 1px solid #ddd;
+  // position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: x-large;
+
+  &.weekend {
+    // background-color: #c9e0fc;
+    background-color: #ecf4fe78;
+  }
+}
+
+.grid-cell-checked {
+  background-color: #80CC9F;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.date-content {
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.date-day {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.date-weekday {
+  font-size: 10px;
+  color: #666;
+}
+
+.available {
+  background-color: #90EE90; /* vert clair */
+}
+
+.unavailable {
+  background-color: #FFB6C1; /* rouge clair */
+}

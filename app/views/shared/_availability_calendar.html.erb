@@ -1,0 +1,50 @@
+<div class="calendar-container my-4 border-bottom" data-controller="scroll-to-checked">
+  <div class="calendar-scroll" data-scroll-to-checked-target="scrollArea">
+    <div class="calendar-content">
+      <%# En-tête avec les jours %>
+      <div class="calendar-header">
+        <div class="user-cell">
+          <div class="user-name fw-bold">
+            Users
+          </div>
+        </div>
+
+        <div class="calendar-row">
+          <% dates.each do |date| %>
+            <div class="date-cell <%= "weekend" if date.saturday? || date.sunday? %>">
+              <div class="date-content">
+                <div class="date-day"><%= date.day %></div>
+                <div class="date-weekday">
+                  <%= l(date, format: '%a').first(2) %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <%# Lignes des participants %>
+      <% participants.each do |participant| %>
+        <div class="calendar-row">
+          <div class="user-cell">
+            <div class="user-name">
+              <%= participant.first_name %>
+            </div>
+          </div>
+
+          <div class="calendar-row">
+            <% dates.each do |date| %>
+              <div class="grid-cell p-1 <%= "weekend" if date.saturday? || date.sunday? %>">
+                <% if participant.availabilities.any? { |availability| (availability.start_date..availability.end_date).include?(date) } %>
+                  <div class="grid-cell-checked" data-scroll-to-checked-target="checkedCell">
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

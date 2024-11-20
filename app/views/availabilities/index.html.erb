@@ -9,4 +9,54 @@
     <% end
 }%>
 
-<%= render "shared/tabbar" %>
+<div class="d-flex justify-content-center">
+  <button class="btn btn-primary m-3 text-center"
+    type="button"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#offcanvasBottom"
+    aria-controls="offcanvasBottom"
+  >Fill my availabilities<i class="ms-2 fa-regular fa-calendar-plus"></i></button>
+</div>
+
+<div class="offcanvas border-radius-calendar offcanvas-bottom h-75" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+  <div class="offcanvas-header header-calendar">
+    <h5 class="offcanvas-title" id="offcanvasBottomLabel">Add your availabilities</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+
+  <!-- Remettre ici le calendrier -->
+  <div class="offcanvas-body" data-controller="flatpickr"
+                              data-flatpickr-start-date-value= <%= @trip.start_date %>
+                              data-flatpickr-end-date-value= <%= @trip.end_date %>
+                              data-flatpickr-current-user-dates-value = <%= @current_user_availabilities.to_json %> >
+
+    <div class="d-flex justify-content-center" >
+      <%= simple_form_for [@trip, @availability] do |f| %>
+        <%= f.text_field :start_date,
+          class: "invisible",
+          value: @availability.start_date,
+          data: {
+            flatpickr_target: "startDate"
+          }  %>
+
+        <div class="d-flex justify-content-center w-100 align-items-center">
+          <%= f.submit "Save my availabilities" ,
+            class: "btn btn-primary mt-3 invisible",
+            data: {
+              flatpickr_target: "submitButton"
+            } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Calendar with availabilities -->
+<%= render "shared/availability_calendar",
+  participants: @participants,
+  availabilities: @availabilities,
+  dates: @dates %>
+
+<%= render "shared/tabbar", active_button: "none" %>

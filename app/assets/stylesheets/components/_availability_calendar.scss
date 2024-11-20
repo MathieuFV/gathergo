@@ -69,6 +69,13 @@ $cell-width: 26px;
   }
 }
 
+.grid-cell-checked {
+  background-color: #80CC9F;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
 .date-content {
   height: 48px;
   display: flex;

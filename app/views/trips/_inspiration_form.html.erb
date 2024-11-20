@@ -1,5 +1,5 @@
 <div class="inspiration-section">
-  <h2 class="inspiration-title">Besoin d'inspiration ?</h2>
+  <h3 class="inspiration-title">Besoin d'inspiration ?</h3>
 
   <%= form_with url: trips_path, method: :get, local: true, class: "inspiration-form" do |f| %>
     <div class="form-group">
@@ -32,16 +32,16 @@
 
     <div class="form-group">
       <%= f.label :region, "Quelle région du monde préférez-vous visiter ?", class: "form-label" %>
-      <%= f.select :region, ["Europe", "Asie", "Amérique du Nord", "Amérique du Sud", "Afrique", "Océanie"],
+      <%= f.select :region, ["France", "Europe", "Asie", "Amérique du Nord", "Amérique du Sud", "Afrique", "Océanie"],
                    { prompt: "Choisissez une option" },
                    { class: "form-select" } %>
     </div>
 
-    <%= f.submit "Trouver des idées", class: "btn btn-primary cta-button" %>
+    <%= f.submit "Trouver des idées", class: "btn btn-primary cta-button mb-3" %>
   <% end %>
 
   <% if @suggestions.present? %>
-  <h2>Suggestions de destinations :</h2>
+  <h3>Suggestions de destinations :</h3>
   <div class="suggestions">
     <ul>
       <%= @suggestions.html_safe %>

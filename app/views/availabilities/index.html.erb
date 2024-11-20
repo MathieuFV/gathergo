@@ -9,8 +9,14 @@
     <% end
 }%>
 
-
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Add availability range</button>
+<div class="d-flex justify-content-center">
+  <button class="btn btn-primary m-3 text-center"
+    type="button"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#offcanvasBottom"
+    aria-controls="offcanvasBottom"
+  >Fill my availabilities<i class="ms-2 fa-regular fa-calendar-plus"></i></button>
+</div>
 
 <div class="offcanvas border-radius-calendar offcanvas-bottom h-75" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
   <div class="offcanvas-header header-calendar">
@@ -28,16 +34,13 @@
         <%= f.text_field :start_date, data: { target: "flatpickr.startDate" }, class: "invisible", value: @availability.start_date %>
         <%= f.hidden_field :end_date, data: { target: "flatpickr.endDate" },value: @availability.end_date %>
         <div class="d-flex justify-content-center w-100 align-items-center">
-          <%= f.submit "Save availability", class: "btn btn-primary mt-4" %>
+          <%= f.submit "Save my availabilities" , class: "btn btn-primary mt-3" %>
         </div>
       <% end %>
     </div>
   </div>
 </div>
 
-<div class="m-4">
-
-</div>
 <%= render "shared/availability_calendar" %>
 
 <%#= simple_form_for [@trip, @availability] do |f| %>

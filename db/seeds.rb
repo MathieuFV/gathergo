@@ -44,6 +44,7 @@ def create_trip(name:, dates:, admin:, users:)
   puts "Creating #{name}"
   trip = Trip.create!(name: name, start_date: dates[:start], end_date: dates[:end])
 
+  puts "Creation participations"
   users.values.each do |user|
     Participation.create!(
       user: user,
@@ -61,6 +62,8 @@ def create_destination(trip:, name:, owner:)
     owner_id: owner.id
   )
 end
+
+
 
 def haversine_distance(lat1, lon1, lat2, lon2)
   # Rayon de la Terre en kilomètres
@@ -200,9 +203,28 @@ destinations = [
   { trip: trip_summer, name: "Belle-Île-en-Mer", owner: users["Mathieu"] }
 ].map { |dest| create_destination(**dest) }
 
+
+def create_availability(trip:, start_date:, end_date:, user:)
+  Availability.create!(
+    start_date: start_date,
+    end_date: end_date,
+    participation: Participation.where(user: user, trip: trip).first
+  )
+end
+
+# Création des disponibilités
+availabilities = [
+  { trip: trip_ski, start_date: "2025-02-15", end_date: "2025-02-23", user: users["Marin"] },
+  { trip: trip_ski, start_date: "2025-02-28", end_date: "2025-03-01", user: users["Marin"] },
+  { trip: trip_ski, start_date: "2025-02-12", end_date: "2025-03-03", user: users["Mathieu"] },
+  { trip: trip_ski, start_date: "2025-02-08", end_date: "2025-02-09", user: users["Pierre"] },
+  { trip: trip_ski, start_date: "2025-02-15", end_date: "2025-02-16", user: users["Pierre"] },
+  { trip: trip_ski, start_date: "2025-02-22", end_date: "2025-02-23", user: users["Pierre"] },
+].map{ |a| create_availability(**a) }
+
 # Enrichissement des destinations
 destinations.each do |destination|
-  enrich_destination(destination)
+  # enrich_destination(destination)
   add_interactions(destination)
 end
 

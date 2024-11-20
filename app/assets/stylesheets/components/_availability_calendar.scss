@@ -1,5 +1,7 @@
 /* app/assets/stylesheets/availability_calendar.css */
 
+$cell-width: 26px;
+
 .calendar-container {
   width: 100%;
   background-color: white;
@@ -30,32 +32,41 @@
   border-right: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   background-color: white;
-}
-
-.user-header {
-  height: 48px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-weight: bold;
 }
 
 .user-name {
-  padding: 8px;
+  padding-left: 8px;
   font-size: 14px;
 }
 
 .date-cell {
-  width: 25px;
+  width: $cell-width;
   border-right: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
+  background-color: $light-blue-background;
+
+  &.weekend {
+    background-color: #c9e0fc;
+    // background-color: #e0e9f5;
+  }
 }
 
 .grid-cell {
-  width: 25px;
+  width: $cell-width;
   height: 48px;
   border-right: 1px solid #ddd;
   // position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: x-large;
+
+  &.weekend {
+    // background-color: #c9e0fc;
+    background-color: #ecf4fe78;
+  }
 }
 
 .date-content {

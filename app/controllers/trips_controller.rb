@@ -44,24 +44,28 @@ class TripsController < ApplicationController
   # Méthode privée pour construire le prompt et appeler l'API OpenAI
   def fetch_suggestions(travel_type:, budget:, duration: nil, season: nil, region: nil)
     prompt = <<~PROMPT
-      Je suis un assistant voyage. L'utilisateur souhaite des suggestions de destinations adaptées à ses préférences.
+    Je suis un assistant voyage. L'utilisateur souhaite des suggestions de destinations adaptées à ses préférences.
 
-      Voici les informations fournies :
-      - Type de voyage : #{travel_type}
-      - Budget : #{budget}
-      - Durée : #{duration || "non spécifiée"}
-      - Période : #{season || "non spécifiée"}
-      - Région : #{region || "non spécifiée"}
+    Voici les informations fournies :
+    - Type de voyage : #{travel_type}
+    - Budget : #{budget}
+    - Durée : #{duration || "non spécifiée"}
+    - Période : #{season || "non spécifiée"}
+    - Région : #{region || "non spécifiée"}
 
-      Propose 3 destinations correspondant à ces critères. Pour chaque destination, donne :
-      1. Le nom de la destination.
-      2. Une description en une ou deux phrases, mettant en avant ce qui la rend spéciale pour ce type de voyage.
-      3. Si pertinent, inclure une activité phare ou une recommandation spécifique.
+    Propose 3 destinations correspondant à ces critères. Pour chaque destination, donne :
+    1. Le nom de la destination (en gras).
+    2. Une description en une ou deux phrases.
+    3. Une suggestion d'activité ou recommandation.
 
-      Format attendu (liste en markdown) :
+    Format attendu (HTML) :
 
-      "* **[Nom de la destination]** : Description courte. Suggestion d'activité/recommandation."
-    PROMPT
+    <ul>
+      <li><b>[Nom de la destination]</b> : Description. Suggestion d'activité/recommandation.</li>
+      ...
+    </ul>
+  PROMPT
+
 
     # Appel à l'API OpenAI
     response = OpenAI::Client.new.chat(

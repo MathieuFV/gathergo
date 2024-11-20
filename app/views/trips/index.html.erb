@@ -10,38 +10,4 @@
 
 <%= link_to 'Déconnexion', destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: 'Êtes-vous sûr de vouloir vous déconnecter ?' }, class: 'btn btn-danger' %>
 
-<%= form_with url: trips_path, method: :get, local: true do |f| %>
-  <div>
-    <%= f.label :travel_type, "Quel type de voyage recherchez-vous ?" %>
-    <%= f.select :travel_type, ["Relaxation", "Aventure", "Culture", "Nature", "Romantique", "Fête"], { prompt: "Choisissez une option" }, { required: true } %>
-  </div>
-
-  <div>
-    <%= f.label :budget, "Quel est votre budget ?" %>
-    <%= f.select :budget, ["Petit budget", "Moyen", "Luxe"], { prompt: "Choisissez une option" }, { required: true } %>
-  </div>
-
-  <div>
-    <%= f.label :duration, "Quelle est la durée prévue pour votre voyage ?" %>
-    <%= f.select :duration, ["Weekend", "3-5 jours", "1 semaine", "2 semaines ou plus"], { prompt: "Choisissez une option" }, { required: false } %>
-  </div>
-
-  <div>
-    <%= f.label :season, "À quelle saison prévoyez-vous de voyager ?" %>
-    <%= f.select :season, ["Hiver", "Printemps", "Été", "Automne"], { prompt: "Choisissez une option" }, { required: false } %>
-  </div>
-
-  <div>
-    <%= f.label :region, "Quelle région du monde préférez-vous visiter ?" %>
-    <%= f.select :region, ["Europe", "Asie", "Amérique du Nord", "Amérique du Sud", "Afrique", "Océanie"], { prompt: "Choisissez une option" }, { required: false } %>
-  </div>
-
-  <%= f.submit "Obtenir des suggestions" %>
-<% end %>
-
-<% if @suggestions.present? %>
-  <h2>Suggestions de destinations :</h2>
-  <div class="suggestions">
-    <%= simple_format(@suggestions) %>
-  </div>
-<% end %>
+<%= render "trips/inspiration_form" %>

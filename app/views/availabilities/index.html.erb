@@ -26,7 +26,8 @@
 
   <div class="offcanvas-body" data-controller="flatpickr"
                               data-flatpickr-start-date-value= <%= @trip.start_date %>
-                              data-flatpickr-end-date-value= <%= @trip.end_date %> >
+                              data-flatpickr-end-date-value= <%= @trip.end_date %>
+                              data-flatpickr-current-user-dates-value = <%= @current_user_availabilities.to_json %> >
 
     <div class="d-flex justify-content-center" >
       <%= simple_form_for [@trip, @availability] do |f| %>
@@ -41,6 +42,9 @@
 </div>
 
 <!-- Calendar with availabilities -->
-<%= render "shared/availability_calendar" %>
+<%= render "shared/availability_calendar",
+  participants: @participants,
+  availabilities: @availabilities,
+  dates: @dates %>
 
 <%= render "shared/tabbar", active_button: "none" %>

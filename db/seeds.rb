@@ -204,27 +204,45 @@ destinations = [
 ].map { |dest| create_destination(**dest) }
 
 
-def create_availability(trip:, start_date:, end_date:, user:)
+def create_availability(trip:, date:, user:)
   Availability.create!(
-    start_date: start_date,
-    end_date: end_date,
-    participation: Participation.where(user: user, trip: trip).first
+    start_date: date,
+    end_date: date,
+    participation: Participation.find_by(user: user, trip: trip)
   )
 end
 
-# Création des disponibilités
-availabilities = [
-  { trip: trip_ski, start_date: "2025-02-15", end_date: "2025-02-23", user: users["Marin"] },
-  { trip: trip_ski, start_date: "2025-02-28", end_date: "2025-03-01", user: users["Marin"] },
-  { trip: trip_ski, start_date: "2025-02-12", end_date: "2025-03-03", user: users["Mathieu"] },
-  { trip: trip_ski, start_date: "2025-02-08", end_date: "2025-02-09", user: users["Pierre"] },
-  { trip: trip_ski, start_date: "2025-02-15", end_date: "2025-02-16", user: users["Pierre"] },
-  { trip: trip_ski, start_date: "2025-02-22", end_date: "2025-02-23", user: users["Pierre"] },
-].map{ |a| create_availability(**a) }
+def create_date_range(trip:, start_date:, end_date:, user:)
+  (Date.parse(start_date.to_s)..Date.parse(end_date.to_s)).each do |date|
+    create_availability(trip: trip, date: date, user: user)
+  end
+end
+
+# Utilisation
+availabilities_data = [
+  { user: users["Marin"], dates: [{ start: "2025-02-15", end: "2025-02-23" }] },
+  { user: users["Mathieu"], dates: [{ start: "2025-02-12", end: "2025-03-03" }] },
+  { user: users["Pierre"], dates: [
+    { start: "2025-02-08", end: "2025-02-09" },
+    { start: "2025-02-15", end: "2025-02-16" },
+    { start: "2025-02-22", end: "2025-02-23" }
+  ]}
+]
+
+availabilities_data.each do |user_data|
+  user_data[:dates].each do |date_range|
+    create_date_range(
+      trip: trip_ski,
+      start_date: date_range[:start],
+      end_date: date_range[:end],
+      user: user_data[:user]
+    )
+  end
+end
 
 # Enrichissement des destinations
 destinations.each do |destination|
-  # enrich_destination(destination)
+  enrich_destination(destination)
   add_interactions(destination)
 end
 

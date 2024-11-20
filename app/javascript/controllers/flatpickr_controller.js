@@ -6,12 +6,13 @@ export default class extends Controller {
   static targets = ["startDate", "endDate"]
   static values = {
     startDate: String,
-    endDate: String
+    endDate: String,
+    currentUserDates: Array,
   };
 
   connect() {
     console.log("Connected to flatpickr stimulus", this.element)
-    console.log("value:" + this.endDateValue)
+    console.log("values:" + this.currentUserDatesValue)
 
     // this.startDateTarget.value
 
@@ -24,12 +25,10 @@ export default class extends Controller {
       position: "auto center",
       closeOnSelect: true,
       // mode: "multiple",
-      // defaultDate: ["2024-11-20", "2024-11-04", "2024-11-23", "2024-11-25"],
+      defaultDate: this.currentUserDatesValue,
       dateFormat: "Y-m-d",
       onClose: (selectedDates) => {
-        this.startDateTarget.value = selectedDates[0]
-        this.endDateTarget.value = selectedDates[1]
-        console.log("end date:" + this.endDateTarget.value)
+        console.log("end date:" + selectedDates)
       }
     });
   }
@@ -42,12 +41,6 @@ export default class extends Controller {
 
   // Afficher les dates déjà entrées par l'utilisateur
   // Permettre d'ajouter 1 à X disponibilités
-
-  range = () => {
-    console.log("Range")
-    // this.calendar.clear();
-    this.calendar.set('mode', 'range'); // Change le mode en "range"
-  }
 
   openCalendar = () => {
     console.log("coucou");

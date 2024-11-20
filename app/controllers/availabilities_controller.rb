@@ -4,8 +4,9 @@ class AvailabilitiesController < ApplicationController
 
     # Display all the availabilities of a user
     @current_user_participation = current_user.participations.where(trip: @trip, user: current_user).first
+
     # current user availabilities
-    @availabilities = @current_user_participation.availabilities
+    @current_user_availabilities = @current_user_participation.availabilities.pluck(:start_date)
 
     # To create a new availability range
     @availability = Availability.new
@@ -29,11 +30,11 @@ class AvailabilitiesController < ApplicationController
     @participation = current_user.participations.find_by(trip: @trip)
     @availability.participation = @participation
 
-    if @availability.save
+    if @availability.save!
       redirect_to trip_availabilities_path(@trip)
     else
-      @availabilities = @participation.availabilities
-      render :index, status: :unprocessable_entity
+      redirect_to trip_availabilities_path(@trip)
+      # render :index, status: :unprocessable_entity
     end
   end
 

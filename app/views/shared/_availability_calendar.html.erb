@@ -10,7 +10,7 @@
         </div>
 
         <div class="calendar-row">
-          <% @dates.each do |date| %>
+          <% dates.each do |date| %>
             <div class="date-cell <%= "weekend" if date.saturday? || date.sunday? %>">
               <div class="date-content">
                 <div class="date-day"><%= date.day %></div>
@@ -24,7 +24,7 @@
       </div>
 
       <%# Lignes des participants %>
-      <% @participants.each do |participant| %>
+      <% participants.each do |participant| %>
         <div class="calendar-row">
           <div class="user-cell">
             <div class="user-name">
@@ -33,7 +33,7 @@
           </div>
 
           <div class="calendar-row">
-            <% @dates.each do |date| %>
+            <% dates.each do |date| %>
               <!--<div class="grid-cell <%#= "available" if participant.availabilities.any? { |availability| (availability.start_date..availability.end_date).include?(date) } %>">
               </div>-->
 
@@ -50,7 +50,7 @@
           </div>
         </div>
       <% end %>
-      <% @participants.each do |participant| %>
+      <% participants.each do |participant| %>
         <div class="calendar-row">
           <div class="user-cell">
             <div class="user-name">
@@ -59,7 +59,7 @@
           </div>
 
           <div class="calendar-row">
-            <% @dates.each do |date| %>
+            <% dates.each do |date| %>
               <div class="grid-cell p-1 <%= "weekend" if date.saturday? || date.sunday? %>">
                 <% if participant.availabilities.any? { |availability| (availability.start_date..availability.end_date).include?(date) } %>
                   <div class="grid-cell-checked" data-scroll-to-checked-target="checkedCell">

@@ -5,6 +5,8 @@ export default class extends Controller {
   static targets = ["scrollArea", "checkedCell"];
 
   connect() {
+    const stickyColumnWidth = document.querySelector('.user-cell').offsetWidth;
+
     console.log(stickyColumnWidth);
 
     const firstCheckedCell = this.checkedCellTargets[0];
@@ -15,5 +17,7 @@ export default class extends Controller {
         inline: 'end'    // Centré horizontalement
       });
     }
+
+    // window.scrollBy(700, 0);
   }
 }

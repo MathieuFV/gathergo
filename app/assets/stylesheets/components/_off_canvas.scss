@@ -4,6 +4,14 @@
 
 .offcanvas {
   z-index: 9;
+
+  &.calendar {
+    border-radius: 28px 28px 0 0;
+  }
+
+  &.share {
+
+  }
 }
 
 .offcanvas-backdrop {

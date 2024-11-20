@@ -4,11 +4,21 @@ class AvailabilitiesController < ApplicationController
 
     # Display all the availabilities of a user
     @participation = current_user.participations.where(trip: @trip, user: current_user).first
-
+    # Availabilities du current user
     @availabilities = @participation.availabilities
 
     # To create a new availability range
     @availability = Availability.new
+
+    # All users who participate to the trip but the current user (to display it on top)
+    # @participants = @trip.users.where.not(id: current_user.id)
+    @participants = @trip.users
+
+    # Availababilities of the participants
+    @participants_availabilities = @participants.map(&:availabilities).flatten
+
+    # Création des dates
+    @dates = (@trip.start_date...@trip.end_date).to_a
   end
 
   def create

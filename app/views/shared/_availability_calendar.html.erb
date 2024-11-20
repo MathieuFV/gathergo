@@ -1,0 +1,45 @@
+<div class="calendar-container">
+  <div class="calendar-scroll">
+    <div class="calendar-content">
+      <%# En-tête avec les jours %>
+      <div class="calendar-header">
+        <div class="user-cell">
+          <div class="user-header">
+            Users
+          </div>
+        </div>
+
+        <div class="calendar-row">
+          <% @dates.each do |date| %>
+            <div class="date-cell">
+              <div class="date-content">
+                <div class="date-day"><%= date.day %></div>
+                <div class="date-weekday">
+                  <%= l(date, format: '%a').first(2) %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <%# Lignes des participants %>
+      <% @participants.each do |participant| %>
+        <div class="calendar-row">
+          <div class="user-cell">
+            <div class="user-name">
+              <%= participant.first_name %>
+            </div>
+          </div>
+
+          <div class="calendar-row">
+            <% @dates.each do |date| %>
+              <div class="grid-cell <%= "available" if participant.availabilities.any? { |availability| (availability.start_date..availability.end_date).include?(date) } %>">
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

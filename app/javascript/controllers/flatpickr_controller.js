@@ -13,11 +13,12 @@ export default class extends Controller {
     this.calendar = flatpickr(this.startDateTarget, {
       // dateFormat: "F j, Y",
       inline: true,
-      // mode: "multiple",
-      mode: "range",
+      mode: "multiple",
+      // mode: "range",
       position: "auto center",
       closeOnSelect: true,
-      mode: "multiple",
+      // mode: "multiple",
+      // defaultDate: ["2024-11-20", "2024-11-04", "2024-11-23", "2024-11-25"],
       dateFormat: "Y-m-d",
       onClose: (selectedDates) => {
         this.startDateTarget.value = selectedDates[0]
@@ -29,7 +30,7 @@ export default class extends Controller {
 
   range = () => {
     console.log("Range")
-    this.calendar.clear();
+    // this.calendar.clear();
     this.calendar.set('mode', 'range'); // Change le mode en "range"
   }
 

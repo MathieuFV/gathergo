@@ -1,0 +1,87 @@
+/* app/assets/stylesheets/availability_calendar.css */
+
+.calendar-container {
+  width: 100%;
+  background-color: white;
+}
+
+.calendar-scroll {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.calendar-content {
+  display: inline-block;
+  min-width: 100%;
+}
+
+.calendar-row {
+  display: flex;
+}
+
+.calendar-header {
+  display: flex;
+}
+
+.user-cell {
+  position: sticky;
+  left: 0;
+  width: 80px;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: white;
+}
+
+.user-header {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.user-name {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.date-cell {
+  width: 25px;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.grid-cell {
+  width: 25px;
+  height: 48px;
+  border-right: 1px solid #ddd;
+  // position: relative;
+}
+
+.date-content {
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.date-day {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.date-weekday {
+  font-size: 10px;
+  color: #666;
+}
+
+
+
+.available {
+  background-color: #90EE90; /* vert clair */
+}
+
+.unavailable {
+  background-color: #FFB6C1; /* rouge clair */
+}

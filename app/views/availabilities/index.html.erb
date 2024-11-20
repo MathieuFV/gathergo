@@ -24,6 +24,7 @@
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
 
+  <!-- Remettre ici le calendrier -->
   <div class="offcanvas-body" data-controller="flatpickr"
                               data-flatpickr-start-date-value= <%= @trip.start_date %>
                               data-flatpickr-end-date-value= <%= @trip.end_date %>
@@ -31,15 +32,26 @@
 
     <div class="d-flex justify-content-center" >
       <%= simple_form_for [@trip, @availability] do |f| %>
-        <%= f.text_field :start_date, data: { target: "flatpickr.startDate" }, class: "invisible", value: @availability.start_date %>
-        <%= f.hidden_field :end_date, data: { target: "flatpickr.endDate" },value: @availability.end_date %>
+        <%= f.text_field :start_date,
+          class: "invisible",
+          value: @availability.start_date,
+          data: {
+            flatpickr_target: "startDate"
+          }  %>
+
         <div class="d-flex justify-content-center w-100 align-items-center">
-          <%= f.submit "Save my availabilities" , class: "btn btn-primary mt-3" %>
+          <%= f.submit "Save my availabilities" ,
+            class: "btn btn-primary mt-3 invisible",
+            data: {
+              flatpickr_target: "submitButton"
+            } %>
         </div>
       <% end %>
     </div>
   </div>
 </div>
+
+
 
 <!-- Calendar with availabilities -->
 <%= render "shared/availability_calendar",

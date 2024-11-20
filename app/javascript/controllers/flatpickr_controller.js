@@ -1,9 +1,8 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
 import flatpickr from "flatpickr";
 
-// Connects to data-controller="flatpickr"
 export default class extends Controller {
-  static targets = ["startDate", "endDate"]
+  static targets = ["startDate", "submitButton"];
   static values = {
     startDate: String,
     endDate: String,
@@ -11,40 +10,51 @@ export default class extends Controller {
   };
 
   connect() {
-    console.log("Connected to flatpickr stimulus", this.element)
-    console.log("values:" + this.currentUserDatesValue)
+    this.initFlatpickr();
+  }
 
-    // this.startDateTarget.value
-
+  initFlatpickr() {
     this.calendar = flatpickr(this.startDateTarget, {
-      // dateFormat: "F j, Y",
+      dateFormat: "Y-m-d",
       inline: true,
       mode: "multiple",
       minDate: this.startDateValue,
       maxDate: this.endDateValue,
       position: "auto center",
       closeOnSelect: true,
-      // mode: "multiple",
       defaultDate: this.currentUserDatesValue,
-      dateFormat: "Y-m-d",
-      onClose: (selectedDates) => {
-        console.log("end date:" + selectedDates)
-      }
+      onChange: this.updateDates
     });
+
+    // Cacher le bouton initialement
+    this.submitButtonTarget.classList.add("invisible");
   }
 
-  // Désactiver les dates en dehors des dates du trip
-    // Récupération des dates du trip dans le controller
-    // Envoie des dates au controller stimulus
-    // Activation de l'option du calendrier pour activer seulement ces dates là
-    // = Centrer le calendrier sur la première date du trip
-
-  // Afficher les dates déjà entrées par l'utilisateur
-  // Permettre d'ajouter 1 à X disponibilités
-
-  openCalendar = () => {
-    console.log("coucou");
+  formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
   }
+
+  datesHaveChanged = (selectedDates, originalDates) => {
+    const formattedSelectedDates = selectedDates.map(this.formatDate);
+
+    if (formattedSelectedDates.length !== originalDates.length) {
+      return true;
+    }
+
+    const sortedSelected = [...formattedSelectedDates].sort();
+    const sortedOriginal = [...originalDates].sort();
+
+    return sortedSelected.some((date, index) => date !== sortedOriginal[index]);
+  };
+
+  updateDates = (selectedDates) => {
+    const hasChanged = this.datesHaveChanged(selectedDates, this.currentUserDatesValue);
+    this.submitButtonTarget.classList.toggle("invisible", !hasChanged);
+
+    const formattedDates = selectedDates.map(this.formatDate).join(',');
+    this.startDateTarget.value = formattedDates;
+  };
 }
-
-// clickOpens: false  //Whether clicking on the input should open the picker. You could disable this if you wish to open the calendar manually with.open()

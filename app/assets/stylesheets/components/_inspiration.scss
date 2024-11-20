@@ -1,0 +1,64 @@
+.inspiration-section {
+  background: #f8f9fa; /* Couleur douce */
+  padding: 2rem;
+  margin-top: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  .inspiration-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    text-align: left;
+    color: #042040;
+  }
+
+  .inspiration-form {
+    .form-group {
+      margin-bottom: 1rem;
+
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        color: #495057;
+      }
+
+      .form-select {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+      }
+    }
+
+    .cta-button {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+  }
+
+  .suggestions {
+    margin-top: 20px;
+
+    ul {
+      list-style: none; /* Supprime les puces */
+      padding: 0;
+
+      li {
+        background: #f9f9f9; /* Arrière-plan clair */
+        border: 1px solid #ddd; /* Bordure fine et grise */
+        border-radius: 8px; /* Coins arrondis */
+        padding: 15px; /* Espace intérieur */
+        margin-bottom: 10px; /* Espacement entre les suggestions */
+        font-size: 16px; /* Taille de texte lisible */
+        line-height: 1.5;
+
+        b {
+          color: #0056b3; /* Couleur distincte pour les noms de destinations */
+        }
+      }
+    }
+  }
+}

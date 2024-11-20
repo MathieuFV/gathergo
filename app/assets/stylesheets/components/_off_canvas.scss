@@ -1,31 +1,28 @@
 .offcanvas-header {
-  padding-top: 80px;
+  &.header-calendar {
+    padding-top: 28px;
+  }
+
+  &.header-share {
+    padding-top: 80px;
+  }
 }
 
 .offcanvas {
   z-index: 9;
 
-  &.calendar {
+  &.border-radius-calendar {
     border-radius: 28px 28px 0 0;
   }
 
-  &.share {
-
+  &.border-radius-share {
+    border-radius: 0 0 28px 28px;
   }
 }
 
 .offcanvas-backdrop {
   z-index: 8;
 }
-
-.offcanvas-body {
-  border-radius: 0 0 28px 28px;
-}
-
-.offcanvas.offcanvas-top {
-  border-radius: 0 0 28px 28px;
-}
-
 
 .no-hover:hover {
   background-color: white;

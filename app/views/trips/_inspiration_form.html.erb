@@ -1,0 +1,51 @@
+<div class="inspiration-section">
+  <h2 class="inspiration-title">Besoin d'inspiration ?</h2>
+
+  <%= form_with url: trips_path, method: :get, local: true, class: "inspiration-form" do |f| %>
+    <div class="form-group">
+      <%= f.label :travel_type, "Quel type de voyage recherchez-vous ?", class: "form-label" %>
+      <%= f.select :travel_type, ["Relaxation", "Aventure", "Culture", "Nature", "Romantique", "Fête"],
+                   { prompt: "Choisissez une option" },
+                   { class: "form-select", required: true } %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :budget, "Quel est votre budget ?", class: "form-label" %>
+      <%= f.select :budget, ["Petit budget", "Moyen", "Luxe"],
+                   { prompt: "Choisissez une option" },
+                   { class: "form-select", required: true } %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :duration, "Quelle est la durée prévue pour votre voyage ?", class: "form-label" %>
+      <%= f.select :duration, ["Weekend", "3-5 jours", "1 semaine", "2 semaines ou plus"],
+                   { prompt: "Choisissez une option" },
+                   { class: "form-select" } %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :season, "À quelle saison prévoyez-vous de voyager ?", class: "form-label" %>
+      <%= f.select :season, ["Hiver", "Printemps", "Été", "Automne"],
+                   { prompt: "Choisissez une option" },
+                   { class: "form-select" } %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :region, "Quelle région du monde préférez-vous visiter ?", class: "form-label" %>
+      <%= f.select :region, ["Europe", "Asie", "Amérique du Nord", "Amérique du Sud", "Afrique", "Océanie"],
+                   { prompt: "Choisissez une option" },
+                   { class: "form-select" } %>
+    </div>
+
+    <%= f.submit "Trouver des idées", class: "btn btn-primary cta-button" %>
+  <% end %>
+
+  <% if @suggestions.present? %>
+  <h2>Suggestions de destinations :</h2>
+  <div class="suggestions">
+    <ul>
+      <%= @suggestions.html_safe %>
+    </ul>
+  </div>
+<% end %>
+</div>

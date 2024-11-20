@@ -34,32 +34,6 @@
 
           <div class="calendar-row">
             <% dates.each do |date| %>
-              <!--<div class="grid-cell <%#= "available" if participant.availabilities.any? { |availability| (availability.start_date..availability.end_date).include?(date) } %>">
-              </div>-->
-
-              <div class="grid-cell p-1 <%= "weekend" if date.saturday? || date.sunday? %>">
-                <% if participant.availabilities.any? { |availability| (availability.start_date..availability.end_date).include?(date) } %>
-                  <!--<i class="fa-solid fa-calendar-check text-primary"></i>-->
-                  <div class="grid-cell-checked">
-                    <!--<i class="fa-solid fa-calendar-check text-white"></i>-->
-                  </div>
-                  <!--<i class="fa-solid fa-circle-check text-primary"></i>-->
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-      <% participants.each do |participant| %>
-        <div class="calendar-row">
-          <div class="user-cell">
-            <div class="user-name">
-              <%= participant.first_name %>
-            </div>
-          </div>
-
-          <div class="calendar-row">
-            <% dates.each do |date| %>
               <div class="grid-cell p-1 <%= "weekend" if date.saturday? || date.sunday? %>">
                 <% if participant.availabilities.any? { |availability| (availability.start_date..availability.end_date).include?(date) } %>
                   <div class="grid-cell-checked" data-scroll-to-checked-target="checkedCell">

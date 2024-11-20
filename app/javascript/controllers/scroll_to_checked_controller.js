@@ -14,10 +14,8 @@ export default class extends Controller {
       firstCheckedCell.scrollIntoView({
         behavior: 'smooth', // Défilement fluide
         block: 'center',    // Centré verticalement
-        inline: 'end'    // Centré horizontalement
+        inline: 'nearest'    // Centré horizontalement
       });
     }
-
-    // window.scrollBy(700, 0);
   }
 }

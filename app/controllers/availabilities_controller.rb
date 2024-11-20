@@ -3,9 +3,9 @@ class AvailabilitiesController < ApplicationController
     @trip = Trip.find(params[:trip_id])
 
     # Display all the availabilities of a user
-    @participation = current_user.participations.where(trip: @trip, user: current_user).first
-    # Availabilities du current user
-    @availabilities = @participation.availabilities
+    @current_user_participation = current_user.participations.where(trip: @trip, user: current_user).first
+    # current user availabilities
+    @availabilities = @current_user_participation.availabilities
 
     # To create a new availability range
     @availability = Availability.new

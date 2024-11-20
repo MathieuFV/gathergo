@@ -4,17 +4,23 @@ import flatpickr from "flatpickr";
 // Connects to data-controller="flatpickr"
 export default class extends Controller {
   static targets = ["startDate", "endDate"]
+  static values = {
+    startDate: String,
+    endDate: String
+  };
 
   connect() {
     console.log("Connected to flatpickr stimulus", this.element)
+    console.log("value:" + this.endDateValue)
 
-    this.startDateTarget.value
+    // this.startDateTarget.value
 
     this.calendar = flatpickr(this.startDateTarget, {
       // dateFormat: "F j, Y",
       inline: true,
       mode: "multiple",
-      // mode: "range",
+      minDate: this.startDateValue,
+      maxDate: this.endDateValue,
       position: "auto center",
       closeOnSelect: true,
       // mode: "multiple",
@@ -27,6 +33,15 @@ export default class extends Controller {
       }
     });
   }
+
+  // Désactiver les dates en dehors des dates du trip
+    // Récupération des dates du trip dans le controller
+    // Envoie des dates au controller stimulus
+    // Activation de l'option du calendrier pour activer seulement ces dates là
+    // = Centrer le calendrier sur la première date du trip
+
+  // Afficher les dates déjà entrées par l'utilisateur
+  // Permettre d'ajouter 1 à X disponibilités
 
   range = () => {
     console.log("Range")

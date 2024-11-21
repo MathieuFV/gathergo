@@ -1,6 +1,6 @@
 /* app/assets/stylesheets/availability_calendar.css */
 
-$cell-width: 26px;
+$cell-width: 36px;
 
 .calendar-container {
   width: 100%;
@@ -100,4 +100,41 @@ $cell-width: 26px;
 
 .unavailable {
   background-color: #FFB6C1; /* rouge clair */
+}
+
+// Hide other months
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  .flatpickr-calendar {
+    width: 95vw !important;
+    margin-top: 0 !important;
+    height: auto !important; /* Permet au calendrier de s'adapter */
+    // max-height: 80vh !important; /* Limite la hauteur à 80% de la hauteur de l'écran */
+  }
+
+  .flatpickr-days,
+  .dayContainer {
+    width: 95vw !important;
+    min-width: 95vw !important;
+    max-width: 95vw !important;
+  }
+
+  .flatpickr-day {
+    width: calc(95vw / 7) !important;
+    height: calc(95vw / 7) !important;
+    line-height: calc(95vw / 7) !important;
+    max-width: calc(95vw / 7) !important;
+    /* Réduire légèrement la taille si nécessaire */
+    font-size: 14px !important;
+  }
+
+  .dayContainer > div {
+    margin: 1px 0 !important; /* Réduit légèrement l'espacement */
+  }
 }

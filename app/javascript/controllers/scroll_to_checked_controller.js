@@ -5,16 +5,23 @@ export default class extends Controller {
   static targets = ["scrollArea", "checkedCell"];
 
   connect() {
-    const stickyColumnWidth = document.querySelector('.user-cell').offsetWidth;
+    // Récupère toutes les cellules cochées
+    const checkedCells = this.checkedCellTargets;
 
-    console.log(stickyColumnWidth);
+    if (checkedCells.length > 0) {
+      // Trouve la cellule avec la position la plus à gauche
+      const leftmostCell = checkedCells.reduce((leftmost, current) => {
+        // Compare les positions horizontales des cellules
+        return current.getBoundingClientRect().left < leftmost.getBoundingClientRect().left
+          ? current
+          : leftmost;
+      });
 
-    const firstCheckedCell = this.checkedCellTargets[0];
-    if (firstCheckedCell) {
-      firstCheckedCell.scrollIntoView({
-        behavior: 'smooth', // Défilement fluide
-        block: 'center',    // Centré verticalement
-        inline: 'center'    // Centré horizontalement
+      // Scroll vers la cellule la plus à gauche
+      leftmostCell.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center'
       });
     }
   }

@@ -9,14 +9,6 @@
     <% end
 }%>
 
-<div class="d-flex justify-content-center">
-  <button class="btn btn-primary m-3 text-center"
-    type="button"
-    data-bs-toggle="offcanvas"
-    data-bs-target="#offcanvasBottom"
-    aria-controls="offcanvasBottom"
-  >Fill my availabilities<i class="ms-2 fa-regular fa-calendar-plus"></i></button>
-</div>
 
 <!-- Offcanvas (slider pops up from the bottom) -->
 <div class="offcanvas border-radius-calendar offcanvas-bottom h-75" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
@@ -52,10 +44,26 @@
   </div>
 </div>
 
-<!-- Calendar with availabilities -->
-<%= render "shared/availability_calendar",
-  participants: @participants,
-  availabilities: @availabilities,
-  dates: @dates %>
+<div class="d-flex flex-column justify-content-between margin-auto">
+  <h3 class="text-center">Check others' availabilities !</h3>
+
+  <!-- Calendar with availabilities -->
+  <%= render "shared/availability_calendar",
+    participants: @participants,
+    availabilities: @availabilities,
+    dates: @dates
+  %>
+
+  <h3 class="text-center">Have you filled yours ?</h3>
+  <div class="d-flex justify-content-center">
+    <button class="btn btn-primary m-3 text-center"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasBottom"
+      aria-controls="offcanvasBottom"
+    >Fill my availabilities<i class="ms-2 fa-regular fa-calendar-plus"></i></button>
+  </div>
+</div>
+
 
 <%= render "shared/tabbar", active_button: "none" %>

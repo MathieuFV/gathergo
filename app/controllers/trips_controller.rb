@@ -6,6 +6,10 @@ class TripsController < ApplicationController
   end
 
   def index
+    # Hide margins for top and nav bars
+    @display_bottom_menu == false
+    @display_top_menu = false
+
     @trips = current_user.trips
 
     # Vérifie si les paramètres pour le formulaire de suggestion sont présents

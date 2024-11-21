@@ -27,6 +27,25 @@
   add_path: new_trip_destination_path(@trip)
 %>
 
+<%= render "shared/sliding_cards_section",
+  title: "Destinations",
+  remaining_days: 2,
+  cards: @destinations,
+  category_path: trip_destinations_path(@trip),
+  card_path: ->(card) { trip_destination_path(@trip, card) },
+  add_path: new_trip_destination_path(@trip)
+%>
+
+<%= render "shared/sliding_cards_section",
+  title: "Destinations",
+  remaining_days: 2,
+  cards: @destinations,
+  category_path: trip_destinations_path(@trip),
+  card_path: ->(card) { trip_destination_path(@trip, card) },
+  add_path: new_trip_destination_path(@trip)
+%>
+
+
 <div class="offcanvas offcanvas-top border-radius-share" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
   <div class="offcanvas-header header-share d-flex justify-content-center ">
     <h5 class="offcanvas-title" id="offcanvasBottomLabel">Share the trip with your friends !</h5>

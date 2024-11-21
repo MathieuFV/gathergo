@@ -26,7 +26,7 @@
   </div>
 
   <!-- Flatpickr Calendar to choose availabilities -->
-  <div class="offcanvas-body" data-controller="flatpickr"
+  <div class="offcanvas-body pt-0 mt-0" data-controller="flatpickr"
                               data-flatpickr-start-date-value= <%= @trip.start_date %>
                               data-flatpickr-end-date-value= <%= @trip.end_date %>
                               data-flatpickr-current-user-dates-value = <%= @current_user_availabilities.to_json %> >
@@ -34,7 +34,7 @@
     <div class="d-flex justify-content-center" >
       <%= simple_form_for [@trip, @availability] do |f| %>
         <%= f.text_field :start_date,
-          class: "invisible",
+          class: "invisible m-0 p-0",
           value: @availability.start_date,
           data: {
             flatpickr_target: "startDate"

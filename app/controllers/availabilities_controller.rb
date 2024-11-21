@@ -19,7 +19,7 @@ class AvailabilitiesController < ApplicationController
     @participants_availabilities = @participants.map(&:availabilities).flatten
 
     # Création des dates
-    @dates = (@trip.start_date...@trip.end_date).to_a
+    @dates = (@trip.start_date..@trip.end_date).to_a # .. is an inclusive range (end_date is included)
   end
 
   def create

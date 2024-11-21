@@ -18,14 +18,15 @@
   >Fill my availabilities<i class="ms-2 fa-regular fa-calendar-plus"></i></button>
 </div>
 
+<!-- Offcanvas (slider pops up from the bottom) -->
 <div class="offcanvas border-radius-calendar offcanvas-bottom h-75" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
   <div class="offcanvas-header header-calendar">
     <h5 class="offcanvas-title" id="offcanvasBottomLabel">Add your availabilities</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
 
-  <!-- Remettre ici le calendrier -->
-  <div class="offcanvas-body" data-controller="flatpickr"
+  <!-- Flatpickr Calendar to choose availabilities -->
+  <div class="offcanvas-body pt-0 mt-0" data-controller="flatpickr"
                               data-flatpickr-start-date-value= <%= @trip.start_date %>
                               data-flatpickr-end-date-value= <%= @trip.end_date %>
                               data-flatpickr-current-user-dates-value = <%= @current_user_availabilities.to_json %> >
@@ -33,7 +34,7 @@
     <div class="d-flex justify-content-center" >
       <%= simple_form_for [@trip, @availability] do |f| %>
         <%= f.text_field :start_date,
-          class: "invisible",
+          class: "invisible m-0 p-0",
           value: @availability.start_date,
           data: {
             flatpickr_target: "startDate"
@@ -50,8 +51,6 @@
     </div>
   </div>
 </div>
-
-
 
 <!-- Calendar with availabilities -->
 <%= render "shared/availability_calendar",

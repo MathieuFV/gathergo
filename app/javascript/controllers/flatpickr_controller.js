@@ -22,7 +22,9 @@ export default class extends Controller {
       maxDate: this.endDateValue,
       position: "auto center",
       closeOnSelect: true,
+      showMonths: 1,
       defaultDate: this.currentUserDatesValue,
+      showOutsideDays: false,
       onChange: this.updateDates
     });
 

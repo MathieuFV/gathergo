@@ -1,7 +1,7 @@
 <section class="sliding-cards-section">
   <%# First row: Title and arrow %>
   <div class="section-header d-flex justify-content-between align-items-center">
-    <h1 class="section-title mb-0"><%= title %></h1>
+    <h3 class="section-title mb-0"><%= title %></h3>
     <%= link_to category_path, class: "see-more-link" do %>
       <i class="fa-solid fa-xl fa-chevron-right"></i>
     <% end %>
@@ -17,7 +17,7 @@
             "background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('#{cl_image_path(card.photos.first.key, height: 300, crop: :fill)}')" : "background-color: #042040;" do %>
           <div class="card-overlay"></div>
           <div class="card-body">
-            <h3 class="card-title"><%= card.name %></h3>
+            <h4 class="card-title"><%= card.name %></h4>
             <div class="card-stats">
               <span class="stats-item">
                 <i class="fa-regular fa-comment"></i>

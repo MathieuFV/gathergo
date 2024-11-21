@@ -38,7 +38,12 @@ class DestinationsController < ApplicationController
 
     origin = { lat: @destination.latitude, lng: @destination.longitude }
     destination = { lat: current_user.latitude, lng: current_user.longitude }
+
     @distance_info = service.fetch_distance(origin, destination)
+
+    if @distance_info[:distance_text] == nil
+      @distance_info[:distance_text] = haversine_distance(origin[:lat], origin[:lng], destination[:lat], destination[:lng]).to_i
+    end
 
     # Affichage des commentaires
     @comments = @destination.comments
@@ -140,10 +145,13 @@ class DestinationsController < ApplicationController
       if wikipedia_page_relevant?(wikipedia_info, google_info)
         puts "Relevant Wikipedia page found for #{google_info[:name]}"
         @destination.description = wikipedia_info[:summary]
+      elsif google_info[:website]
+        puts "Non relevant"
+        @destination.description = "No information directly found on Wikipedia about #{@destination.name}. More on #{google_info[:website]}"
       end
     else
-      # Si aucune information wikipédia trouvée
-      @destination.description = "No information found on Wikipedia about #{@destination.name}"
+      # Si aucune information wikipédia trouvée@de
+      @destination.description = "No information found about #{@destination.name}"
     end
   end
 

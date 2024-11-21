@@ -18,13 +18,13 @@ end
 
 # Initialisation du service Google Places
 service = GooglePlacesService.new(ENV['GOOGLE_GEOCODING_API_KEY'])
-result = service.fetch_place_details("Paris")
+result = service.fetch_place_details("New York")
 
 # Variables pour latitude et longitude
 google_lat = result[:latitude]
 google_lon = result[:longitude]
 
-p "Google lat: #{google_lat} - long: #{google_lon}"
+# p "Google lat: #{google_lat} - long: #{google_lon}"
 
 # essai = Geocoder.search("Corbel, France")
 # p essai
@@ -42,9 +42,9 @@ if wikipedia_info.present?
     wiki_lon = wikipedia_info[:coordinates].first["lon"]
 
     # Comparaison des deux coordonnées
-    p haversine_distance(google_lat, google_lon, wiki_lat, wiki_lon)
+    # p haversine_distance(google_lat, google_lon, wiki_lat, wiki_lon)
   end
-  p wikipedia_info[:summary]
+  # p wikipedia_info[:summary]
 end
 
 

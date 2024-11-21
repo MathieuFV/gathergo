@@ -1,6 +1,10 @@
-<h1>Join <%= @trip.name %> !</h1>
+<div class="container">
+  <h1 class="text-center">Join <%= @trip.name %> !</h1>
 
-<p>Do you want to join <%= @trip.name %> ?</p>
+  <p class="text-center">Do you want to join <%= @trip.name %> ?</p>
 
-<%= button_to "Join `#{@trip.name}`", trip_add_participant_path(@trip) , class: "btn btn-success" %>
-<%= link_to "Cancel", trips_path, class: "btn btn-danger" %>
+  <div class="d-flex justify-content-around">
+    <%= button_to "Join #{@trip.name}", add_participant_trip_path(@trip) , class: "btn btn-success text-white" %>
+    <%= link_to "Cancel", trips_path, class: "btn btn-danger" %>
+  </div>
+</div>

@@ -34,7 +34,7 @@ class TripsController < ApplicationController
   end
 
   def add_participant
-    @trip = Trip.find(params[:trip_id])
+    @trip = Trip.find(params[:id])
 
     # Create new participation
     @participation = Participation.new(user: current_user, trip: @trip, role: "participant")

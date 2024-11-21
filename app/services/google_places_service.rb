@@ -18,6 +18,14 @@ class GooglePlacesService
       # Récupère les détails complets
       details = @client.spot(place.place_id)
 
+      p details
+
+      # Récupération du nom officiel du lieu
+      official_name = details.address_components.find { |component|
+        component['types'].include?('locality') ||
+        component['types'].include?('administrative_area_level_1')
+      }&.[]('long_name') || details.name
+
       # Utilisation des 10 premières photos pour les ajouter aux destinations
       photos = details.photos
       photos = photos.map do |photo|
@@ -32,10 +40,13 @@ class GooglePlacesService
 
       {
         name: details.name,
+        id: place.place_id,
+        official_name: official_name,
         description: details.formatted_address + "\n" + (details.reviews&.first&.text || ""),
         photos_url: photos,
         latitude: details.lat,
-        longitude: details.lng
+        longitude: details.lng,
+        website: details.website
       }
     rescue => e
       Rails.logger.error("Error fetching place details for #{place_name}: #{e.message}")
@@ -53,10 +64,11 @@ class GooglePlacesService
     if data["status"] == "OK"
       element = data["rows"].first["elements"].first
       {
-        distance_text: element["distance"]["text"],
-        distance_value: element["distance"]["value"], # en mètres
-        duration_text: element["duration"]["text"].gsub(/\s?hour(s)?\b/, "h"),
-        duration_value: element["duration"]["value"] # en secondes
+        # Dig is used to avoid crash if data is null
+        distance_text: element.dig("distance", "text"),
+        distance_value: element.dig("distance", "value"),
+        duration_text: element.dig("duration", "text")&.gsub(/\s?hour(s)?\b/, "h"),
+        duration_value: element.dig("duration", "value")
       }
     else
       Rails.logger.error("Error fetching distance: #{data['error_message']}")

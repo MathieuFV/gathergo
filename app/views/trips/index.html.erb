@@ -48,6 +48,18 @@
   <%= link_to new_trip_path, class: "fab-button", aria_label: "Create new trip" do %>
     <i class="fa-solid fa-plus"></i>
   <% end %>
-</div>
 
-<%= render "trips/inspiration_form" %>
+
+  <div data-controller="toggle" class="toggle-container">
+    <span class="toggle-label">Besoin d'inspiration ?</span>
+    <label class="toggle-switch">
+      <input type="checkbox" data-action="change->toggle#fire">
+      <span class="slider"></span>
+    </label>
+    <div data-toggle-target="toggableElement" class="d-none">
+      <%= render "trips/inspiration_form" %>
+    </div>
+  </div>
+
+</div>
+</div>

@@ -115,7 +115,7 @@ end
 
 def add_wikipedia_description(destination, google_info)
   search_term = google_info[:name]
-  wikipedia_info = WikipediaService.new(search_term).fetch_wikipedia_summary
+  wikipedia_info = WikipediaService.new(search_term, "en").fetch_wikipedia_summary
 
   if wikipedia_info.present?
     # Coordinates comparaison (to improve wikipedia accurency)

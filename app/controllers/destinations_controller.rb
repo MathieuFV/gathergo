@@ -70,11 +70,10 @@ class DestinationsController < ApplicationController
     # Appel de l'api wikipedia
     if google_place_info[:name].present?
       # Utilisation du nom normalisé par google place
-      # wikipedia_info = WikipediaService.new(google_place_info[:name], "en").fetch_wikipedia_summary
-      wikipedia_info = WikipediaService.new(@destination.name, "en").fetch_wikipedia_summary
+      wikipedia_info = WikipediaService.new(google_place_info[:name]).fetch_wikipedia_summary
     else
       # Utilisation du nom brut sinon
-      wikipedia_info = WikipediaService.new(@destination.name, "en").fetch_wikipedia_summary
+      wikipedia_info = WikipediaService.new(@destination.name).fetch_wikipedia_summary
     end
 
     # Appel du service wikipedia pour récupérer des infos sur la destination
@@ -129,8 +128,6 @@ class DestinationsController < ApplicationController
       wiki_longitude = wikipedia_info[:coordinates].first["lon"]
       google_latitude = google_info[:latitude]
       google_longitude = google_info[:longitude]
-
-      return true
     else
       return false
     end

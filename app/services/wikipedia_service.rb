@@ -1,13 +1,12 @@
 class WikipediaService
-  def initialize(destination_name, language)
+  def initialize(destination_name)
     @destination_name = destination_name
-    @language = language
   end
 
   def fetch_wikipedia_summary
     if @destination_name.present?
       # Construction de l'URL pour l'Action API de Wikipédia
-      api_url = URI("https://#{@language}.wikipedia.org/w/api.php")
+      api_url = URI("https://en.wikipedia.org/w/api.php")
 
       # Définition des paramètres pour obtenir un extrait complet et les coordonnées
       params = {

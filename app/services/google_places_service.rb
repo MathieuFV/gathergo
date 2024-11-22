@@ -18,11 +18,13 @@ class GooglePlacesService
       # Récupère les détails complets
       details = @client.spot(place.place_id)
 
-      # # Récupération du nom officiel du lieu
-      # official_name = details.address_components.find { |component|
-      #   component['types'].include?('locality') ||
-      #   component['types'].include?('administrative_area_level_1')
-      # }&.[]('long_name') || details.name
+      p details
+
+      # Récupération du nom officiel du lieu
+      official_name = details.address_components.find { |component|
+        component['types'].include?('locality') ||
+        component['types'].include?('administrative_area_level_1')
+      }&.[]('long_name') || details.name
 
       # Utilisation des 10 premières photos pour les ajouter aux destinations
       photos = details.photos
@@ -39,6 +41,7 @@ class GooglePlacesService
       {
         name: details.name,
         id: place.place_id,
+        official_name: official_name,
         description: details.formatted_address + "\n" + (details.reviews&.first&.text || ""),
         photos_url: photos,
         latitude: details.lat,

@@ -82,7 +82,7 @@ class DestinationsController < ApplicationController
 
     # Sauvegarde de la nouvelle destination
     if @destination.save
-      redirect_to trip_path(@trip)
+      redirect_to trip_destination_path(@trip, @destination)
     else
       render :new, status: :unprocessable_entity
     end

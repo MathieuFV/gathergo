@@ -11,7 +11,7 @@
         <% if proposal[:link_path].present? %>
           <i class="fa-solid fa-chevron-right card-arrow"></i>
         <% end %>
-        
+
         <%# Stats are always present %>
         <div class="card-stats">
           <%= render "shared/stats_item", icon: "fa-regular fa-comment", count: proposal[:comments_count] %>
@@ -27,7 +27,7 @@
           avatar_url: proposal[:user][:avatar_url],
           name: proposal[:user][:name],
           created_at: proposal[:created_at] %>
-    
+
     <%= render "shared/vote_button",
           voted: proposal[:voted_by_current_user],
           trip_id: proposal[:trip_id],

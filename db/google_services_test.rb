@@ -16,39 +16,78 @@ def haversine_distance(lat1, lon1, lat2, lon2)
   earth_radius * c
 end
 
-# Initialisation du service Google Places
-service = GooglePlacesService.new(ENV['GOOGLE_GEOCODING_API_KEY'])
-result = service.fetch_place_details("New York")
+def essai_google_wiki(destination_name)
+  p "Essai #{destination_name} "
+  # Initialisation du service Google Places
+  service = GooglePlacesService.new(ENV['GOOGLE_GEOCODING_API_KEY'])
+  result = service.fetch_place_details(destination_name)
 
-# Variables pour latitude et longitude
-google_lat = result[:latitude]
-google_lon = result[:longitude]
+  # Variables pour latitude et longitude
+  google_lat = result[:latitude]
+  google_lon = result[:longitude]
 
-# p "Google lat: #{google_lat} - long: #{google_lon}"
+  # p "Google lat: #{google_lat} - long: #{google_lon}"
 
-# essai = Geocoder.search("Corbel, France")
-# p essai
+  # essai = Geocoder.search("Corbel, France")
+  # p essai
 
-# Récupération wikipedia
-wikipedia = WikipediaService.new(result[:name])
-wikipedia_info = wikipedia.fetch_wikipedia_summary
+  # Récupération wikipedia
+  wikipedia = WikipediaService.new(destination_name, "en")
+  wikipedia_info = wikipedia.fetch_wikipedia_summary
 
-# wikipedia_info = WikipediaService.new("Toulon").fetch_wikipedia_summary
-if wikipedia_info.present?
+  if wikipedia_info.present?
 
-  # Vérification de la page wikipédia trouvée (comparaison des coordonnées)
-  if wikipedia_info[:coordinates]
-    wiki_lat = wikipedia_info[:coordinates].first["lat"]
-    wiki_lon = wikipedia_info[:coordinates].first["lon"]
+    # Vérification de la page wikipédia trouvée (comparaison des coordonnées)
+    if wikipedia_info[:coordinates]
+      wiki_lat = wikipedia_info[:coordinates].first["lat"]
+      wiki_lon = wikipedia_info[:coordinates].first["lon"]
 
-    # Comparaison des deux coordonnées
-    # p haversine_distance(google_lat, google_lon, wiki_lat, wiki_lon)
+      # Comparaison des deux coordonnées
+      # p haversine_distance(google_lat, google_lon, wiki_lat, wiki_lon)
+      p wikipedia_info[:summary]
+    else
+      # On retente avec le français
+      p "essai fr"
+      wikipedia = WikipediaService.new(destination_name, "fr")
+      wikipedia_info = wikipedia.fetch_wikipedia_summary
+
+      if wikipedia_info.present?
+        if wikipedia_info[:coordinates]
+          wiki_lat = wikipedia_info[:coordinates].first["lat"]
+          wiki_lon = wikipedia_info[:coordinates].first["lon"]
+
+          # Comparaison des deux coordonnées
+          # p haversine_distance(google_lat, google_lon, wiki_lat, wiki_lon)
+          p wikipedia_info[:summary]
+        end
+      end
+    end
   end
-  # p wikipedia_info[:summary]
 end
 
 
 
+# essai_google_wiki("New York")
+# essai_google_wiki("Méribel")
+essai_google_wiki("Corbel")
+# essai_google_wiki("Celebes")
+# essai_google_wiki("Washington D.C.")
+# essai_google_wiki("Düsseldorf")
+# essai_google_wiki("Gigaro")
+# essai_google_wiki("La Croix-Valmer")
+# essai_google_wiki("Querétaro")
+# essai_google_wiki("Chiapas")
+# essai_google_wiki("Arcachon")
+# essai_google_wiki("Belle-Île-en-Mer")
+# essai_google_wiki("La Clusaz")
+# essai_google_wiki("Champagny-en-Vanoise")
+# essai_google_wiki("Hyères")
+# essai_google_wiki("Porquerolles")
+
+#
+# New York
+# Corbel
+# Sulawesi
 
 # marin = User.where(first_name: "Mari.latn").first
 

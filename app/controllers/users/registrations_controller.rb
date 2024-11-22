@@ -12,9 +12,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+
+    unless @user.photo.attached?
+      photo_path = Rails.root.join("app/assets/images/users/default_profile_picture.png")
+      @user.photo.attach(
+        io: File.open(photo_path),
+        filename: "default_profile_picture.png",
+        content_type: "image/png"
+      )
+    end
+  end
 
   # GET /resource/edit
   def edit

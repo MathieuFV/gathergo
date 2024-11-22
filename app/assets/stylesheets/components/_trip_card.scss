@@ -15,12 +15,6 @@
     flex-grow: 1;
   }
 
-  .trip-name {
-    color: $primary-text-color;
-    margin-bottom: 0.25rem;
-    font-size: 1.25rem;
-  }
-
   .trip-dates {
     color: $secondary-text-color;
     font-size: 0.9rem;
@@ -61,6 +55,14 @@
     background-color: $gray-400;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
+}
+
+.trip-name {
+  color: $primary-text-color;
+  margin-bottom: 0.25rem;
+  font-size: 1.25rem;
+
+  font-weight: 700;
 }
 
 .trip-card-link {

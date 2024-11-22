@@ -4,7 +4,7 @@
   $card-border-radius: 26px;
   $card-padding: 1rem;
   $arrow-right-spacing: 1.5rem;
-  
+
   .proposal-card {
     height: $card-height;
     border-radius: $card-border-radius;
@@ -23,7 +23,7 @@
       background: linear-gradient(
         180deg,
         rgba(0, 0, 0, 0.2) 0%,
-        rgba(0, 0, 0, 0.6) 100%
+        rgba(0, 0, 0, 0.3) 100%
       );
       z-index: 1;
     }
@@ -45,6 +45,7 @@
       text-align: center;
       width: calc(100% - 4rem);
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      font-weight: 600;
     }
 
     .card-arrow {
@@ -125,7 +126,7 @@
   text-decoration: none;
   color: white;
   display: block;
-  
+
   &:hover {
     color: inherit;
     text-decoration: none;

@@ -8,7 +8,7 @@ class Destination < ApplicationRecord
   validates :trip_id, presence: true
   validates :name, presence: true
 
-  has_many_attached :photos, dependent: :destroy
+  has_many_attached :photos, dependent: :purge
 
   # Geocoding
   geocoded_by :name

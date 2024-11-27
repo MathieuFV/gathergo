@@ -16,10 +16,11 @@ class AvailabilitiesController < ApplicationController
     @participants = @trip.users
 
     # Availababilities of the participants
-    @participants_availabilities = @participants.map(&:availabilities).flatten
+    @participants_availabilities = @participants.map(&:availabilities).flatten # A remplacer par flat_map ? au lieu de map puis flatten
 
     # Création des dates
     @dates = (@trip.start_date..@trip.end_date).to_a # .. is an inclusive range (end_date is included)
+    raise
   end
 
   def create

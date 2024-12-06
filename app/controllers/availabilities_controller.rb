@@ -20,7 +20,6 @@ class AvailabilitiesController < ApplicationController
 
     # Création des dates
     @dates = (@trip.start_date..@trip.end_date).to_a # .. is an inclusive range (end_date is included)
-    raise
   end
 
   def create
